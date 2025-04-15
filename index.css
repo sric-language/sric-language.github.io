@@ -1,0 +1,49 @@
+
+
+#title{
+  width: 80%;
+  margin: 0 auto;
+  
+  padding: 10px 0 20px 0;
+}
+
+#title h1{
+  font-size:3em;
+  padding: 10px 0;
+}
+
+#title h3{
+  font-size:1.6em;
+  margin: 0 0 20px 0;
+}
+
+#btn {
+  float:right;
+  font-size: 1em;
+  position:relative;
+  top:-120px; 
+}
+
+.round {
+border:1px solid;
+border-radius:25px;
+-moz-border-radius:25px; /* Old Firefox */
+padding: 10px;
+}
+
+
+.fs h3{
+  margin: 0 0 13px 0;
+  font-size:1.5em;
+}
+
+.fs p{
+  margin: 0 0;
+  font-size:1em;
+  color:#888; 
+}
+
+.fs {
+  padding: 15px;
+  margin: 15px;
+}

@@ -1,0 +1,108 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+  <title>Sric Language</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="common.css"/>
+  <link rel="stylesheet" type="text/css" href="index.css"/>
+
+  <script type="text/javascript">
+    window.onload=function(){
+      var isZh = false;
+      var lang = (navigator.appName=='Netscape'?navigator.language:navigator.userLanguage).toLowerCase();
+      switch(lang){
+          case 'zh-cn':
+              isZh = true;
+              break;
+          case 'zh-tw':
+              isZh = true;
+              break;
+          case 'zh-hk':
+              isZh = true;
+              break;
+          default:
+              isZh = false;
+      }
+      //var contentEn = document.getElementById("content-en");
+      //var contentZh = document.getElementById("content-zh");
+
+      if (isZh) {
+        window.location.href = 'index_zh.html';
+      }
+    }
+  </script>
+
+</head>
+<body>
+  <div id="header">
+    <div class="sitebar">
+      <ul>
+        <li>
+          <a href='/'>Index<index></a>
+        </li>
+
+        <li>
+          <a href='https://github.com/sric-language/sric/releases'>Download</a>
+        </li>
+
+        <li>
+          <a href='https://github.com/sric-language/sric/blob/master/doc/doc-en/Index.md'>Doc</a>
+        </li>
+
+        <li>
+          <a href='apidoc/index.html'>ApiDoc</a>
+        </li>
+
+        <li>
+          <a href='https://github.com/sric-language/sric'>GitHub</a>
+        </li>
+     </ul>
+    </div>
+
+    <div id="title">
+      
+
+      <h1>Sric</h1>
+      <h3>Memory-safe high-performance programming language</h3>
+
+      <p id="btn" class="round">
+        <a href="https://github.com/sric-language/sric/blob/master/doc/doc-en/Start.md">Get Started</a>
+      </p>
+      
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="features">
+      <div class="fs">
+        <h3>Fast</h3>
+        <p>Zero-cost abstractions, low-level memory access</p>
+      </div>
+      
+      <div class="fs">
+        <h3>Memory Safe</h3>
+        <p>Dynamic memory safety checks, no reference restrictions</p>
+      </div>
+      
+      <div class="fs">
+        <h3>C++ Interoperability</h3>
+        <p>Seamless interaction with C++, integrates into C++ ecosystem</p>
+      </div>
+      
+      <div class="fs">
+        <h3>Feature-Rich</h3>
+        <p>Object-oriented, null safety, templates, closures, reflection, operator overloading</p>
+      </div>
+      
+      <div class="fs">
+        <h3>Easy to Learn</h3>
+        <p>Simpler and more approachable than C++</p>
+      </div>
+
+    </div>
+
+  </div>
+</body>
+</html>
