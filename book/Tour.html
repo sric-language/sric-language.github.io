@@ -1,0 +1,386 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>语法概览 - sric doc</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="highlight-css" href="highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">sric doc</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h3 id="数据类型"><a class="header" href="#数据类型">数据类型</a></h3>
+<pre><code>var p: Int             //值类型
+var p: own* Int;       //所有权指针
+var p: * Int;       //非所有权指针
+var p: &amp; Int;          //引用
+var p: raw* Int;       //裸指针
+</code></pre>
+<h3 id="明确的拷贝或者移动"><a class="header" href="#明确的拷贝或者移动">明确的拷贝或者移动</a></h3>
+<p>移动或者共享所有权指针</p>
+<pre><code>var p: own* Int = ...;
+var p1 = p; //compiler error;
+var p2 = move p;
+var p3 = share(p2);
+</code></pre>
+<p>移动或者拷贝有所有权指针的结构:</p>
+<pre><code>struct A {
+    var i: own* Int;
+    fun copy(): A { ... }
+}
+var a: A;
+var x = a; //compile error
+var b = move a;
+var c = a.copy();
+</code></pre>
+<h3 id="unsafe"><a class="header" href="#unsafe">Unsafe</a></h3>
+<p>在unsafe块中解引用裸指针</p>
+<pre><code>var p: raw* Int;
+...
+unsafe {
+    var i = *p;
+}
+</code></pre>
+<p>Unsafe 函数必须在unsafe块中调用</p>
+<pre><code>unsafe fun foo() { ... }
+
+fun main() {
+    unsafe {
+        foo();
+    }
+}
+</code></pre>
+<h3 id="继承"><a class="header" href="#继承">继承</a></h3>
+<p>和Java一样的单继承</p>
+<pre><code>trait I {
+    virtual fun foo();
+}
+
+virtual struct B {
+    var a: Int;
+    fun bar() { ... }
+}
+
+struct A : B, I {
+    override fun foo(B* b) {
+        ...
+    }
+}
+
+</code></pre>
+<h3 id="with块"><a class="header" href="#with块">With块</a></h3>
+<p>with块不是C++的命名初始化， 它可以包含任何语句.</p>
+<pre><code>struct A {
+    var i: Int;
+    fun init() { ... }
+}
+
+var a  = A { .init(); .i = 0; };
+var a: own* A = new A { .i = 0; };
+</code></pre>
+<h3 id="指针用法"><a class="header" href="#指针用法">指针用法</a></h3>
+<p>总是通过<code>.</code>来访问</p>
+<pre><code>var a: A;
+var b: own* A;
+a.foo();
+b.foo();
+</code></pre>
+<h3 id="类型转换和判断"><a class="header" href="#类型转换和判断">类型转换和判断</a></h3>
+<pre><code>var a = p as own* A;
+var b = p is own* A;
+</code></pre>
+<h3 id="数组"><a class="header" href="#数组">数组</a></h3>
+<p>静态大小的数组</p>
+<pre><code>var a  = []Int { 1,2,3 };
+var a: [15]Int;
+</code></pre>
+<h3 id="泛型类型"><a class="header" href="#泛型类型">泛型类型</a></h3>
+<p>泛型类型通过'$&lt;'开头</p>
+<pre><code>struct Bar$&lt;T&gt; {
+    fun foo() {
+        ...
+    }
+}
+
+T fun foo$&lt;T&gt;(a: T) {
+    return a;
+}
+
+var b: Bar$&lt;Int&gt;;
+</code></pre>
+<h3 id="null-安全"><a class="header" href="#null-安全">Null 安全</a></h3>
+<p>指针默认是不可以为null的</p>
+<pre><code>var a: own*? B;
+var b: own* B = a;
+</code></pre>
+<p>可空类型转为不可空类型会在运行时进行检测，防止空值传播。</p>
+<h3 id="不可变性"><a class="header" href="#不可变性">不可变性</a></h3>
+<p>和C++类似</p>
+<pre><code>var p : raw* const Int;
+var p : const raw* Int;
+var p : const raw* const Int;
+</code></pre>
+<h3 id="可见性"><a class="header" href="#可见性">可见性</a></h3>
+<pre><code>public
+private
+protected
+readonly
+</code></pre>
+<p>'readonly' 的意思是公开读，私有写。</p>
+<h3 id="操作符重载"><a class="header" href="#操作符重载">操作符重载</a></h3>
+<pre><code>struct A {
+    operator fun mult(a: A): A { ... }
+}
+
+var c = a * b;
+</code></pre>
+<p>可重载的操作符:</p>
+<pre><code>methods    symbol
+------     ------
+plus       a + b 
+minus      a - b 
+mult       a * b 
+div        a / b 
+get        a[b] 
+set        a[b] = c
+compare    == != &lt; &gt; &lt;= &gt;=
+</code></pre>
+<h3 id="模块"><a class="header" href="#模块">模块</a></h3>
+<p>模块是命名空间，也是编译单元和部署单元。</p>
+<p>一个模块包含好多源文件和文件夹.</p>
+<p>模块通过构建脚本来定义:</p>
+<pre><code>name = std
+summary = standard library
+outType = lib
+version = 1.0
+depends = sys 1.0
+srcDirs = src/
+</code></pre>
+<p>在代码里面导入外部模块:</p>
+<pre><code>import std::*;
+import std::Vec;
+</code></pre>
+<h3 id="闭包"><a class="header" href="#闭包">闭包</a></h3>
+<pre><code>fun foo(f: fun(a:Int) ) {
+    f(1);
+}
+
+foo(fun(a:Int){ ... });
+</code></pre>
+<h3 id="类型别名"><a class="header" href="#类型别名">类型别名</a></h3>
+<p>别名:</p>
+<pre><code>typealias VecInt = std::Vec$&lt;Int&gt;;
+</code></pre>
+<h3 id="枚举"><a class="header" href="#枚举">枚举</a></h3>
+<pre><code>enum Color {
+    red = 1, green, blue
+}
+
+var c = Color::red;
+</code></pre>
+<h3 id="默认参数和命名参数"><a class="header" href="#默认参数和命名参数">默认参数和命名参数</a></h3>
+<pre><code>fun foo(a: Int, b: Int = 0) {
+}
+
+fun main() {
+    foo(a : 10);
+}
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="Start.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="DiffCpp.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="Start.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="DiffCpp.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
