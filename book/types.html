@@ -160,6 +160,12 @@
 <li>指针分为所有权指针、非所有权指针、裸指针。</li>
 <li>和C/C++不同的是，指针的＊号放在类型的前方。</li>
 </ul>
+<pre><code>var p: Int             //值类型
+var p: own* Int;       //所有权指针
+var p: * Int;          //非所有权指针
+var p: &amp; Int;          //引用
+var p: raw* Int;       //裸指针
+</code></pre>
 <h4 id="所有权指针"><a class="header" href="#所有权指针">所有权指针</a></h4>
 <ul>
 <li>所有权指针表示拥有所指对象，在作用域消失时需要释放对象。</li>
@@ -169,7 +175,6 @@
 var p2 = move p1;
 var p3 = share(p1);
 </code></pre>
-<p>经测试sric的所有权指针性能好于shared_ptr和unique_ptr。一般系统中所有权指针数量不会太多，所以不用担心性能问题。</p>
 <h4 id="非所有权指针"><a class="header" href="#非所有权指针">非所有权指针</a></h4>
 <ul>
 <li>非所有权指针使用没有限制，不会像Rust一样有很多限制。</li>
@@ -180,7 +185,6 @@ var p3 = share(p1);
 var p4: * Int = p1;
 var p5: raw* Int = p1;
 </code></pre>
-<p>非所有权指针性能和裸指针几乎一样。</p>
 <h4 id="裸指针"><a class="header" href="#裸指针">裸指针</a></h4>
 <p>裸指针是C/C++的指针，需要在安全模式中使用。</p>
 <pre><code>var p: raw* Int = ...;
@@ -218,9 +222,7 @@ var a: [size]Int;
 <pre><code>var a: own*? B = null;
 var a: own* B = null; //compile error
 </code></pre>
-<p>通过感叹号把可空转为不可空。</p>
-<pre><code>var b: own* B = a!;
-</code></pre>
+<p>在可空指针转为不可空时，编译器会自动插入空指针检查。</p>
 <h3 id="不可变性"><a class="header" href="#不可变性">不可变性</a></h3>
 <p>和C++类似，const可以修饰指针本身，也可以修饰指针所指对象。</p>
 <pre><code>var p : raw* const Int;

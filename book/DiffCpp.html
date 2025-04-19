@@ -155,7 +155,59 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h3 id="从c移除的功能"><a class="header" href="#从c移除的功能">从C++移除的功能</a></h3>
+                        <h2 id="从c到sric"><a class="header" href="#从c到sric">从C++到Sric</a></h2>
+<h3 id="类型比较"><a class="header" href="#类型比较">类型比较</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>C++</th><th>Sric</th></tr></thead><tbody>
+<tr><td>int</td><td>Int</td></tr>
+<tr><td>short</td><td>Int16</td></tr>
+<tr><td>int64_t</td><td>Int32</td></tr>
+<tr><td>unsigned int</td><td>UInt32</td></tr>
+<tr><td>int64_t</td><td>Int32</td></tr>
+<tr><td>float</td><td>Float32</td></tr>
+<tr><td>double</td><td>Float/Float64</td></tr>
+<tr><td>void</td><td>Void</td></tr>
+<tr><td>char</td><td>Int8</td></tr>
+<tr><td>char[4]</td><td>[4]Int8</td></tr>
+<tr><td>int*</td><td>raw* Int8</td></tr>
+<tr><td>const int&amp;</td><td>&amp; const int</td></tr>
+</tbody></table>
+</div>
+<h3 id="定义"><a class="header" href="#定义">定义</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>C++</th><th>Sric</th></tr></thead><tbody>
+<tr><td>const char* str</td><td>var str: raw* Int8</td></tr>
+<tr><td>void foo(int i) {}</td><td>fun foo(i: Int) {}</td></tr>
+</tbody></table>
+</div>
+<h3 id="类型定义"><a class="header" href="#类型定义">类型定义</a></h3>
+<p>C++</p>
+<pre><code>#include &lt;math.h&gt;
+
+class Point {
+public:
+    int x;
+    int y;
+    double dis(const Point &amp;t) const {
+        int dx = t.x - x;
+        int dy = t.y - y;
+        return sqrt(dx*dx + dy*dy);
+    }
+};
+</code></pre>
+<p>Sric:</p>
+<pre><code>import cstd::*;
+
+struct Point {
+    var x: Int;
+    var y: Int;
+    fun dis(t: &amp; const Point) const: Float {
+        var dx = t.x - x;
+        var dy = t.y - y;
+        return sqrt(dx*dx + dy*dy);
+    }
+};
+</code></pre>
+<h2 id="特性比较"><a class="header" href="#特性比较">特性比较</a></h2>
+<h3 id="从c移除的功能"><a class="header" href="#从c移除的功能">从C++移除的功能</a></h3>
 <ul>
 <li>没有函数重载</li>
 <li>没有头文件</li>
@@ -194,7 +246,7 @@
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="basic.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="Start.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -208,7 +260,7 @@
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="basic.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="Start.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

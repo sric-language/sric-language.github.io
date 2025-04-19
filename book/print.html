@@ -156,38 +156,30 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="安装"><a class="header" href="#安装">安装</a></h2>
-<p>需要:</p>
-<ul>
-<li>JDK 17+</li>
-<li>C++ 编译器 支持C++17</li>
-<li>fanx/fmake (可选)</li>
-</ul>
-<p>构建:</p>
+                        <h2 id="为什么要用sric"><a class="header" href="#为什么要用sric">为什么要用Sric</a></h2>
+<p>Sric是内存安全的高新性能编程语言。
+Sric语言大部分灵感来自C++，在C++基础上做了两件事情：</p>
 <ol>
-<li>添加 "bin"目录 到你的环境变量</li>
-<li>运行 build.sh</li>
+<li>减少特性、减少复杂性。</li>
+<li>增加内存安全性。</li>
 </ol>
-<h2 id="ide"><a class="header" href="#ide">IDE</a></h2>
-<ol>
-<li>在vscode插件市场中搜索'sric-language',并安装。</li>
-<li>在插件的设置页配置sricHome指向sric目录(bin的上一级)。</li>
-</ol>
-<h2 id="用法"><a class="header" href="#用法">用法</a></h2>
-<pre><code>sric test.scm
-</code></pre>
-<p>其中.scm文件是模块定义文件，也是构建脚本。
-生成的 C++ 代码位置在 "sric/output" 目录。</p>
-<h2 id="使用fmake构建"><a class="header" href="#使用fmake构建">使用fmake构建</a></h2>
-<pre><code>sric test.scm -fmake -debug
-</code></pre>
-<p>也可以单独手动运行fmake:</p>
-<pre><code>fan fmake output/test.fmake -debug
-</code></pre>
+<h3 id="设计哲学"><a class="header" href="#设计哲学">设计哲学</a></h3>
+<h4 id="性能"><a class="header" href="#性能">性能</a></h4>
+<p>“现代计算机性能足够快”是个童年的谎言，硬件的发展远赶不上问题复杂度的增长。我遇到的每个行业都有性能问题。要解决性能问题，首先就不能有GC。有垃圾收集的语言始终存在隐形的性能天花板。需要有底层内存操作的能力，并且能灵活的在栈中分配内存，这是高性能语言需要具备的条件。Sric从设计之初就拥有和C/C++一样的性能。</p>
+<h4 id="内存安全"><a class="header" href="#内存安全">内存安全</a></h4>
+<p>内存安全和性能是可兼得的。但Rust的机制却限制了代码的功能，强迫用户改变编程方式，并增加了学习成本。Sric则采用了另一种方式，通过运行时内存安全检查，试图通过略微的性能损失来解决内存安全问题。内存安全检查只在debug模式下执行，在release模式，它的运行速度和手写C++代码一样快。</p>
+<h4 id="抽象能力"><a class="header" href="#抽象能力">抽象能力</a></h4>
+<p>面向对象是编程语言抽象能力的重要表现。尽管由于滥用继承导致现今人们对面向对象有些不好的印象，但我觉得面向对象在某些场合还是有用的。并且从语言上对继承做了一些限制。</p>
+<h4 id="简单和容易"><a class="header" href="#简单和容易">简单和容易</a></h4>
+<p>C++和Rust都走到了这条的对立面，企图用复杂的特性覆盖所有。Sric则试图尽可能减少特性，避免复杂性。例如没有C++的各种版本构造函数、没有函数重载、没有模板元编程、没有多继承， 没有Rust的宏、复杂的包模块机制、生命期标注等。</p>
+<p>Sric并不致力于提供语法糖。过多的语法糖会提高学习成本，有时候反而降低可读性。语法糖不是越多越好，而是权衡学习成本和收益。</p>
+<h4 id="c交互"><a class="header" href="#c交互">C++交互</a></h4>
+<p>Sric能够与C++无缝隙交互，它能生成人类可读的C++代码。C++和C历史悠久，有大量优秀的第三方库。Sric可以融入C++生态，轻松调用遗产代码，或者非常容易的调用操作系统API。</p>
+<p>并且Sric代码也可以容易的被C++语言调用，这样能与不愿意学习Sric的开发者更好的协作。例如我们可以内部使用Sric开发，对外部提供C++接口。</p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="数据类型"><a class="header" href="#数据类型">数据类型</a></h3>
 <pre><code>var p: Int             //值类型
 var p: own* Int;       //所有权指针
-var p: * Int;       //非所有权指针
+var p: * Int;          //非所有权指针
 var p: &amp; Int;          //引用
 var p: raw* Int;       //裸指针
 </code></pre>
@@ -319,6 +311,7 @@ div        a / b
 get        a[b] 
 set        a[b] = c
 compare    == != &lt; &gt; &lt;= &gt;=
+add        a,b,c;
 </code></pre>
 <h3 id="模块"><a class="header" href="#模块">模块</a></h3>
 <p>模块是命名空间，也是编译单元和部署单元。</p>
@@ -361,7 +354,59 @@ fun main() {
     foo(a : 10);
 }
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h3 id="从c移除的功能"><a class="header" href="#从c移除的功能">从C++移除的功能</a></h3>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="从c到sric"><a class="header" href="#从c到sric">从C++到Sric</a></h2>
+<h3 id="类型比较"><a class="header" href="#类型比较">类型比较</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>C++</th><th>Sric</th></tr></thead><tbody>
+<tr><td>int</td><td>Int</td></tr>
+<tr><td>short</td><td>Int16</td></tr>
+<tr><td>int64_t</td><td>Int32</td></tr>
+<tr><td>unsigned int</td><td>UInt32</td></tr>
+<tr><td>int64_t</td><td>Int32</td></tr>
+<tr><td>float</td><td>Float32</td></tr>
+<tr><td>double</td><td>Float/Float64</td></tr>
+<tr><td>void</td><td>Void</td></tr>
+<tr><td>char</td><td>Int8</td></tr>
+<tr><td>char[4]</td><td>[4]Int8</td></tr>
+<tr><td>int*</td><td>raw* Int8</td></tr>
+<tr><td>const int&amp;</td><td>&amp; const int</td></tr>
+</tbody></table>
+</div>
+<h3 id="定义"><a class="header" href="#定义">定义</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>C++</th><th>Sric</th></tr></thead><tbody>
+<tr><td>const char* str</td><td>var str: raw* Int8</td></tr>
+<tr><td>void foo(int i) {}</td><td>fun foo(i: Int) {}</td></tr>
+</tbody></table>
+</div>
+<h3 id="类型定义"><a class="header" href="#类型定义">类型定义</a></h3>
+<p>C++</p>
+<pre><code>#include &lt;math.h&gt;
+
+class Point {
+public:
+    int x;
+    int y;
+    double dis(const Point &amp;t) const {
+        int dx = t.x - x;
+        int dy = t.y - y;
+        return sqrt(dx*dx + dy*dy);
+    }
+};
+</code></pre>
+<p>Sric:</p>
+<pre><code>import cstd::*;
+
+struct Point {
+    var x: Int;
+    var y: Int;
+    fun dis(t: &amp; const Point) const: Float {
+        var dx = t.x - x;
+        var dy = t.y - y;
+        return sqrt(dx*dx + dy*dy);
+    }
+};
+</code></pre>
+<h2 id="特性比较"><a class="header" href="#特性比较">特性比较</a></h2>
+<h3 id="从c移除的功能"><a class="header" href="#从c移除的功能">从C++移除的功能</a></h3>
 <ul>
 <li>没有函数重载</li>
 <li>没有头文件</li>
@@ -391,6 +436,34 @@ fun main() {
 <li>动态反射</li>
 <li>命名参数</li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="安装"><a class="header" href="#安装">安装</a></h2>
+<p>需要:</p>
+<ul>
+<li>JDK 17+</li>
+<li>C++ 编译器 支持C++17</li>
+<li>fanx 和 <a href="https://github.com/chunquedong/fmake">fmake</a></li>
+</ul>
+<p>构建:</p>
+<ol>
+<li>添加 "bin"目录 到你的环境变量</li>
+<li>运行 build.sh</li>
+</ol>
+<h2 id="ide"><a class="header" href="#ide">IDE</a></h2>
+<ol>
+<li>在vscode插件市场中搜索'sric-language',并安装。</li>
+<li>在插件的设置页配置sricHome指向sric目录(bin的上一级)。</li>
+</ol>
+<h2 id="用法"><a class="header" href="#用法">用法</a></h2>
+<pre><code>sric test.scm
+</code></pre>
+<p>其中.scm文件是模块定义文件，也是构建脚本。
+生成的 C++ 代码位置在 "sric/output" 目录。</p>
+<h2 id="使用fmake构建"><a class="header" href="#使用fmake构建">使用fmake构建</a></h2>
+<pre><code>sric test.scm -fmake -debug
+</code></pre>
+<p>也可以单独手动运行fmake:</p>
+<pre><code>fan fmake output/test.fmake -debug
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="内建类型"><a class="header" href="#内建类型">内建类型</a></h3>
 <ul>
 <li>Int, Int8, Int16, Int32, Int64, UInt8, UInt16, UInt32, UInt64</li>
@@ -482,6 +555,12 @@ readonly var i: Int = 0;
 <li>指针分为所有权指针、非所有权指针、裸指针。</li>
 <li>和C/C++不同的是，指针的＊号放在类型的前方。</li>
 </ul>
+<pre><code>var p: Int             //值类型
+var p: own* Int;       //所有权指针
+var p: * Int;          //非所有权指针
+var p: &amp; Int;          //引用
+var p: raw* Int;       //裸指针
+</code></pre>
 <h4 id="所有权指针"><a class="header" href="#所有权指针">所有权指针</a></h4>
 <ul>
 <li>所有权指针表示拥有所指对象，在作用域消失时需要释放对象。</li>
@@ -491,7 +570,6 @@ readonly var i: Int = 0;
 var p2 = move p1;
 var p3 = share(p1);
 </code></pre>
-<p>经测试sric的所有权指针性能好于shared_ptr和unique_ptr。一般系统中所有权指针数量不会太多，所以不用担心性能问题。</p>
 <h4 id="非所有权指针"><a class="header" href="#非所有权指针">非所有权指针</a></h4>
 <ul>
 <li>非所有权指针使用没有限制，不会像Rust一样有很多限制。</li>
@@ -502,7 +580,6 @@ var p3 = share(p1);
 var p4: * Int = p1;
 var p5: raw* Int = p1;
 </code></pre>
-<p>非所有权指针性能和裸指针几乎一样。</p>
 <h4 id="裸指针"><a class="header" href="#裸指针">裸指针</a></h4>
 <p>裸指针是C/C++的指针，需要在安全模式中使用。</p>
 <pre><code>var p: raw* Int = ...;
@@ -540,9 +617,7 @@ var a: [size]Int;
 <pre><code>var a: own*? B = null;
 var a: own* B = null; //compile error
 </code></pre>
-<p>通过感叹号把可空转为不可空。</p>
-<pre><code>var b: own* B = a!;
-</code></pre>
+<p>在可空指针转为不可空时，编译器会自动插入空指针检查。</p>
 <h3 id="不可变性-1"><a class="header" href="#不可变性-1">不可变性</a></h3>
 <p>和C++类似，const可以修饰指针本身，也可以修饰指针所指对象。</p>
 <pre><code>var p : raw* const Int;
@@ -625,7 +700,7 @@ var i = unsafeCast$&lt;raw*Int&gt;(&amp;u.data);
 <ul>
 <li>不支持多继承，类似于Java</li>
 <li>被继承的类需要标记为virtual或者abstract</li>
-<li>Trait相对与Java的interface，不能有数据成员和方法实现。</li>
+<li>Trait相当与Java的interface，不能有数据成员和方法实现。</li>
 <li>继承的分号后面必须先写类（如果有）再写Trait。</li>
 <li>重写父类的virutal或者abstract方法时，需要加override标记。</li>
 <li>使用super关键字调用父类方法。</li>
@@ -707,11 +782,7 @@ if ((i &amp; Mask) != 0) {}
 </code></pre>
 <ul>
 <li>只支持<code>++i</code>，不支持<code>i++</code></li>
-<li>类型转换和类型检查用as和is</li>
 </ul>
-<pre><code>if (a is String) ...
-var b = a as String;
-</code></pre>
 <h3 id="with块-1"><a class="header" href="#with块-1">With块</a></h3>
 <p>with块不是C++的命名初始化， 它可以包含任何语句.</p>
 <pre><code>struct A {
@@ -735,13 +806,13 @@ b.foo();
 var b = p is own* A;
 </code></pre>
 <p>其他类型转换使用unsafeCast函数来完成。</p>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="泛型"><a class="header" href="#泛型">泛型</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h3 id="泛型"><a class="header" href="#泛型">泛型</a></h3>
 <p>泛型和C++不同的是使用'$&lt;'开头，这是为了消除泛型参数和小于运算符的歧义。</p>
 <pre><code>struct Tree$&lt;T&gt; {
 }
 </code></pre>
 <p>泛型参数可以有示例类型，编译时以示例类型来做类型检查。</p>
-<pre><code>struct Compareable$&lt;T&gt; {
+<pre><code>private struct Compareable$&lt;T&gt; {
     operator fun compare(t: *T): Int;
 }
 strcut Tree$&lt;T : Compareable&gt; {
@@ -749,12 +820,6 @@ strcut Tree$&lt;T : Compareable&gt; {
 </code></pre>
 <p>泛型模板实例化时，可以传入任意满足示例类型的类型。不需要继承示例类型。</p>
 <pre><code>var tree = Tree$&lt;Int&gt; {};
-</code></pre>
-<p>暂不支持泛型函数的泛型参数类型推断，需要显式写出泛型参数。</p>
-<pre><code>fun max$&lt;T: Int&gt;(a: T, b: T) {
-    return a &gt; b ? a : b;
-}
-var m = max$&lt;Int&gt;(0, 1);
 </code></pre>
 <h2 id="闭包-1"><a class="header" href="#闭包-1">闭包</a></h2>
 <p>匿名函数使用fun关键字定义</p>
@@ -798,6 +863,7 @@ div        a / b
 get        a[b] 
 set        a[b] = c
 compare    == != &lt; &gt; &lt;= &gt;=
+add        a,b,c;
 </code></pre>
 <h3 id="逗号运算符"><a class="header" href="#逗号运算符">逗号运算符</a></h3>
 <p>逗号运算符只在with块内有效.</p>
@@ -806,19 +872,26 @@ compare    == != &lt; &gt; &lt;= &gt;=
 <p>等价于</p>
 <pre><code>x { .add(a).add(b).add(c); }
 </code></pre>
-<h2 id="反射"><a class="header" href="#反射">反射</a></h2>
-<p>默认启用反射，需要手动添加reflect标记。</p>
+<h3 id="反射"><a class="header" href="#反射">反射</a></h3>
+<p>默认不启用反射，需要手动添加reflect标记。</p>
 <pre><code>reflect struct Point {
     var x: Int;
     var y: Int;
 }
 </code></pre>
+<p>注解可以在反射API中获取</p>
+<pre><code>//@SimpleSerial
+reflect struct Point {
+    var x: Int;
+    var y: Int;
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="模块化"><a class="header" href="#模块化">模块化</a></h2>
-<p>每个语言对模块的定义都有点不太一样，sric中模块即使命名空间，也是编译单元，也是部署单元。</p>
+<p>每个语言对模块的定义都有点不太一样，sric中模块既是命名空间，也是编译单元，也是部署单元。</p>
 <h3 id="模块定义"><a class="header" href="#模块定义">模块定义</a></h3>
 <p>模块通过构建脚本来定义，构建脚本以scm为扩展名:</p>
-<pre><code>name = std
-summary = standard library
+<pre><code>name = demo
+summary = demo library
 outType = lib
 version = 1.0
 depends = sys 1.0
@@ -827,12 +900,12 @@ srcDirs = src/
 <p>源码目录srcDirs需要以<code>/</code>结尾，编译器会自动搜索目录下的所有.sric文件。</p>
 <h3 id="模块导入"><a class="header" href="#模块导入">模块导入</a></h3>
 <p>在代码里面导入外部模块:</p>
-<pre><code>import std::*;
-import std::Vec;
+<pre><code>import sric::*;
+import sric::DArray;
 </code></pre>
 <p>其中<code>*</code>表示导入模块下的所有符号。导入的模块必须在构建脚本的depends字段声明。</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="和c交互"><a class="header" href="#和c交互">和C++交互</a></h2>
-<p>sric可以很容易的和C++交互。sric编译为人类可读的C++代码，和已有C++代码一起编译，可以像C++代码一样被C++直接调用。</p>
+<p>sric可以很容易的和C++交互。sric编译为人类可读的C++代码，可以像C++代码一样被C++直接调用。</p>
 <p>调用C++代码，只需要将C++代码的原型声明一下，即可调用。C语言代码使用externc来修饰，C++代码使用extern来修饰。</p>
 <h3 id="c语言"><a class="header" href="#c语言">C语言</a></h3>
 <pre><code>externc fun printf(format: raw* const Int8, args: ...);
@@ -852,7 +925,7 @@ extern struct P {
     fun foo();
 }
 </code></pre>
-<p>如果碰到碰到C++支持，sric不支持的特性，就不能直接调用了，可能需要自己封装。</p>
+<p>如果碰到有些C++的特性在sric不支持，就不能直接调用了，可能需要自己封装。</p>
 <h3 id="符号映射"><a class="header" href="#符号映射">符号映射</a></h3>
 <p>也可以用symbol指令来映射符号名称，例如</p>
 <pre><code>//C++
@@ -867,6 +940,77 @@ extern fun hello();
 </code></pre>
 <h3 id="生成c接口"><a class="header" href="#生成c接口">生成C++接口</a></h3>
 <p>使用tool目录的python脚本，可以由C++头文件生成的sric原型。</p>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="序列化"><a class="header" href="#序列化">序列化</a></h2>
+<p>sric通过内建的动态反射来支持序列化，序列化格式为文本格式<a href="https://github.com/chunquedong/jsonc">HiML</a>。</p>
+<h3 id="序列化例子"><a class="header" href="#序列化例子">序列化例子</a></h3>
+<p>要序列化的类需要reflect标记。例如：</p>
+<pre><code>reflect struct Point {
+    var x: Int;
+    var y: Float;
+}
+
+unsafe fun testSimple() {
+    var encoder: Encoder;
+    var obj = new Point { .x = 1; .y = 2; };
+    var t = obj as *Void;
+    var res = encoder.encode(t, "testSerial::Point");
+    printf("%s\n", res.c_str());
+
+    var decoder: Decoder;
+    var p = decoder.decode(res);
+    var obj2: raw* Point = unsafeCast$&lt;raw*Point&gt;(p);
+    
+    verify(obj2.x == obj.x);
+    verify(obj2.y == obj.y);
+}
+</code></pre>
+<p>上面的例子中由于Point是非多态对象，所以要显式传入名称"testSerial::Point"。</p>
+<h3 id="避免序列化"><a class="header" href="#避免序列化">避免序列化</a></h3>
+<p>有时候有些字段不想序列化，可以用Transient注解来标记</p>
+<pre><code>reflect struct Point {
+    var x: Int;
+
+    //@Transient
+    var y: Float;
+}
+</code></pre>
+<h3 id="反序列化后处理"><a class="header" href="#反序列化后处理">反序列化后处理</a></h3>
+<p>有时候希望反序列化后，调用指定函数来恢复状态。名称为_onDeserialize的函数将被自动调用。</p>
+<pre><code>reflect struct Point {
+    var x: Int;
+
+    fun _onDeserialize() {
+    }
+}
+</code></pre>
+<h3 id="简单模式序列化"><a class="header" href="#简单模式序列化">简单模式序列化</a></h3>
+<p>正常情况下自定义类被序列化对象，可通过SimpleSerial注解将其序列化为字符串。
+例如我们想要把Insets序列化为"1 2 3 4"而不是"Insets{top=1,right=2,bottom=3,left=4}"</p>
+<pre><code>//@SimpleSerial
+reflect struct Insets {
+    var top: Int = 0;
+    var right: Int = 0;
+    var bottom: Int = 0;
+    var left: Int = 0;
+
+    fun toString() : String {
+        return String::format("%d %d %d %d", top, right, bottom, left);
+    }
+
+    fun fromString(str: String): Bool {
+        var fs = str.split(" ");
+        if (fs.size() == 4) {
+            top = fs[0].toInt32();
+            right = fs[1].toInt32();
+            bottom = fs[2].toInt32();
+            left = fs[3].toInt32();
+            return true;
+        }
+        return false;
+    }
+}
+</code></pre>
+<p>序列化和反序列化过程中会自动调用toString和fromString，两个函数的签名必须和上面完全一致。</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="代码约定"><a class="header" href="#代码约定">代码约定</a></h2>
 <h3 id="源文件"><a class="header" href="#源文件">源文件</a></h3>
 <p>源文件使用UTF-8编码。</p>
