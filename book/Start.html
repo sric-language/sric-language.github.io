@@ -155,24 +155,43 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="安装"><a class="header" href="#安装">安装</a></h2>
-<p>需要:</p>
+                        <h1 id="安装"><a class="header" href="#安装">安装</a></h1>
+<h3 id="1安装需要的软件"><a class="header" href="#1安装需要的软件">1.安装需要的软件</a></h3>
 <ul>
 <li>JDK 17+</li>
-<li>C++ 编译器 支持C++17</li>
-<li>fanx 和 <a href="https://github.com/chunquedong/fmake">fmake</a></li>
+<li>C++ 编译器(支持C++17)</li>
+<li><a href="https://github.com/fanx-dev/fanx/releases">fanx</a></li>
+<li>CMake</li>
 </ul>
-<p>构建:</p>
-<ol>
-<li>添加 "bin"目录 到你的环境变量</li>
-<li>运行 build.sh</li>
-</ol>
-<h2 id="ide"><a class="header" href="#ide">IDE</a></h2>
+<p>安装以上软件，并配置环境变量，确保java、jar、fan、cmake等命令在gitbash中可用。</p>
+<h3 id="2构建fmake"><a class="header" href="#2构建fmake">2.构建fmake</a></h3>
+<pre><code>git clone git@github.com:chunquedong/fmake.git
+cd fmake
+fanb pod.props
+</code></pre>
+<p>在Windows系统上使用微软C++编译器工具集:</p>
+<pre><code>cd fmake
+./vsvars.sh
+cd -
+</code></pre>
+<p><a href="https://github.com/chunquedong/fmake">更多关于fmake的信息</a></p>
+<h3 id="3构建jsonc"><a class="header" href="#3构建jsonc">3.构建jsonc</a></h3>
+<pre><code>git clone git@github.com:chunquedong/jsonc.git
+cd jsonc
+./build.sh
+</code></pre>
+<h3 id="4构建sric"><a class="header" href="#4构建sric">4.构建Sric</a></h3>
+<pre><code>git clone git@github.com:sric-language/sric.git
+cd sric
+./build.sh
+</code></pre>
+<p>添加sric的"bin"目录到你的环境变量（配置完环境变量需要重启gitbash）</p>
+<h1 id="ide"><a class="header" href="#ide">IDE</a></h1>
 <ol>
 <li>在vscode插件市场中搜索'sric-language',并安装。</li>
 <li>在插件的设置页配置sricHome指向sric目录(bin的上一级)。</li>
 </ol>
-<h2 id="用法"><a class="header" href="#用法">用法</a></h2>
+<h1 id="用法"><a class="header" href="#用法">用法</a></h1>
 <pre><code>sric test.scm
 </code></pre>
 <p>其中.scm文件是模块定义文件，也是构建脚本。
