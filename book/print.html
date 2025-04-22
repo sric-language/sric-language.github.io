@@ -403,7 +403,7 @@ struct Point {
         var dy = t.y - y;
         return sqrt(dx*dx + dy*dy);
     }
-};
+}
 </code></pre>
 <h2 id="特性比较"><a class="header" href="#特性比较">特性比较</a></h2>
 <h3 id="从c移除的功能"><a class="header" href="#从c移除的功能">从C++移除的功能</a></h3>
@@ -443,6 +443,7 @@ struct Point {
 <li>C++ 编译器(支持C++17)</li>
 <li><a href="https://github.com/fanx-dev/fanx/releases">fanx</a></li>
 <li>CMake</li>
+<li>git</li>
 </ul>
 <p>安装以上软件，并配置环境变量，确保java、jar、fan、cmake等命令在gitbash中可用。</p>
 <h3 id="2构建fmake"><a class="header" href="#2构建fmake">2.构建fmake</a></h3>
@@ -452,7 +453,7 @@ fanb pod.props
 </code></pre>
 <p>在Windows系统上使用微软C++编译器工具集:</p>
 <pre><code>cd fmake
-./vsvars.sh
+source vsvars.sh
 cd -
 </code></pre>
 <p><a href="https://github.com/chunquedong/fmake">更多关于fmake的信息</a></p>
@@ -925,40 +926,58 @@ import sric::DArray;
 <p>其中<code>*</code>表示导入模块下的所有符号。导入的模块必须在构建脚本的depends字段声明。</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="和c交互"><a class="header" href="#和c交互">和C++交互</a></h2>
 <p>sric可以很容易的和C++交互。sric编译为人类可读的C++代码，可以像C++代码一样被C++直接调用。</p>
-<p>调用C++代码，只需要将C++代码的原型声明一下，即可调用。C语言代码使用externc来修饰，C++代码使用extern来修饰。</p>
-<h3 id="c语言"><a class="header" href="#c语言">C语言</a></h3>
+<p>调用C++代码，只需要将C++代码的原型声明一下，即可调用。C语言/无命名空间代码使用externc来修饰；同名命名空间使用extern来修饰；其他情况使用符号映射。</p>
+<h3 id="c语言无命名空间"><a class="header" href="#c语言无命名空间">C语言/无命名空间</a></h3>
 <pre><code>externc fun printf(format: raw* const Int8, args: ...);
 
 fun main() {
     printf("Hello World\n");
 }
 </code></pre>
-<h3 id="c"><a class="header" href="#c">C++</a></h3>
-<pre><code>//C++
-class P {
-    void foo();
-};
+<h3 id="同名命名空间"><a class="header" href="#同名命名空间">同名命名空间</a></h3>
+<p>当C++命名空间和模块名称相同时。
+C++:</p>
+<pre><code>namespace xx {
+    class P {
+        void foo();
+    };
+}
 </code></pre>
-<pre><code>//sric
+<p>Sric:</p>
+<pre><code>//xx module
 extern struct P {
     fun foo();
 }
 </code></pre>
-<p>如果碰到有些C++的特性在sric不支持，就不能直接调用了，可能需要自己封装。</p>
+<p>这种情况下Sric代码的模块名称必须和C++的命名空间一致。</p>
 <h3 id="符号映射"><a class="header" href="#符号映射">符号映射</a></h3>
-<p>也可以用symbol指令来映射符号名称，例如</p>
-<pre><code>//C++
-namespace test {
+<p>也可以用symbol注解来映射符号名称，例如。
+C++:</p>
+<pre><code>namespace test {
     void hi() {
     }
 }
 
-//sric
-//@extern symbol: test::hi
+</code></pre>
+<p>Sric:</p>
+<pre><code>//@extern symbol: test::hi
 extern fun hello();
+</code></pre>
+<p>此时在Sric中调用hello将调用C++的hi方法。</p>
+<h3 id="包含头文件"><a class="header" href="#包含头文件">包含头文件</a></h3>
+<p>在顶级声明前面用@#include注解来包含特殊的C++头文件</p>
+<pre><code>//@#include "test.h"
 </code></pre>
 <h3 id="生成c接口"><a class="header" href="#生成c接口">生成C++接口</a></h3>
 <p>使用tool目录的python脚本，可以由C++头文件生成的sric原型。</p>
+<h3 id="不使用fmake进行编译"><a class="header" href="#不使用fmake进行编译">不使用fmake进行编译</a></h3>
+<p>可以自己编译生成的C++代码，位于sric/output目录下。</p>
+<p>可以定义SC_NO_CHECK和SC_CHECK宏。</p>
+<ul>
+<li>SC_CHECK表示进行安全检查。</li>
+<li>SC_NO_CHECK表示不进行安全检查。</li>
+</ul>
+<p>当没有这两个宏时，按照_DEBUG和NDEBUG宏来自动定义。</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="序列化"><a class="header" href="#序列化">序列化</a></h2>
 <p>sric通过内建的动态反射来支持序列化，序列化格式为文本格式<a href="https://github.com/chunquedong/jsonc">HiML</a>。</p>
 <h3 id="序列化例子"><a class="header" href="#序列化例子">序列化例子</a></h3>

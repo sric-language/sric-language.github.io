@@ -6,30 +6,24 @@
   <title>Fanx</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="common.css"/>
-  <link rel="stylesheet" type="text/css" href="index.css"/>
+  <link rel="stylesheet" type="text/css" href="others.css"/>
   <style type="text/css">
 
-
-  .content a {
-    color: #666;
-    text-decoration:none;
-    font-size:1.5em;
-  }
-
-  .content .doc {
-    background: #eee;
-    padding: 30px;
-    margin: 30px;
-  }
 
   </style>
 </head>
 <body>
-  <div id="header">
+  <div class="header">
     <div class="sitebar">
+      <div id="logo">
+        <img src="res/logo.png" alt="logo"/>
+      </div>
+      <div id="logo-name">
+        SRIC
+      </div>
       <ul>
         <li>
-          <a href='index_zh.html'>首页</a>
+          <a href='index.html'>首页</a>
         </li>
 
         <li>
@@ -37,14 +31,18 @@
         </li>
 
         <li>
-          <a href='document.html'>文档</a>
+          <a href='book/index.html'>文档</a>
+        </li>
+
+        <li>
+          <a href='apidoc.html'>API</a>
         </li>
 
         <li>
           <a href='community_zh.html'>社区</a>
         </li>
-
-     </ul>
+        
+      </ul>
     </div>
 
   </div>
@@ -62,6 +60,27 @@
     <p class="doc">
       <a href='apidoc/serial.html'>serial</a>
     </p>
+  </div>
+
+  
+  <div class="footer">
+    <div class="footer-content">
+      <div class="footer-text">
+        <span>文档</span>
+        <a href='book/Start.html'>快速开始</a>
+        <a href='book/index.html'>编程指南</a>
+        <a href='apidoc.html'>API文档</a>
+      </div>
+      <div class="footer-text">
+        <span>社区</span>
+        <a href='https://www.zhihu.com/column/c_1842314344005775360'>知乎</a>
+        <a href='https://github.com/sric-language/sric'>Github</a>
+        <a href='https://gitee.com/chunquedong/sric'>Gitee</a>
+      </div>
+      <p class="footer-copyright"> 
+        Copyright (c) 2025 chunquedong
+      </p>
+    </div>
   </div>
 </body>
 </html>

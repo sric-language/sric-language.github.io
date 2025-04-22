@@ -1,49 +1,237 @@
 
+.header {
+  background: url(res/home.png);
+  height: 800px;
+}
 
-#title{
-  width: 80%;
+
+.banner {
+  width: 1500px;
   margin: 0 auto;
-  
-  padding: 10px 0 20px 0;
+}
+.text-block {
+  float: left;
+  margin-top: 162px;
+}
+.code-block {
+  float: right;
+  margin-top: 84px;
 }
 
-#title h1{
-  font-size:3em;
-  padding: 10px 0;
+.banner-bg {
+  width:100%;
+  height:800px;
+  vertical-align: bottom;
+}
+.code-bg {
+  width: 900px;
+}
+.code {
+  width: 600px;
+  right: 210px;
+  color: #fff;
+  font-family: Consolas,Monaco,Menlo,"Andale Mono","lucida console","Courier New",monospace;
+  font-size: 20px;
+  line-height: 1.9;
+  margin-top: -420px;
 }
 
-#title h3{
-  font-size:1.6em;
-  margin: 0 0 20px 0;
+.slogon1 {
+  font-size:51px;
+  color:#fff;
+}
+.slogon2 {
+  font-size:25px;
+  color:#fff;
+  width: 380px;
+  margin-top: 30px;
+}
+.start-button {
+  padding: 15px 60px;
+  border-radius: 60px;
+  background-color: rgb(255, 255, 255);
+  color: #0444f7;
+  text-decoration: none;
+  display: block;
+  width: 70px;
+  margin-top: 57px;
 }
 
-#btn {
-  float:right;
-  font-size: 1em;
-  position:relative;
-  top:-120px; 
-}
-
-.round {
-border:1px solid;
-border-radius:25px;
--moz-border-radius:25px; /* Old Firefox */
-padding: 10px;
-}
 
 
-.fs h3{
-  margin: 0 0 13px 0;
-  font-size:1.5em;
+
+
+
+.features{
+  background:#fff;
+  width: 1500px;
+  margin: 0 auto;
+  padding: 100px 0;
 }
 
-.fs p{
-  margin: 0 0;
-  font-size:1em;
-  color:#888; 
+.title {
+  text-align: center;
+  font-size: 60px;
+  margin-top: 30px;
+  color: rgb(0, 0, 0);
 }
 
-.fs {
-  padding: 15px;
-  margin: 15px;
+.title2 {
+  font-size: 18px;
+  color: #89898c;
+  text-align: center;
+  margin: 34px auto 0 auto;
+  width: 1500px;
 }
+
+.features-content {
+  margin-top: 100px;
+}
+
+.features-text {
+  float: right;
+  width: 590px;
+}
+
+.fs-text {
+  margin-top: 60px;
+}
+
+.fs-text h3 {
+  font-size: 30px;
+  color: black;
+}
+
+.fs-text p {
+  font-size: 18px;
+  color: #89898c;
+  margin-top: 20px;
+}
+
+
+
+
+
+
+
+.aplication {
+  background-color: #f7f9fd;
+  margin: 0 auto;
+  padding: 110px 0;
+}
+
+.aplication-content {
+  width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  margin-top: 90px;
+}
+
+.aplication-item {
+  width: 360px;
+  height: 540px;
+  border-radius: 20px;
+  background-color: rgb(255, 255, 255);
+  margin: 20px;
+}
+
+.app-image {
+  display: block;
+  margin: 0 auto;
+  margin-top: 36px;
+}
+
+.app-text h3 {
+  font-size: 30px;
+  color: black;
+  text-align: center;
+  margin-top: 45px;
+  margin-bottom: 35px;
+}
+
+.app-text p {
+  font-size: 18px;
+  color: #89898c;
+  width: 250px;
+  margin: 0 auto;
+}
+
+
+
+
+
+
+.wase {
+  background:#fff;
+  width: 1500px;
+  margin: 0 auto;
+  padding: 100px 0;
+  height: 700px;
+}
+
+.wase-text {
+  width: 660px;
+  float: left;
+}
+
+.wase-text h3 {
+  font-size: 30px;
+  color: black;
+  text-align: center;
+}
+
+.wase-text p {
+  margin-top: 30px;
+  font-size: 24px;
+  color: #89898c;
+  line-height: 2.5;
+}
+
+.wase-image {
+  float: right;
+}
+
+.demo-button {
+  padding: 15px 60px;
+  border-radius: 60px;
+  background-color: #134cb0;
+  color: #ffffff;
+  text-decoration: none;
+  display: block;
+  width: 94px;
+  margin-top: 57px;
+}
+
+
+
+
+
+
+.join {
+  background: #134cb0;
+  padding: 100px 0;
+  height: 160px;
+}
+
+.join-text {
+  width: 1500px;
+  margin: 0 auto;
+}
+
+.join-text h3 {
+  font-size: 60px;
+  color: rgb(255, 255, 255);
+  text-align: center;
+}
+
+.join-text p {
+  margin-top: 30px;
+  font-size: 18px;
+  color: rgb(255, 255, 255);
+  line-height: 2.5;
+}
+
+
+
+
+

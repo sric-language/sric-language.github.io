@@ -1,0 +1,203 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+  <title>Sric Language</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="common.css"/>
+  <link rel="stylesheet" type="text/css" href="index.css"/>
+  <style type="text/css">
+
+  </style>
+
+  <script type="text/javascript">
+  </script>
+</head>
+<body>
+  <div class="header">
+    
+    <div class="sitebar">
+      <div id="logo">
+        <img src="res/logo.png" alt="logo"/>
+      </div>
+      <div id="logo-name">
+        SRIC
+      </div>
+      <ul>
+        <li>
+          <a href='index.html'>Home</a>
+        </li>
+
+        <li>
+          <a href='download.html'>Download</a>
+        </li>
+
+        <li>
+          <a href='https://github.com/sric-language/sric/blob/master/doc/doc-en/Index.md'>Document</a>
+        </li>
+
+        <li>
+          <a href='apidoc.html'>API</a>
+        </li>
+
+        <li>
+          <a href='community_zh.html'>Community</a>
+        </li>
+        
+      </ul>
+    </div>
+
+    <div class="banner">
+
+      <div class="text-block">
+          <div class="slogon1">
+            <h2>Sric</h2>
+          </div>
+          <div class="slogon2">
+            <p>A memory-safe high-performance programming language for rapidly developing highly reliable software</p>
+          </div>
+          <a class="start-button" href="https://github.com/sric-language/sric/blob/master/doc/doc-en/Start.md">Get Start</a>
+      </div>
+
+      <div class="code-block">
+          <img class="code-bg" src="res/code.png" alt="image"/>
+          <div class="code">
+            <pre>
+              import cstd::*;
+              struct Point {
+                  var x: Int;
+                  var y: Int;
+                  fun dis(t: & Point) : Float {
+                      var dx = t.x - x;
+                      var dy = t.y - y;
+                      return sqrt(dx*dx + dy*dy);
+                  }
+              }
+            </pre>
+          </div>
+      </div>
+    </div>
+
+
+  </div>
+  
+  <div class="features">
+
+    <h1 class="title">Why Sric?</h1>
+
+    <p class="title2">A maxed-out, hexagon warrior among programming languages.</p>
+
+    <div class="features-content">
+        <img src="res/features.png" alt="image"/>
+
+        <div class="features-text">
+          <div class="fs-text">
+              <h3>Performance</h3>
+              <p>The Sric language delivers blazing-fast runtime performance, thanks to its lack of a garbage collector and support for low-level memory operations. It maintains low-cost abstractions while offering high expressiveness.</p>
+          </div>
+          
+          <div class="fs-text">
+              <h3>Safety</h3>
+              <p>Sric is memory-safe, free from memory leaks, dangling pointers, and other common C++ memory issues. Its safety mechanisms don't restrict coding flexibility or introduce additional learning overhead.</p>
+          </div>
+          
+          <div class="fs-text">
+              <h3>Simplicity</h3>
+              <p>Sric strives to minimize complexity by eliminating unnecessary syntax features. For example, it avoids C++-style constructors, function overloading, template metaprogramming, multiple inheritance, macros, and similar complexities.</p>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="aplication">
+
+    <h1 class="title">Build it in Rust</h1>
+
+    <p class="title2">Sric has a wide range of applications. It can easily call existing C/C++ libraries and be called by C++ code. It is suitable for building command-line tools, server-side software, embedded systems, desktop applications, and even web frontends via WebAssembly.</p>
+
+    <div class="aplication-content">
+        <div class="aplication-item">
+          <img class="app-image" src="res/cmd.png" alt="image"/>
+          <div class="app-text">
+            <h3>Command Line</h3>
+            <p>Speed up CLI development with Sric. Maintain your applications with robust reliability.</p>
+          </div>
+        </div>
+
+        <div class="aplication-item">
+          <img class="app-image" src="res/cmd.png" alt="image"/>
+          <div class="app-text">
+            <h3>WebAssembly</h3>
+            <p>Sric outperforms JavaScript in web applications, delivering native-speed execution</p>
+          </div>
+        </div>
+
+        <div class="aplication-item">
+          <img class="app-image" src="res/cmd.png" alt="image"/>
+          <div class="app-text">
+            <h3>Networking</h3>
+            <p>No GC pauses, no surprises. Sric delivers lean and reliable networking stacks.</p>
+          </div>
+        </div>
+
+        <div class="aplication-item">
+          <img class="app-image" src="res/cmd.png" alt="image"/>
+          <div class="app-text">
+            <h3>Embedded</h3>
+            <p>For low-resource devices: Get hardware-level control without losing developer convenience. Meet Sric.</p>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="wase">
+      <div class="wase-text">
+        <h3>Wase cross-platform GUI</h3>
+        <p>Wase is a cross-platform UI library developed for Sric. Write once, run on both desktop and web browsers – with future support for Android and iOS.
+
+          Featuring:
+          
+          Rich component library with polished aesthetics
+          
+          Self-rendering engine (Qt/Flutter-style but more lightweight)
+          
+          Native declarative API powered by Sric's custom comma-expression syntax
+          (SwiftUI/React Native-like development experience)</p>
+        <a class="demo-button" href="wase/run.html">Online Demo</a>
+      </div>
+      <div class="wase-image-block">
+        <img class="wase-image" src="res/wase.png" alt="image"/>
+      </div>
+  </div>
+
+
+  <div class="join">
+      <div class="join-text">
+        <h3>Get involved</h3>
+        <p>Sric is 100% open-source and free to use. Being a young project, we're just getting started – and that's where you come in! No matter your skill level, your ideas and contributions can help build something extraordinary.</p>
+      </div>
+  </div>
+
+
+  <div class="footer">
+    <div class="footer-content">
+      <div class="footer-text">
+        <span>Document</span>
+        <a href='book/Start.html'>Get Start</a>
+        <a href='book/index.html'>Guide</a>
+        <a href='apidoc.html'>API</a>
+      </div>
+      <div class="footer-text">
+        <span>Community</span>
+        <a href='https://www.zhihu.com/column/c_1842314344005775360'>ZhiHu</a>
+        <a href='https://github.com/sric-language/sric'>Github</a>
+        <a href='https://gitee.com/chunquedong/sric'>Gitee</a>
+      </div>
+      <p class="footer-copyright"> 
+        Copyright (c) 2025 chunquedong
+      </p>
+    </div>
+  </div>
+</body>
+</html>
