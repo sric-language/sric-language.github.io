@@ -6,9 +6,9 @@
 body{
   font-size:1em;
   font-family:Helvetica, Arial, Sans;
-  width: 100%;
   margin: 0;
   padding: 0;
+  min-width: 1600px;
 }
 
 ul li{
@@ -49,7 +49,7 @@ p {
 .sitebar li a{
   color: rgb(255, 255, 255);
   text-decoration:none;
-  vertical-align: middle;
+  line-height: 1;
 }
 .sitebar #logo-name {
   font-size:23px;
