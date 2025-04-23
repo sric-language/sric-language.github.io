@@ -83,7 +83,7 @@ var readyPromise = new Promise((resolve, reject) => {
   readyPromiseResolve = resolve;
   readyPromiseReject = reject;
 });
-["_malloc","_free","_memory","___indirect_function_table","_editTextOnTextChange","_main","onRuntimeInitialized"].forEach((prop) => {
+["_malloc","_free","_memory","___indirect_function_table","_isMobile","_editTextOnTextChange","_main","onRuntimeInitialized"].forEach((prop) => {
   if (!Object.getOwnPropertyDescriptor(readyPromise, prop)) {
     Object.defineProperty(readyPromise, prop, {
       get: () => abort('You are getting ' + prop + ' on the Promise object, instead of the instance. Use .then() to get called back with the instance, see the MODULARIZE docs in src/settings.js'),
@@ -113,7 +113,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: C:\Users\YANGJI~1\AppData\Local\Temp\tmpesli994i.js
+// include: C:\Users\YANGJI~1\AppData\Local\Temp\tmp18a7krv1.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -294,21 +294,21 @@ Module['FS_createPath']("/", "res", true, true);
 
   })();
 
-// end include: C:\Users\YANGJI~1\AppData\Local\Temp\tmpesli994i.js
-// include: C:\Users\YANGJI~1\AppData\Local\Temp\tmpw8pmg3ya.js
+// end include: C:\Users\YANGJI~1\AppData\Local\Temp\tmp18a7krv1.js
+// include: C:\Users\YANGJI~1\AppData\Local\Temp\tmp0fywdv8u.js
 
     // All the pre-js content up to here must remain later on, we need to run
     // it.
     if (Module['$ww'] || (typeof ENVIRONMENT_IS_PTHREAD != 'undefined' && ENVIRONMENT_IS_PTHREAD)) Module['preRun'] = [];
     var necessaryPreJSTasks = Module['preRun'].slice();
-  // end include: C:\Users\YANGJI~1\AppData\Local\Temp\tmpw8pmg3ya.js
-// include: C:\Users\YANGJI~1\AppData\Local\Temp\tmpei8_kkn0.js
+  // end include: C:\Users\YANGJI~1\AppData\Local\Temp\tmp0fywdv8u.js
+// include: C:\Users\YANGJI~1\AppData\Local\Temp\tmpbe1p2qow.js
 
     if (!Module['preRun']) throw 'Module.preRun should exist because file support used it; did a pre-js delete it?';
     necessaryPreJSTasks.forEach((task) => {
       if (Module['preRun'].indexOf(task) < 0) throw 'All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?';
     });
-  // end include: C:\Users\YANGJI~1\AppData\Local\Temp\tmpei8_kkn0.js
+  // end include: C:\Users\YANGJI~1\AppData\Local\Temp\tmpbe1p2qow.js
 
 
 // Sometimes an existing Module object exists with properties
@@ -1183,8 +1183,9 @@ function dbg(...args) {
 // === Body ===
 
 var ASM_CONSTS = {
-  131208: () => { alert('Your browser does not support WebGL 2.0'); }
+  131303: () => { alert('Your browser does not support WebGL 2.0'); }
 };
+function isMobile() { if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) { return true; } return false; }
 
 // end include: preamble.js
 
@@ -8282,7 +8283,9 @@ var wasmImports = {
   /** @export */
   glfwTerminate: _glfwTerminate,
   /** @export */
-  glfwWindowHint: _glfwWindowHint
+  glfwWindowHint: _glfwWindowHint,
+  /** @export */
+  isMobile
 };
 var wasmExports;
 createWasm();
