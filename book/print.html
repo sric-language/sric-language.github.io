@@ -1002,9 +1002,34 @@ extern fun hello();
 <p>在顶级声明前面用@#include注解来包含特殊的C++头文件</p>
 <pre><code>//@#include "test.h"
 </code></pre>
-<h3 id="生成c接口"><a class="header" href="#生成c接口">生成C++接口</a></h3>
+<h3 id="有参构造函数"><a class="header" href="#有参构造函数">有参构造函数</a></h3>
+<p>由于Sric不支持有参数的构造函数，所以使用下面两个方式来调用有参数的构造函数：</p>
+<pre><code>new_$&lt;vector$&lt;Int&gt;&gt;(3);
+makeValue$&lt;vector$&lt;Int&gt;&gt;(3);
+</code></pre>
+<h3 id="完整示例"><a class="header" href="#完整示例">完整示例</a></h3>
+<pre><code>import sric::*;
+
+
+//@#include &lt;vector&gt;
+//@extern symbol: std::vector
+extern struct vector$&lt;T&gt; {
+    fun size(): Int;
+}
+
+fun testExtern() {
+    var v = new_$&lt;vector$&lt;Int&gt;&gt;(3);
+    verify(v.size() == 3);
+}
+
+fun testExtern2() {
+    var v2 = makeValue$&lt;vector$&lt;Int&gt;&gt;(3);
+    verify(v2.size() == 3);
+}
+</code></pre>
+<h2 id="生成c接口"><a class="header" href="#生成c接口">生成C++接口</a></h2>
 <p>使用tool目录的python脚本，可以由C++头文件生成的sric原型。</p>
-<h3 id="不使用fmake进行编译"><a class="header" href="#不使用fmake进行编译">不使用fmake进行编译</a></h3>
+<h2 id="不使用fmake进行编译"><a class="header" href="#不使用fmake进行编译">不使用fmake进行编译</a></h2>
 <p>可以自己编译生成的C++代码，位于sric/output目录下。</p>
 <p>可以定义SC_NO_CHECK和SC_CHECK宏。</p>
 <ul>
