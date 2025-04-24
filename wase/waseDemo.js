@@ -1,7 +1,10 @@
 var mgpFontContext;
 function getFontContext() {
   if (!mgpFontContext) {
-    mgpFontContext = document.createElement("canvas").getContext("2d", { willReadFrequently: true });
+    var canvas = document.createElement("canvas")
+    canvas.width = 512;
+    canvas.height = 512;
+    mgpFontContext = canvas.getContext("2d", { willReadFrequently: true });
   }
   //mgpFontContext.textBaseline = "top";
   return mgpFontContext;
@@ -113,7 +116,7 @@ if (ENVIRONMENT_IS_NODE) {
 
 // --pre-jses are emitted after the Module integration code, so that they can
 // refer to Module (if they choose; they can also define Module)
-// include: C:\Users\YANGJI~1\AppData\Local\Temp\tmp18a7krv1.js
+// include: C:\Users\YANGJI~1\AppData\Local\Temp\tmpd5792njf.js
 
   Module['expectedDataFileDownloads'] ??= 0;
   Module['expectedDataFileDownloads']++;
@@ -294,21 +297,21 @@ Module['FS_createPath']("/", "res", true, true);
 
   })();
 
-// end include: C:\Users\YANGJI~1\AppData\Local\Temp\tmp18a7krv1.js
-// include: C:\Users\YANGJI~1\AppData\Local\Temp\tmp0fywdv8u.js
+// end include: C:\Users\YANGJI~1\AppData\Local\Temp\tmpd5792njf.js
+// include: C:\Users\YANGJI~1\AppData\Local\Temp\tmpvcde2q2f.js
 
     // All the pre-js content up to here must remain later on, we need to run
     // it.
     if (Module['$ww'] || (typeof ENVIRONMENT_IS_PTHREAD != 'undefined' && ENVIRONMENT_IS_PTHREAD)) Module['preRun'] = [];
     var necessaryPreJSTasks = Module['preRun'].slice();
-  // end include: C:\Users\YANGJI~1\AppData\Local\Temp\tmp0fywdv8u.js
-// include: C:\Users\YANGJI~1\AppData\Local\Temp\tmpbe1p2qow.js
+  // end include: C:\Users\YANGJI~1\AppData\Local\Temp\tmpvcde2q2f.js
+// include: C:\Users\YANGJI~1\AppData\Local\Temp\tmpt_1cmwoi.js
 
     if (!Module['preRun']) throw 'Module.preRun should exist because file support used it; did a pre-js delete it?';
     necessaryPreJSTasks.forEach((task) => {
       if (Module['preRun'].indexOf(task) < 0) throw 'All preRun tasks that exist before user pre-js code should remain after; did you replace Module or modify Module.preRun?';
     });
-  // end include: C:\Users\YANGJI~1\AppData\Local\Temp\tmpbe1p2qow.js
+  // end include: C:\Users\YANGJI~1\AppData\Local\Temp\tmpt_1cmwoi.js
 
 
 // Sometimes an existing Module object exists with properties
@@ -1183,7 +1186,7 @@ function dbg(...args) {
 // === Body ===
 
 var ASM_CONSTS = {
-  131303: () => { alert('Your browser does not support WebGL 2.0'); }
+  131335: () => { alert('Your browser does not support WebGL 2.0'); }
 };
 function isMobile() { if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) { return true; } return false; }
 
@@ -4672,7 +4675,7 @@ function isMobile() { if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) { re
         Module.HEAPF32[p++] = w;
         Module.HEAPF32[p++] = h;
         Module.HEAPF32[p++] = 0;
-        Module.HEAPF32[p++] = m.actualBoundingBoxAscent;
+        Module.HEAPF32[p++] = m.fontBoundingBoxAscent;
         return 1;
       }
 
@@ -4697,13 +4700,13 @@ function isMobile() { if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) { re
         Module.HEAPF32[p++] = w;
         Module.HEAPF32[p++] = h;
         Module.HEAPF32[p++] = 0;
-        Module.HEAPF32[p++] = m.actualBoundingBoxAscent;
+        Module.HEAPF32[p++] = m.fontBoundingBoxAscent;
     
         var iw = Math.ceil(w);
         var ih = Math.ceil(h);
         cx.clearRect(0, 0, iw, ih);
         cx.fillStyle = "rgba(255,0,0,1)";
-        cx.fillText(text, 0, m.actualBoundingBoxAscent+2);
+        cx.fillText(text, 0, m.fontBoundingBoxAscent);
         var imageData = cx.getImageData(0, 0, iw, ih);
         var imageBuf = imageData.data;
     
