@@ -368,7 +368,7 @@ fun main() {
 <tr><td>char</td><td>Int8</td></tr>
 <tr><td>char[4]</td><td>[4]Int8</td></tr>
 <tr><td>int*</td><td>raw* Int8</td></tr>
-<tr><td>const int&amp;</td><td>&amp; const int</td></tr>
+<tr><td>const int&amp;</td><td>&amp; const Int</td></tr>
 </tbody></table>
 </div>
 <h3 id="定义"><a class="header" href="#定义">定义</a></h3>
@@ -507,17 +507,20 @@ srcDirs = ./
 </ol>
 <pre><code>'C:\Users\user\fmakeRepo\msvc\hello-1.0-release\bin\hello'
 </code></pre>
-<h1 id="用法"><a class="header" href="#用法">用法</a></h1>
-<pre><code>sric test.scm
-</code></pre>
 <p>其中.scm文件是模块定义文件，也是构建脚本。
 生成的 C++ 代码位置在 "sric/output" 目录。</p>
 <h2 id="使用fmake构建"><a class="header" href="#使用fmake构建">使用fmake构建</a></h2>
-<pre><code>sric test.scm -fmake -debug
+<p>不加-fmake构建后，只生成C++代码（位置在 "sric/output" 目录）。</p>
+<pre><code>sric hello.scm
 </code></pre>
-<p>也可以单独手动运行fmake:</p>
-<pre><code>fan fmake output/test.fmake -debug
+<p>然后再单独手动运行fmake编译:</p>
+<pre><code>fan fmake output/hello.fmake -debug
 </code></pre>
+<h2 id="调试"><a class="header" href="#调试">调试</a></h2>
+<p>可通过生成IDE项目来调试生成的C++代码。</p>
+<pre><code>fan fmake output/hello.fmake -debug -G
+</code></pre>
+<p>生成的项目文件在上层目录的build文件夹下。</p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="内建类型"><a class="header" href="#内建类型">内建类型</a></h3>
 <ul>
 <li>Int, Int8, Int16, Int32, Int64, UInt8, UInt16, UInt32, UInt64</li>
@@ -548,10 +551,10 @@ srcDirs = ./
     introduce
 */
 </code></pre>
-<p>命令注释</p>
+<h3 id="注解"><a class="header" href="#注解">注解</a></h3>
 <pre><code>//@method: GET
 </code></pre>
-<p>命令相当与Java的注解，可以通过反射接口动态反射。</p>
+<p>注解可以通过反射接口动态获取。</p>
 <h3 id="变量定义"><a class="header" href="#变量定义">变量定义</a></h3>
 <ul>
 <li>使用var定义变量，不管是否可变都用var。</li>
@@ -1003,10 +1006,7 @@ extern fun hello();
 <pre><code>//@#include "test.h"
 </code></pre>
 <h3 id="有参构造函数"><a class="header" href="#有参构造函数">有参构造函数</a></h3>
-<p>由于Sric不支持有参数的构造函数，所以使用下面两个方式来调用有参数的构造函数：</p>
-<pre><code>new_$&lt;vector$&lt;Int&gt;&gt;(3);
-makeValue$&lt;vector$&lt;Int&gt;&gt;(3);
-</code></pre>
+<p>由于Sric不支持有参数的构造函数，所以使用makePtr,makeValue来调用有参数的构造函数。</p>
 <h3 id="完整示例"><a class="header" href="#完整示例">完整示例</a></h3>
 <pre><code>import sric::*;
 
@@ -1018,7 +1018,7 @@ extern struct vector$&lt;T&gt; {
 }
 
 fun testExtern() {
-    var v = new_$&lt;vector$&lt;Int&gt;&gt;(3);
+    var v = makePtr$&lt;vector$&lt;Int&gt;&gt;(3);
     verify(v.size() == 3);
 }
 
@@ -1124,7 +1124,6 @@ reflect struct Insets {
 <ul>
 <li>类型名使用Pascal命名法</li>
 <li>模块名、函数名、变量名使用小写驼峰式命名。</li>
-<li>枚举条目使用Pascal命名法。</li>
 <li>从来不要用全大写："FOO_BAR"</li>
 </ul>
 

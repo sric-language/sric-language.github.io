@@ -226,17 +226,20 @@ srcDirs = ./
 </ol>
 <pre><code>'C:\Users\user\fmakeRepo\msvc\hello-1.0-release\bin\hello'
 </code></pre>
-<h1 id="用法"><a class="header" href="#用法">用法</a></h1>
-<pre><code>sric test.scm
-</code></pre>
 <p>其中.scm文件是模块定义文件，也是构建脚本。
 生成的 C++ 代码位置在 "sric/output" 目录。</p>
 <h2 id="使用fmake构建"><a class="header" href="#使用fmake构建">使用fmake构建</a></h2>
-<pre><code>sric test.scm -fmake -debug
+<p>不加-fmake构建后，只生成C++代码（位置在 "sric/output" 目录）。</p>
+<pre><code>sric hello.scm
 </code></pre>
-<p>也可以单独手动运行fmake:</p>
-<pre><code>fan fmake output/test.fmake -debug
+<p>然后再单独手动运行fmake编译:</p>
+<pre><code>fan fmake output/hello.fmake -debug
 </code></pre>
+<h2 id="调试"><a class="header" href="#调试">调试</a></h2>
+<p>可通过生成IDE项目来调试生成的C++代码。</p>
+<pre><code>fan fmake output/hello.fmake -debug -G
+</code></pre>
+<p>生成的项目文件在上层目录的build文件夹下。</p>
 
                     </main>
 

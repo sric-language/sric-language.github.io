@@ -200,10 +200,7 @@ extern fun hello();
 <pre><code>//@#include "test.h"
 </code></pre>
 <h3 id="有参构造函数"><a class="header" href="#有参构造函数">有参构造函数</a></h3>
-<p>由于Sric不支持有参数的构造函数，所以使用下面两个方式来调用有参数的构造函数：</p>
-<pre><code>new_$&lt;vector$&lt;Int&gt;&gt;(3);
-makeValue$&lt;vector$&lt;Int&gt;&gt;(3);
-</code></pre>
+<p>由于Sric不支持有参数的构造函数，所以使用makePtr,makeValue来调用有参数的构造函数。</p>
 <h3 id="完整示例"><a class="header" href="#完整示例">完整示例</a></h3>
 <pre><code>import sric::*;
 
@@ -215,7 +212,7 @@ extern struct vector$&lt;T&gt; {
 }
 
 fun testExtern() {
-    var v = new_$&lt;vector$&lt;Int&gt;&gt;(3);
+    var v = makePtr$&lt;vector$&lt;Int&gt;&gt;(3);
     verify(v.size() == 3);
 }
 
