@@ -156,7 +156,20 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="为什么要用sric"><a class="header" href="#为什么要用sric">为什么要用Sric</a></h2>
+                        <h2 id="sric编程语言"><a class="header" href="#sric编程语言">Sric编程语言</a></h2>
+<p>内存安全的高性能编程语言</p>
+<h3 id="特性"><a class="header" href="#特性">特性</a></h3>
+<ul>
+<li>高性能：支持底层内存操作，没有垃圾收集器，和C++一样快。</li>
+<li>内存安全：没有内存泄漏、没有悬垂指针等C++常见内存问题。</li>
+<li>面向对象</li>
+<li>和C++无缝集成，利用已有C++生态。</li>
+<li>空指针安全</li>
+<li>动态反射</li>
+<li>VSCode插件和 LSP 支持</li>
+<li>支持模板泛型、闭包等特性</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="为什么要用sric"><a class="header" href="#为什么要用sric">为什么要用Sric</a></h2>
 <p>Sric是内存安全的高新性能编程语言。
 Sric语言大部分灵感来自C++，在C++基础上做了两件事情：</p>
 <ol>
@@ -167,7 +180,7 @@ Sric语言大部分灵感来自C++，在C++基础上做了两件事情：</p>
 <h4 id="性能"><a class="header" href="#性能">性能</a></h4>
 <p>“现代计算机性能足够快”是个童年的谎言，硬件的发展远赶不上问题复杂度的增长。我遇到的每个行业都有性能问题。要解决性能问题，首先就不能有GC。有垃圾收集的语言始终存在隐形的性能天花板。需要有底层内存操作的能力，并且能灵活的在栈中分配内存，这是高性能语言需要具备的条件。Sric从设计之初就拥有和C/C++一样的性能。</p>
 <h4 id="内存安全"><a class="header" href="#内存安全">内存安全</a></h4>
-<p>内存安全和性能是可兼得的。但Rust的机制却限制了代码的功能，强迫用户改变编程方式，并增加了学习成本。Sric则采用了另一种方式，通过运行时内存安全检查，试图通过略微的性能损失来解决内存安全问题。内存安全检查只在debug模式下执行，在release模式，它的运行速度和手写C++代码一样快。</p>
+<p>内存安全和性能是可兼得的。但Rust的机制却限制了代码的功能，强迫用户编写复杂且低效的代码，并增加了学习成本。Sric则采用了另一种方式，对开发者来说不需要做任何事情就能获得内存安全。<a href="memory.html">Sric内存安全原理</a></p>
 <h4 id="抽象能力"><a class="header" href="#抽象能力">抽象能力</a></h4>
 <p>面向对象是编程语言抽象能力的重要表现。尽管由于滥用继承导致现今人们对面向对象有些不好的印象，但我觉得面向对象在某些场合还是有用的。并且从语言上对继承做了一些限制。</p>
 <h4 id="简单和容易"><a class="header" href="#简单和容易">简单和容易</a></h4>
@@ -436,6 +449,12 @@ struct Point {
 <li>动态反射</li>
 <li>命名参数</li>
 </ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="内存安全原理"><a class="header" href="#内存安全原理">内存安全原理</a></h1>
+<p>Sric和Rust都是没有GC的内存安全语言，但两者有很大差别。Rust在编译时做安全检查，而Sric是在运行时检查内存安全。Rust的安全机制有很多编码限制，会强迫用户写复杂且低效的代码。Sric的安全机制是无感的，不需要做什么事就能获得内存安全。Sric的内存安全检查开销非常小，默认在Release模式下安全检查是关闭的，此时运行速度和手写C++代码一样快。</p>
+<p>内存安全包括很多方面。数组越界、空指针、未初始化指针等，这些加简单的检查即可。因为使用所有权机制，也不存在内存泄漏、双重释放等问题。所以内存安全核心问题是怎么检测悬垂指针。Sric的非所有权指针负责主要的内存检测任务。</p>
+<p>在Sric中非所有权指针是一个胖指针，它包括实际指针以及一个检测码等内容。对象内存内部也有一个相同的检测码。在创建指针的时候，指针的检测码和对象的检测码是一致的。当内存释放时，这个检测码被赋0。每次在使用指针时对比指针的检测码和对象的检测码是否相同，如果不同则说明对象内存已经释放掉了。这时候及时报错，不让错误传播到其他地方，这样很容易定位到问题。</p>
+<p>虽然原理比较简单，但是需要考虑衍生指针怎么处理（指针指向内存中部，而不是内存头）、内存数组怎么处理、堆上分配和栈上分配怎么处理、非合作对象怎么处理（C++中定义的类没有地方存检测码）。幸运的是Sric已经把大部分问题都解决了。</p>
+<p>Address Sanitizer也被用来做内存安全检测。但Address Sanitizer没法检测内存释放以后又被重新分配给其他对象的情况，还有指针指向数组预分配内存的情况会漏检。Address Sanitizer的内存占用和运行开销也比较大。相比起来Sric检查的更全面，运行时开销非常小，没有平台限制。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="安装"><a class="header" href="#安装">安装</a></h1>
 <h3 id="1安装需要的软件"><a class="header" href="#1安装需要的软件">1.安装需要的软件</a></h3>
 <ul>
@@ -674,7 +693,7 @@ var p : const raw* Int;
 var p : const raw* const Int;
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="结构"><a class="header" href="#结构">结构</a></h2>
-<p>类没有构造函数，需要调用者自己初始化。</p>
+<p>类没有有参构造函数，需要调用者自己初始化。</p>
 <pre><code>struct Point {
     var x: Int = 0;
     var y: Int = uninit;
@@ -719,32 +738,6 @@ var p = Point { .init(1); };
 
 Point::foo();
 </code></pre>
-<h2 id="类型别名-1"><a class="header" href="#类型别名-1">类型别名</a></h2>
-<p>类型别名相当于C的typedef</p>
-<pre><code>typealias size_t = Int32;
-</code></pre>
-<h2 id="枚举-1"><a class="header" href="#枚举-1">枚举</a></h2>
-<p>枚举和C++相同，但总是占命名空间。</p>
-<pre><code>enum Color {
-    Red, Green = 2, Blue
-}
-
-fun foo(c: Color) {}
-
-foo(Color::Red);
-</code></pre>
-<p>并且可以可选的设置为一个整数值。</p>
-<h2 id="联合体"><a class="header" href="#联合体">联合体</a></h2>
-<p>sric暂不支持union。可以使用强制类型转换来替代。</p>
-<pre><code>struct U {
-    var data: [8]Int8;
-}
-
-var i = unsafeCast$&lt;raw*Int&gt;(&amp;u.data);
-
-</code></pre>
-<p>或者使用继承多态来满足需求。
-也许将来会加入像C++一样的std::variant作为替代。</p>
 <h2 id="继承-1"><a class="header" href="#继承-1">继承</a></h2>
 <ul>
 <li>不支持多继承，类似于Java</li>
@@ -773,7 +766,7 @@ struct A : B , I {
     }
 }
 </code></pre>
-<p>Sric绝大部分情况是不需要写析构函数的，因为所有权机制会自定清理内存。</p>
+<p>Sric绝大部分情况是不需要写析构函数的，因为所有权机制会自动清理内存。</p>
 <p>构造函数是为了弥补原地初始化不能写复杂逻辑的问题。例如可以用三个点的语法，在构造函数中初始化。</p>
 <pre><code>struct A {
     var p : own* Int = ...;
@@ -782,6 +775,32 @@ struct A : B , I {
     }
 }
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="类型别名-1"><a class="header" href="#类型别名-1">类型别名</a></h2>
+<p>类型别名相当于C的typedef</p>
+<pre><code>typealias size_t = Int32;
+</code></pre>
+<h2 id="枚举-1"><a class="header" href="#枚举-1">枚举</a></h2>
+<p>枚举和C++相同，但总是占命名空间。</p>
+<pre><code>enum Color {
+    Red, Green = 2, Blue
+}
+
+fun foo(c: Color) {}
+
+foo(Color::Red);
+</code></pre>
+<p>并且可以可选的设置为一个整数值。</p>
+<h2 id="联合体"><a class="header" href="#联合体">联合体</a></h2>
+<p>sric暂不支持union。可以使用强制类型转换来替代。</p>
+<pre><code>struct U {
+    var data: [8]Int8;
+}
+
+var i = unsafeCast$&lt;raw*Int&gt;(&amp;u.data);
+
+</code></pre>
+<p>或者使用继承多态来满足需求。
+也许将来会加入像C++一样的std::variant作为替代。</p>
 <h2 id="不安全结构"><a class="header" href="#不安全结构">不安全结构</a></h2>
 <p>unsafe结构完全和对应的C++类一致，不包含安全检查需要的标记位。extern结构默认是unsafe的。
 unsafe里的this的类型是裸指针，而不是安全指针。如果对象是独立分配的，可以通过rawToRef转为安全指针。</p>
@@ -870,7 +889,7 @@ strcut Tree$&lt;T : Compareable&gt; {
 <p>泛型模板实例化时，可以传入任意满足示例类型的类型。不需要继承示例类型。</p>
 <pre><code>var tree = Tree$&lt;Int&gt; {};
 </code></pre>
-<h2 id="闭包-1"><a class="header" href="#闭包-1">闭包</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="闭包-1"><a class="header" href="#闭包-1">闭包</a></h2>
 <p>匿名函数使用fun关键字定义</p>
 <pre><code>fun foo(f: fun(a:Int):Int) {
     f(1);
@@ -895,7 +914,7 @@ var f = fun(a:Int):Int{
     return a + *ri;
 };
 </code></pre>
-<h3 id="操作符重载-1"><a class="header" href="#操作符重载-1">操作符重载</a></h3>
+<div style="break-before: page; page-break-before: always;"></div><h3 id="操作符重载-1"><a class="header" href="#操作符重载-1">操作符重载</a></h3>
 <pre><code>struct A {
     operator fun mult(a: A): A { ... }
 }
@@ -921,20 +940,6 @@ add        a,b,c;
 <p>等价于</p>
 <pre><code>x { .add(a).add(b).add(c); }
 </code></pre>
-<h3 id="反射"><a class="header" href="#反射">反射</a></h3>
-<p>默认不启用反射，需要手动添加reflect标记。</p>
-<pre><code>reflect struct Point {
-    var x: Int;
-    var y: Int;
-}
-</code></pre>
-<p>注解可以在反射API中获取</p>
-<pre><code>//@SimpleSerial
-reflect struct Point {
-    var x: Int;
-    var y: Int;
-}
-</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="模块化"><a class="header" href="#模块化">模块化</a></h2>
 <p>每个语言对模块的定义都有点不太一样，sric中模块既是命名空间，也是编译单元，也是部署单元。</p>
 <h3 id="模块定义"><a class="header" href="#模块定义">模块定义</a></h3>
@@ -953,6 +958,20 @@ srcDirs = src/
 import sric::DArray;
 </code></pre>
 <p>其中<code>*</code>表示导入模块下的所有符号。导入的模块必须在构建脚本的depends字段声明。</p>
+<div style="break-before: page; page-break-before: always;"></div><h3 id="反射"><a class="header" href="#反射">反射</a></h3>
+<p>默认不启用反射，需要手动添加reflect标记。</p>
+<pre><code>reflect struct Point {
+    var x: Int;
+    var y: Int;
+}
+</code></pre>
+<p>注解可以在反射API中获取</p>
+<pre><code>//@SimpleSerial
+reflect struct Point {
+    var x: Int;
+    var y: Int;
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="和c交互"><a class="header" href="#和c交互">和C++交互</a></h2>
 <p>sric可以很容易的和C++交互。sric编译为人类可读的C++代码，可以像C++代码一样被C++直接调用。</p>
 <p>调用C++代码，只需要将C++代码的原型声明一下，即可调用。C语言/无命名空间代码使用externc来修饰；同名命名空间使用extern来修饰；其他情况使用符号映射。</p>

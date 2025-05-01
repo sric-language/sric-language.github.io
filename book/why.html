@@ -166,7 +166,7 @@ Sric语言大部分灵感来自C++，在C++基础上做了两件事情：</p>
 <h4 id="性能"><a class="header" href="#性能">性能</a></h4>
 <p>“现代计算机性能足够快”是个童年的谎言，硬件的发展远赶不上问题复杂度的增长。我遇到的每个行业都有性能问题。要解决性能问题，首先就不能有GC。有垃圾收集的语言始终存在隐形的性能天花板。需要有底层内存操作的能力，并且能灵活的在栈中分配内存，这是高性能语言需要具备的条件。Sric从设计之初就拥有和C/C++一样的性能。</p>
 <h4 id="内存安全"><a class="header" href="#内存安全">内存安全</a></h4>
-<p>内存安全和性能是可兼得的。但Rust的机制却限制了代码的功能，强迫用户改变编程方式，并增加了学习成本。Sric则采用了另一种方式，通过运行时内存安全检查，试图通过略微的性能损失来解决内存安全问题。内存安全检查只在debug模式下执行，在release模式，它的运行速度和手写C++代码一样快。</p>
+<p>内存安全和性能是可兼得的。但Rust的机制却限制了代码的功能，强迫用户编写复杂且低效的代码，并增加了学习成本。Sric则采用了另一种方式，对开发者来说不需要做任何事情就能获得内存安全。<a href="memory.html">Sric内存安全原理</a></p>
 <h4 id="抽象能力"><a class="header" href="#抽象能力">抽象能力</a></h4>
 <p>面向对象是编程语言抽象能力的重要表现。尽管由于滥用继承导致现今人们对面向对象有些不好的印象，但我觉得面向对象在某些场合还是有用的。并且从语言上对继承做了一些限制。</p>
 <h4 id="简单和容易"><a class="header" href="#简单和容易">简单和容易</a></h4>
@@ -180,6 +180,9 @@ Sric语言大部分灵感来自C++，在C++基础上做了两件事情：</p>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
                             <a rel="next prefetch" href="Tour.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
@@ -191,6 +194,9 @@ Sric语言大部分灵感来自C++，在C++基础上做了两件事情：</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
                     <a rel="next prefetch" href="Tour.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>快速开始 - sric doc</title>
+        <title>其他结构 - sric doc</title>
 
 
         <!-- Custom HTML head -->
@@ -155,93 +155,51 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="安装"><a class="header" href="#安装">安装</a></h1>
-<h3 id="1安装需要的软件"><a class="header" href="#1安装需要的软件">1.安装需要的软件</a></h3>
-<ul>
-<li>JDK 17+</li>
-<li>C++ 编译器(支持C++17)</li>
-<li><a href="https://github.com/fanx-dev/fanx/releases">fanx</a></li>
-<li>CMake</li>
-<li>git</li>
-</ul>
-<p>安装以上软件，并配置环境变量，确保java、jar、fan、cmake等命令在gitbash中可用。</p>
-<h3 id="2构建fmake"><a class="header" href="#2构建fmake">2.构建fmake</a></h3>
-<pre><code>git clone git@github.com:chunquedong/fmake.git
-cd fmake
-fanb pod.props
+                        <h2 id="类型别名"><a class="header" href="#类型别名">类型别名</a></h2>
+<p>类型别名相当于C的typedef</p>
+<pre><code>typealias size_t = Int32;
 </code></pre>
-<p>在Windows系统上使用微软C++编译器工具集:</p>
-<pre><code>cd fmake
-source vsvars.sh
-cd -
-</code></pre>
-<p><a href="https://github.com/chunquedong/fmake">更多关于fmake的信息</a></p>
-<h3 id="3构建jsonc"><a class="header" href="#3构建jsonc">3.构建jsonc</a></h3>
-<pre><code>git clone git@github.com:chunquedong/jsonc.git
-cd jsonc
-./build.sh
-</code></pre>
-<h3 id="4构建sric"><a class="header" href="#4构建sric">4.构建Sric</a></h3>
-<pre><code>git clone git@github.com:sric-language/sric.git
-cd sric
-./build.sh
-</code></pre>
-<p>添加sric的"bin"目录到你的环境变量（配置完环境变量需要重启gitbash）</p>
-<h1 id="ide"><a class="header" href="#ide">IDE</a></h1>
-<ol>
-<li>在vscode插件市场中搜索'sric-language',并安装。</li>
-<li>在插件的设置页配置sricHome指向sric目录(bin的上一级)。</li>
-</ol>
-<h1 id="hello-world"><a class="header" href="#hello-world">Hello World</a></h1>
-<ol>
-<li>创建一个空文件夹作为工作空间</li>
-<li>创建文件main.sric，内容如下:</li>
-</ol>
-<pre><code>import cstd::*;
-
-fun main(): Int {
-    printf("Hello World\n");
-    return 0;
+<h2 id="枚举"><a class="header" href="#枚举">枚举</a></h2>
+<p>枚举和C++相同，但总是占命名空间。</p>
+<pre><code>enum Color {
+    Red, Green = 2, Blue
 }
 
+fun foo(c: Color) {}
+
+foo(Color::Red);
 </code></pre>
-<ol start="3">
-<li>创建module.scm文件，内容如下:</li>
-</ol>
-<pre><code>name = hello
-summary = hello
-outType = exe
-version = 1.0
-depends = sric 1.0, cstd 1.0
-srcDirs = ./
+<p>并且可以可选的设置为一个整数值。</p>
+<h2 id="联合体"><a class="header" href="#联合体">联合体</a></h2>
+<p>sric暂不支持union。可以使用强制类型转换来替代。</p>
+<pre><code>struct U {
+    var data: [8]Int8;
+}
+
+var i = unsafeCast$&lt;raw*Int&gt;(&amp;u.data);
+
 </code></pre>
-<ol start="4">
-<li>编译和运行</li>
-</ol>
-<pre><code>sric module.scm -fmake -run
+<p>或者使用继承多态来满足需求。
+也许将来会加入像C++一样的std::variant作为替代。</p>
+<h2 id="不安全结构"><a class="header" href="#不安全结构">不安全结构</a></h2>
+<p>unsafe结构完全和对应的C++类一致，不包含安全检查需要的标记位。extern结构默认是unsafe的。
+unsafe里的this的类型是裸指针，而不是安全指针。如果对象是独立分配的，可以通过rawToRef转为安全指针。</p>
+<pre><code>unsafe struct A {
+    fun foo() {
+        var self = rawToRef(this);
+    }
+}
 </code></pre>
-<h2 id="使用fmake构建"><a class="header" href="#使用fmake构建">使用fmake构建</a></h2>
-<p>不加-fmake构建后，只生成C++代码（位置在 "sric/output" 目录）。</p>
-<pre><code>sric hello.scm
-</code></pre>
-<p>然后再单独手动运行fmake编译:</p>
-<pre><code>fan fmake output/hello.fmake -debug
-</code></pre>
-<h2 id="调试"><a class="header" href="#调试">调试</a></h2>
-<p>可通过生成IDE项目来调试生成的C++代码。</p>
-<pre><code>fan fmake output/hello.fmake -debug -G
-</code></pre>
-<p>生成的项目文件在上层目录的build文件夹下。</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="memory.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="oo.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="basic.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="stmt.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -251,11 +209,11 @@ srcDirs = ./
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="memory.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="oo.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="basic.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="stmt.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

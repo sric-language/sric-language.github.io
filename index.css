@@ -94,7 +94,7 @@
 }
 
 .fs-text {
-  margin-top: 60px;
+  margin-top: 50px;
 }
 
 .fs-text h3 {
@@ -188,6 +188,7 @@
 }
 
 .wase-image {
+  margin-top: -40px;
   float: right;
 }
 

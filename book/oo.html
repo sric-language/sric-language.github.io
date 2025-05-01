@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>快速开始 - sric doc</title>
+        <title>面向对象 - sric doc</title>
 
 
         <!-- Custom HTML head -->
@@ -155,93 +155,99 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="安装"><a class="header" href="#安装">安装</a></h1>
-<h3 id="1安装需要的软件"><a class="header" href="#1安装需要的软件">1.安装需要的软件</a></h3>
-<ul>
-<li>JDK 17+</li>
-<li>C++ 编译器(支持C++17)</li>
-<li><a href="https://github.com/fanx-dev/fanx/releases">fanx</a></li>
-<li>CMake</li>
-<li>git</li>
-</ul>
-<p>安装以上软件，并配置环境变量，确保java、jar、fan、cmake等命令在gitbash中可用。</p>
-<h3 id="2构建fmake"><a class="header" href="#2构建fmake">2.构建fmake</a></h3>
-<pre><code>git clone git@github.com:chunquedong/fmake.git
-cd fmake
-fanb pod.props
+                        <h2 id="结构"><a class="header" href="#结构">结构</a></h2>
+<p>类没有有参构造函数，需要调用者自己初始化。</p>
+<pre><code>struct Point {
+    var x: Int = 0;
+    var y: Int = uninit;
+    var z: Int;
+}
+var p = Point { .y = 1; };
 </code></pre>
-<p>在Windows系统上使用微软C++编译器工具集:</p>
-<pre><code>cd fmake
-source vsvars.sh
-cd -
+<p>初始化的语法叫做with块，不同于C的命名初始化。with块可以保护任何语句，并且可以用在非初始化场景。例如</p>
+<pre><code>var point = Point { .y = 1; };
+point {
+    .x = 2; if (a) { .y = 3; }
+}
 </code></pre>
-<p><a href="https://github.com/chunquedong/fmake">更多关于fmake的信息</a></p>
-<h3 id="3构建jsonc"><a class="header" href="#3构建jsonc">3.构建jsonc</a></h3>
-<pre><code>git clone git@github.com:chunquedong/jsonc.git
-cd jsonc
-./build.sh
-</code></pre>
-<h3 id="4构建sric"><a class="header" href="#4构建sric">4.构建Sric</a></h3>
-<pre><code>git clone git@github.com:sric-language/sric.git
-cd sric
-./build.sh
-</code></pre>
-<p>添加sric的"bin"目录到你的环境变量（配置完环境变量需要重启gitbash）</p>
-<h1 id="ide"><a class="header" href="#ide">IDE</a></h1>
-<ol>
-<li>在vscode插件市场中搜索'sric-language',并安装。</li>
-<li>在插件的设置页配置sricHome指向sric目录(bin的上一级)。</li>
-</ol>
-<h1 id="hello-world"><a class="header" href="#hello-world">Hello World</a></h1>
-<ol>
-<li>创建一个空文件夹作为工作空间</li>
-<li>创建文件main.sric，内容如下:</li>
-</ol>
-<pre><code>import cstd::*;
+<p>也可以提供一个初始化的方法，约定名称为init。</p>
+<pre><code>struct Point {
+    var x: Int;
+    var y: Int;
 
-fun main(): Int {
-    printf("Hello World\n");
-    return 0;
+    fun init(a: Int) {
+        this { .y = a; }
+    }
+}
+var p = Point { .init(1); };
+</code></pre>
+<h2 id="方法"><a class="header" href="#方法">方法</a></h2>
+<ul>
+<li>类型可以由方法，非静态成员函数，有一个隐藏的this指针。</li>
+<li>方法必须出现在数据成员之后。</li>
+<li>this的可变性修饰在函数后部，返回类型之前，例如:</li>
+</ul>
+<pre><code>struct Point {
+    fun length() const : Float {
+        ...
+    }
+}
+</code></pre>
+<p>struct可以包含静态函数，但不能保护静态字段。静态函数没有隐式的this指针。</p>
+<pre><code>strcut Point {
+    static fun foo() {
+    }
 }
 
+Point::foo();
 </code></pre>
-<ol start="3">
-<li>创建module.scm文件，内容如下:</li>
-</ol>
-<pre><code>name = hello
-summary = hello
-outType = exe
-version = 1.0
-depends = sric 1.0, cstd 1.0
-srcDirs = ./
+<h2 id="继承"><a class="header" href="#继承">继承</a></h2>
+<ul>
+<li>不支持多继承，类似于Java</li>
+<li>被继承的类需要标记为virtual或者abstract</li>
+<li>Trait相当与Java的interface，不能有数据成员和方法实现。</li>
+<li>继承的分号后面必须先写类（如果有）再写Trait。</li>
+<li>重写父类的virutal或者abstract方法时，需要加override标记。</li>
+<li>使用super关键字调用父类方法。</li>
+</ul>
+<pre><code>virtual strcut B {
+    virtual fun foo() {}
+}
+trait I {
+    abstract fun foo2();
+}
+struct A : B , I {
+    override fun foo2() {}
+}
 </code></pre>
-<ol start="4">
-<li>编译和运行</li>
-</ol>
-<pre><code>sric module.scm -fmake -run
+<h2 id="构造函数和析构函数"><a class="header" href="#构造函数和析构函数">构造函数和析构函数</a></h2>
+<p>Sric没有C++类似的构造函数，只有默认构造函数，不能有参数。例如</p>
+<pre><code>struct A {
+    fun new() {
+    }
+    fun delete() {
+    }
+}
 </code></pre>
-<h2 id="使用fmake构建"><a class="header" href="#使用fmake构建">使用fmake构建</a></h2>
-<p>不加-fmake构建后，只生成C++代码（位置在 "sric/output" 目录）。</p>
-<pre><code>sric hello.scm
+<p>Sric绝大部分情况是不需要写析构函数的，因为所有权机制会自动清理内存。</p>
+<p>构造函数是为了弥补原地初始化不能写复杂逻辑的问题。例如可以用三个点的语法，在构造函数中初始化。</p>
+<pre><code>struct A {
+    var p : own* Int = ...;
+    fun new() {
+        p = new Int;
+    }
+}
 </code></pre>
-<p>然后再单独手动运行fmake编译:</p>
-<pre><code>fan fmake output/hello.fmake -debug
-</code></pre>
-<h2 id="调试"><a class="header" href="#调试">调试</a></h2>
-<p>可通过生成IDE项目来调试生成的C++代码。</p>
-<pre><code>fan fmake output/hello.fmake -debug -G
-</code></pre>
-<p>生成的项目文件在上层目录的build文件夹下。</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="memory.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="types.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="basic.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="other_struct.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -251,11 +257,11 @@ srcDirs = ./
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="memory.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="types.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="basic.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="other_struct.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
