@@ -221,7 +221,7 @@ fun testExtern2() {
     verify(v2.size() == 3);
 }
 </code></pre>
-<h2 id="生成c接口"><a class="header" href="#生成c接口">生成C++接口</a></h2>
+<h2 id="从c头文件生成sric接口"><a class="header" href="#从c头文件生成sric接口">从C++头文件生成Sric接口</a></h2>
 <p>使用tool目录的python脚本，可以由C++头文件生成的sric原型。</p>
 <h2 id="不使用fmake进行编译"><a class="header" href="#不使用fmake进行编译">不使用fmake进行编译</a></h2>
 <p>可以自己编译生成的C++代码，位于sric/output目录下。</p>
@@ -231,12 +231,17 @@ fun testExtern2() {
 <li>SC_NO_CHECK表示不进行安全检查。</li>
 </ul>
 <p>当没有这两个宏时，按照_DEBUG和NDEBUG宏来自动定义。</p>
+<h2 id="sric代码和c代码混合编译"><a class="header" href="#sric代码和c代码混合编译">Sric代码和C++代码混合编译</a></h2>
+<p>在module.scm中增加fmake的配置项，以fmake.前缀开头，例如：</p>
+<pre><code>fmake.srcDirs = ./
+fmake.incDirs = ./
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="reflect.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="coroutine.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
@@ -250,7 +255,7 @@ fun testExtern2() {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="reflect.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="coroutine.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 

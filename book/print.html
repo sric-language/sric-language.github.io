@@ -167,7 +167,7 @@
 <li>空指针安全</li>
 <li>动态反射</li>
 <li>VSCode插件和 LSP 支持</li>
-<li>支持模板泛型、闭包等特性</li>
+<li>支持模板泛型、闭包、协程等特性</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="为什么要用sric"><a class="header" href="#为什么要用sric">为什么要用Sric</a></h2>
 <p>Sric是内存安全的高新性能编程语言。
@@ -459,7 +459,7 @@ struct Point {
 <h3 id="1安装需要的软件"><a class="header" href="#1安装需要的软件">1.安装需要的软件</a></h3>
 <ul>
 <li>JDK 17+</li>
-<li>C++ 编译器(支持C++17)</li>
+<li>C++ 编译器(支持C++20)</li>
 <li><a href="https://github.com/fanx-dev/fanx/releases">fanx</a></li>
 <li>CMake</li>
 <li>git</li>
@@ -975,6 +975,40 @@ reflect struct Point {
     var y: Int;
 }
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="协程"><a class="header" href="#协程">协程</a></h2>
+<p>Sric的协程和Javascript的几乎完全一致，下面是协程的例子：</p>
+<pre><code>async fun test2() : Int {
+    var i = 0;
+    i = await testCallback();
+    printf("await result:%d\n", i);
+    return i + 1;
+}
+</code></pre>
+<ul>
+<li>协程函数使用async标记</li>
+<li>await的目标必须是async函数，或者返回值为<code>Promise$&lt;T&gt;</code>的函数。</li>
+<li>async函数的返回值会被编译器自动包装成<code>Promise$&lt;T&gt;</code></li>
+</ul>
+<h2 id="协程c适配"><a class="header" href="#协程c适配">协程C++适配</a></h2>
+<h4 id="接入主循环"><a class="header" href="#接入主循环">接入主循环</a></h4>
+<p>Sric协程通过主循环来调度。UI框架的主线程有主循环，服务端库libevent、libev、libuv、libhv都有主循环。他们的主循环写法都不太一样，伪代码如下：</p>
+<pre><code>sric::call_later = [](std::function&lt;void()&gt; h){
+    call_in_loop([]{
+        h();
+    });
+};
+</code></pre>
+<h4 id="适配异步回调接口"><a class="header" href="#适配异步回调接口">适配异步回调接口</a></h4>
+<p>堆上分配sric::Promise<T>::ResultData对象，在回调中调用其on_done方法。</p>
+<pre><code>sric::Promise&lt;int&gt; testCallback() {
+    auto resultData = std::make_shared&lt;sric::Promise&lt;int&gt;::ResultData &gt;();
+    std::thread([=]() {
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        resultData-&gt;on_done(1);
+    }).detach();
+    return sric::Promise&lt;int&gt;(resultData);
+}
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="和c交互"><a class="header" href="#和c交互">和C++交互</a></h2>
 <p>sric可以很容易的和C++交互。sric编译为人类可读的C++代码，可以像C++代码一样被C++直接调用。</p>
 <p>调用C++代码，只需要将C++代码的原型声明一下，即可调用。C语言/无命名空间代码使用externc来修饰；同名命名空间使用extern来修饰；其他情况使用符号映射。</p>
@@ -1041,7 +1075,7 @@ fun testExtern2() {
     verify(v2.size() == 3);
 }
 </code></pre>
-<h2 id="生成c接口"><a class="header" href="#生成c接口">生成C++接口</a></h2>
+<h2 id="从c头文件生成sric接口"><a class="header" href="#从c头文件生成sric接口">从C++头文件生成Sric接口</a></h2>
 <p>使用tool目录的python脚本，可以由C++头文件生成的sric原型。</p>
 <h2 id="不使用fmake进行编译"><a class="header" href="#不使用fmake进行编译">不使用fmake进行编译</a></h2>
 <p>可以自己编译生成的C++代码，位于sric/output目录下。</p>
@@ -1051,6 +1085,11 @@ fun testExtern2() {
 <li>SC_NO_CHECK表示不进行安全检查。</li>
 </ul>
 <p>当没有这两个宏时，按照_DEBUG和NDEBUG宏来自动定义。</p>
+<h2 id="sric代码和c代码混合编译"><a class="header" href="#sric代码和c代码混合编译">Sric代码和C++代码混合编译</a></h2>
+<p>在module.scm中增加fmake的配置项，以fmake.前缀开头，例如：</p>
+<pre><code>fmake.srcDirs = ./
+fmake.incDirs = ./
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="序列化"><a class="header" href="#序列化">序列化</a></h2>
 <p>sric通过内建的动态反射来支持序列化，序列化格式为文本格式<a href="https://github.com/chunquedong/jsonc">HiML</a>。</p>
 <h3 id="序列化例子"><a class="header" href="#序列化例子">序列化例子</a></h3>
