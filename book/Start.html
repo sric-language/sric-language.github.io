@@ -221,7 +221,13 @@ srcDirs = ./
 <ol start="4">
 <li>编译和运行</li>
 </ol>
-<pre><code>sric module.scm -fmake -run
+<pre><code>sric module.scm -fmake
+</code></pre>
+<ol>
+<li>运行</li>
+</ol>
+<p>编译后控制台会打印输出文件路径，加上引号来运行。例如:</p>
+<pre><code>'C:\Users\xxx\fmakeRepo\msvc\test-1.0-debug\bin\test'
 </code></pre>
 <h2 id="使用fmake构建"><a class="header" href="#使用fmake构建">使用fmake构建</a></h2>
 <p>不加-fmake构建后，只生成C++代码（位置在 "sric/output" 目录）。</p>
@@ -235,6 +241,18 @@ srcDirs = ./
 <pre><code>fan fmake output/hello.fmake -debug -G
 </code></pre>
 <p>生成的项目文件在上层目录的build文件夹下。</p>
+<h2 id="常见问题"><a class="header" href="#常见问题">常见问题</a></h2>
+<h3 id="中文乱码"><a class="header" href="#中文乱码">中文乱码</a></h3>
+<p>gitbash中，运行下面命令：</p>
+<pre><code>cmd "/c chcp 65001&gt;nul"
+</code></pre>
+<p>cmd中运行下面命令;</p>
+<pre><code>chcp 65001&gt;nul
+</code></pre>
+<h3 id="编译器不支持c20"><a class="header" href="#编译器不支持c20">编译器不支持C++20</a></h3>
+<p>由于协程需要C++20版本，可以通过参数来指定C++版本（此时协程相关代码会编译报错）。</p>
+<pre><code>sric module.scm -fmake -c++17
+</code></pre>
 
                     </main>
 
