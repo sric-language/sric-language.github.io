@@ -162,12 +162,9 @@
 <ul>
 <li>高性能：支持底层内存操作，没有垃圾收集器，和C++一样快。</li>
 <li>内存安全：没有内存泄漏、没有悬垂指针等C++常见内存问题。</li>
-<li>面向对象</li>
-<li>和C++无缝集成，利用已有C++生态。</li>
-<li>空指针安全</li>
-<li>动态反射</li>
-<li>VSCode插件和 LSP 支持</li>
-<li>支持模板泛型、闭包、协程等特性</li>
+<li>和C++无缝集成：生成人类可读的C++代码。</li>
+<li>丰富的特性: 面向对象、空指针安全、动态反射、模板泛型、闭包、协程等特性。</li>
+<li>工具：VSCode插件和 LSP 支持。</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="为什么要用sric"><a class="header" href="#为什么要用sric">为什么要用Sric</a></h2>
 <p>Sric是内存安全的高新性能编程语言。
@@ -458,11 +455,12 @@ struct Point {
 <div style="break-before: page; page-break-before: always;"></div><h1 id="安装"><a class="header" href="#安装">安装</a></h1>
 <h3 id="1安装需要的软件"><a class="header" href="#1安装需要的软件">1.安装需要的软件</a></h3>
 <ul>
-<li>JDK 17+</li>
-<li>C++ 编译器(支持C++20)</li>
-<li><a href="https://github.com/fanx-dev/fanx/releases">fanx</a></li>
-<li>CMake</li>
-<li>git</li>
+<li><a href="https://www.oracle.com/java/technologies/downloads/">JDK 17+</a></li>
+<li>支持C++20的C++ 编译器: gcc 10+、 clang 17+、 Xcode 16+、 Visual Studio 2022+</li>
+<li><a href="https://github.com/fanx-dev/fanx/releases">Fanx</a></li>
+<li><a href="https://cmake.org/download/">CMake</a></li>
+<li><a href="https://git-scm.com/downloads">git</a></li>
+<li><a href="https://code.visualstudio.com/">VSCode</a></li>
 </ul>
 <p>安装以上软件，并配置环境变量，确保java、jar、fan、cmake等命令在gitbash中可用。</p>
 <h3 id="2构建fmake"><a class="header" href="#2构建fmake">2.构建fmake</a></h3>
@@ -479,16 +477,18 @@ cd -
 <h3 id="3构建jsonc"><a class="header" href="#3构建jsonc">3.构建jsonc</a></h3>
 <pre><code>git clone https://github.com/chunquedong/jsonc.git
 cd jsonc
-./build.sh
+sh build.sh
 </code></pre>
 <h3 id="4构建sric"><a class="header" href="#4构建sric">4.构建Sric</a></h3>
 <pre><code>git clone https://github.com/sric-language/sric.git
 cd sric
 chmod a+x bin/sric
-./build.sh
-./build_debug.sh
+sh build.sh
+sh build_debug.sh
 </code></pre>
 <p>添加sric的"bin"目录到你的环境变量（配置完环境变量需要重启gitbash）</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="安装-1"><a class="header" href="#安装-1">安装</a></h1>
+<p><a href="build.html">从源码构建</a></p>
 <h1 id="ide"><a class="header" href="#ide">IDE</a></h1>
 <ol>
 <li>在vscode插件市场中搜索'sric-language',并安装。</li>
@@ -523,6 +523,9 @@ srcDirs = ./
 </ol>
 <pre><code>sric module.scm -fmake
 </code></pre>
+<p>构建debug版本:</p>
+<pre><code>sric module.scm -fmake -debug
+</code></pre>
 <ol>
 <li>运行</li>
 </ol>
@@ -541,17 +544,37 @@ srcDirs = ./
 <pre><code>fan fmake output/hello.fmake -debug -G
 </code></pre>
 <p>生成的项目文件在上层目录的build文件夹下。</p>
-<h2 id="常见问题"><a class="header" href="#常见问题">常见问题</a></h2>
-<h3 id="中文乱码"><a class="header" href="#中文乱码">中文乱码</a></h3>
-<p>gitbash中，运行下面命令：</p>
-<pre><code>cmd "/c chcp 65001&gt;nul"
-</code></pre>
-<p>cmd中运行下面命令;</p>
-<pre><code>chcp 65001&gt;nul
-</code></pre>
-<h3 id="编译器不支持c20"><a class="header" href="#编译器不支持c20">编译器不支持C++20</a></h3>
-<p>由于协程需要C++20版本，可以通过参数来指定C++版本（此时协程相关代码会编译报错）。</p>
-<pre><code>sric module.scm -fmake -c++17
+<div style="break-before: page; page-break-before: always;"></div><h2 id="猜数字游戏"><a class="header" href="#猜数字游戏">猜数字游戏</a></h2>
+<pre><code>import cstd::*;
+import sric::*;
+
+fun main(): Int {
+    //init random seed
+    srand(currentTimeMillis());
+
+    //random 0..50
+    var expected = (rand() / (RAND_MAX as Float32)  * 50) as Int;
+    var guess = 0;
+
+    printf("Please input your guess\n");
+    while (true) {
+        //get input
+        var guess = 0;
+        scanf("%d", (&amp;guess as raw*Int));
+
+        if (guess &gt; expected) {
+            printf("Too big\n");
+        }
+        else if (guess &lt; expected) {
+            printf("Too small\n");
+        }
+        else {
+            printf("You win!\n");
+            break;
+        }
+    }
+    return 0;
+}
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="内建类型"><a class="header" href="#内建类型">内建类型</a></h3>
 <ul>
@@ -639,7 +662,7 @@ readonly var i: Int = 0;
 <li>protected表示当前模块内可见，或者继承的子类可见。</li>
 <li>readonly只能用来修饰变量，不能修饰函数。表示公开读，私有写。</li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h3 id="指针"><a class="header" href="#指针">指针</a></h3>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="指针"><a class="header" href="#指针">指针</a></h2>
 <ul>
 <li>指针分为所有权指针、非所有权指针、裸指针。</li>
 <li>和C/C++不同的是，指针的＊号放在类型的前方。</li>
@@ -650,6 +673,13 @@ var p: * Int;          //非所有权指针
 var p: &amp; Int;          //引用
 var p: raw* Int;       //裸指针
 </code></pre>
+<h4 id="值类型"><a class="header" href="#值类型">值类型</a></h4>
+<p>Sric中变量默认是值类型的，值类型在传递和赋值的时候会自动拷贝。而指针类型在传递和赋值的时候只拷贝了指针本身，指针指向的对象没有被拷贝。</p>
+<h4 id="内存分配"><a class="header" href="#内存分配">内存分配</a></h4>
+<p>指针可以通过值类型取地址获得，但更常用的是通过new关键字在堆上分配内存。</p>
+<pre><code>var i: own* Int = new Int;
+</code></pre>
+<p>new后面的类型没有括号（因为Sric不支持有参构造函数）。new分配的对象为所有权指针。</p>
 <h4 id="所有权指针"><a class="header" href="#所有权指针">所有权指针</a></h4>
 <ul>
 <li>所有权指针表示拥有所指对象，在作用域消失时需要释放对象。</li>
@@ -683,12 +713,12 @@ var p: *Int = &amp;i;
 <p>其他类型的指针可以自动转为裸指针类型。</p>
 <h4 id="指针运算"><a class="header" href="#指针运算">指针运算</a></h4>
 <p>只有裸指针才能进行指针运算。指针运算只能在unsafe块，或者unsafe函数中进行。</p>
-<h3 id="引用"><a class="header" href="#引用">引用</a></h3>
+<h2 id="引用"><a class="header" href="#引用">引用</a></h2>
 <p>引用的概念同C++，但在sric中引用只能用在函数参数和返回值中。</p>
 <pre><code>fun foo(a: &amp; const Int) {
 }
 </code></pre>
-<h3 id="数组-1"><a class="header" href="#数组-1">数组</a></h3>
+<h2 id="数组-1"><a class="header" href="#数组-1">数组</a></h2>
 <p>数组特指静态大小数组。如果需要动态数组，请参考标准库中的DArray。
 数组的括号写在类型前面</p>
 <pre><code>var a: [5]Int;
@@ -701,18 +731,85 @@ var p: *Int = &amp;i;
 var a: [size]Int;
 </code></pre>
 <p>目前constexpr只能赋值字面量，远没有C++的constexpr强大，待改进。</p>
-<h3 id="non-nullable"><a class="header" href="#non-nullable">Non-nullable</a></h3>
+<h2 id="空指针安全"><a class="header" href="#空指针安全">空指针安全</a></h2>
 <p>指针默认是不可以为null的，除非特殊声明。</p>
 <pre><code>var a: own*? B = null;
 var a: own* B = null; //compile error
 </code></pre>
 <p>在可空指针转为不可空时，编译器会自动插入空指针检查。</p>
-<h3 id="不可变性-1"><a class="header" href="#不可变性-1">不可变性</a></h3>
+<p>只有指针能为空，其他值类型不可以为空。</p>
+<h2 id="不可变性-1"><a class="header" href="#不可变性-1">不可变性</a></h2>
 <p>和C++类似，const可以修饰指针本身，也可以修饰指针所指对象。</p>
 <pre><code>var p : raw* const Int;
 var p : const raw* Int;
 var p : const raw* const Int;
 </code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="语句"><a class="header" href="#语句">语句</a></h2>
+<ul>
+<li>所有语句使用分号结尾。</li>
+<li>不支持do while语句和goto语句，其他和C++一致。</li>
+<li>switch语句不支持自动贯穿，如果想贯穿需要用fallthrough关键字</li>
+</ul>
+<pre><code>switch (i) {
+    case 1:
+        fallthrough;
+    case 2:
+        printf("%d\n", i);
+}
+</code></pre>
+<h3 id="unsafe-1"><a class="header" href="#unsafe-1">Unsafe</a></h3>
+<p>在unsafe块中解引用裸指针</p>
+<pre><code>var p: *Int;
+...
+unsafe {
+    var i = *p;
+}
+</code></pre>
+<p>Unsafe 函数必须在unsafe块中调用</p>
+<pre><code>unsafe fun foo() { ... }
+
+fun main() {
+    unsafe {
+        foo();
+    }
+}
+</code></pre>
+<h2 id="表达式"><a class="header" href="#表达式">表达式</a></h2>
+<ul>
+<li>除了位运算的优先级外其他和C/C++相同，位运算优先级高于等于运算符。</li>
+</ul>
+<pre><code>if (i &amp; Mask != 0) {}
+//same as
+if ((i &amp; Mask) != 0) {}
+</code></pre>
+<ul>
+<li>只支持<code>++i</code>，不支持<code>i++</code></li>
+</ul>
+<h3 id="with块-1"><a class="header" href="#with块-1">With块</a></h3>
+<p>with块不是C++的命名初始化， 它可以包含任何语句.</p>
+<pre><code>struct A {
+    var i: Int;
+    fun init() { ... }
+}
+
+var a  = A { .init(); .i = 0; };
+var a: own* A = new A { .i = 0; };
+</code></pre>
+<h3 id="指针访问"><a class="header" href="#指针访问">指针访问</a></h3>
+<p>指针也通过<code>.</code>来访问，不用<code>-&gt;</code></p>
+<pre><code>var a: A;
+var b: own* A;
+a.foo();
+b.foo();
+</code></pre>
+<h3 id="类型转换和判断-1"><a class="header" href="#类型转换和判断-1">类型转换和判断:</a></h3>
+<p>as表达式用来做动态类型转换和数字类型转换。</p>
+<pre><code>var a = p as own* A;
+var b = p is own* A;
+</code></pre>
+<p>其他类型转换使用unsafeCast函数来完成。</p>
+<h2 id="异常处理"><a class="header" href="#异常处理">异常处理</a></h2>
+<p>Sric不支持异常处理，也不捕获C++异常。</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="结构"><a class="header" href="#结构">结构</a></h2>
 <p>类没有有参构造函数，需要调用者自己初始化。</p>
 <pre><code>struct Point {
@@ -820,8 +917,7 @@ foo(Color::Red);
 var i = unsafeCast$&lt;raw*Int&gt;(&amp;u.data);
 
 </code></pre>
-<p>或者使用继承多态来满足需求。
-也许将来会加入像C++一样的std::variant作为替代。</p>
+<p>或者使用继承多态来满足需求。</p>
 <h2 id="不安全结构"><a class="header" href="#不安全结构">不安全结构</a></h2>
 <p>unsafe结构完全和对应的C++类一致，不包含安全检查需要的标记位。extern结构默认是unsafe的。
 unsafe里的this的类型是裸指针，而不是安全指针。如果对象是独立分配的，可以通过rawToRef转为安全指针。</p>
@@ -831,70 +927,6 @@ unsafe里的this的类型是裸指针，而不是安全指针。如果对象是�
     }
 }
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="语句"><a class="header" href="#语句">语句</a></h2>
-<ul>
-<li>所有语句使用分号结尾。</li>
-<li>不支持do while语句和goto语句，其他和C++一致。</li>
-<li>switch语句不支持自动贯穿，如果想贯穿需要用fallthrough关键字</li>
-</ul>
-<pre><code>switch (i) {
-    case 1:
-        fallthrough;
-    case 2:
-        printf("%d\n", i);
-}
-</code></pre>
-<h3 id="unsafe-1"><a class="header" href="#unsafe-1">Unsafe</a></h3>
-<p>在unsafe块中解引用裸指针</p>
-<pre><code>var p: *Int;
-...
-unsafe {
-    var i = *p;
-}
-</code></pre>
-<p>Unsafe 函数必须在unsafe块中调用</p>
-<pre><code>unsafe fun foo() { ... }
-
-fun main() {
-    unsafe {
-        foo();
-    }
-}
-</code></pre>
-<h2 id="表达式"><a class="header" href="#表达式">表达式</a></h2>
-<ul>
-<li>除了位运算的优先级外其他和C/C++相同，位运算优先级高于等于运算符。</li>
-</ul>
-<pre><code>if (i &amp; Mask != 0) {}
-//same as
-if ((i &amp; Mask) != 0) {}
-</code></pre>
-<ul>
-<li>只支持<code>++i</code>，不支持<code>i++</code></li>
-</ul>
-<h3 id="with块-1"><a class="header" href="#with块-1">With块</a></h3>
-<p>with块不是C++的命名初始化， 它可以包含任何语句.</p>
-<pre><code>struct A {
-    var i: Int;
-    fun init() { ... }
-}
-
-var a  = A { .init(); .i = 0; };
-var a: own* A = new A { .i = 0; };
-</code></pre>
-<h3 id="指针访问"><a class="header" href="#指针访问">指针访问</a></h3>
-<p>指针也通过<code>.</code>来访问，不用<code>-&gt;</code></p>
-<pre><code>var a: A;
-var b: own* A;
-a.foo();
-b.foo();
-</code></pre>
-<h3 id="类型转换和判断-1"><a class="header" href="#类型转换和判断-1">类型转换和判断:</a></h3>
-<p>as表达式用来做动态类型转换和数字类型转换。</p>
-<pre><code>var a = p as own* A;
-var b = p is own* A;
-</code></pre>
-<p>其他类型转换使用unsafeCast函数来完成。</p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="泛型"><a class="header" href="#泛型">泛型</a></h3>
 <p>泛型和C++不同的是使用'$&lt;'开头，这是为了消除泛型参数和小于运算符的歧义。</p>
 <pre><code>struct Tree$&lt;T&gt; {
@@ -1196,6 +1228,27 @@ reflect struct Insets {
 <li>类型名使用Pascal命名法</li>
 <li>模块名、函数名、变量名使用小写驼峰式命名。</li>
 <li>从来不要用全大写："FOO_BAR"</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="常见问题"><a class="header" href="#常见问题">常见问题</a></h1>
+<h3 id="中文乱码"><a class="header" href="#中文乱码">中文乱码</a></h3>
+<p>gitbash中，运行下面命令：</p>
+<pre><code>cmd "/c chcp 65001&gt;nul"
+</code></pre>
+<p>cmd中运行下面命令;</p>
+<pre><code>chcp 65001&gt;nul
+</code></pre>
+<h3 id="编译器不支持c20"><a class="header" href="#编译器不支持c20">编译器不支持C++20</a></h3>
+<p>由于协程需要C++20版本，可以通过参数来指定C++版本（此时协程相关代码会编译报错）。</p>
+<pre><code>sric module.scm -fmake -c++17
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="命令行工具"><a class="header" href="#命令行工具">命令行工具</a></h1>
+<h2 id="构建参数"><a class="header" href="#构建参数">构建参数</a></h2>
+<p>sric命令有一下参数：</p>
+<ul>
+<li>-debug 在Debug模式编译（默认release模式）</li>
+<li>-fmake 使用fmake编译生成的C++代码。</li>
+<li>-r 递归构建所有依赖。</li>
+<li>-c++17 使用C++17标准。</li>
 </ul>
 
                     </main>

@@ -155,7 +155,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h3 id="指针"><a class="header" href="#指针">指针</a></h3>
+                        <h2 id="指针"><a class="header" href="#指针">指针</a></h2>
 <ul>
 <li>指针分为所有权指针、非所有权指针、裸指针。</li>
 <li>和C/C++不同的是，指针的＊号放在类型的前方。</li>
@@ -166,6 +166,13 @@ var p: * Int;          //非所有权指针
 var p: &amp; Int;          //引用
 var p: raw* Int;       //裸指针
 </code></pre>
+<h4 id="值类型"><a class="header" href="#值类型">值类型</a></h4>
+<p>Sric中变量默认是值类型的，值类型在传递和赋值的时候会自动拷贝。而指针类型在传递和赋值的时候只拷贝了指针本身，指针指向的对象没有被拷贝。</p>
+<h4 id="内存分配"><a class="header" href="#内存分配">内存分配</a></h4>
+<p>指针可以通过值类型取地址获得，但更常用的是通过new关键字在堆上分配内存。</p>
+<pre><code>var i: own* Int = new Int;
+</code></pre>
+<p>new后面的类型没有括号（因为Sric不支持有参构造函数）。new分配的对象为所有权指针。</p>
 <h4 id="所有权指针"><a class="header" href="#所有权指针">所有权指针</a></h4>
 <ul>
 <li>所有权指针表示拥有所指对象，在作用域消失时需要释放对象。</li>
@@ -199,12 +206,12 @@ var p: *Int = &amp;i;
 <p>其他类型的指针可以自动转为裸指针类型。</p>
 <h4 id="指针运算"><a class="header" href="#指针运算">指针运算</a></h4>
 <p>只有裸指针才能进行指针运算。指针运算只能在unsafe块，或者unsafe函数中进行。</p>
-<h3 id="引用"><a class="header" href="#引用">引用</a></h3>
+<h2 id="引用"><a class="header" href="#引用">引用</a></h2>
 <p>引用的概念同C++，但在sric中引用只能用在函数参数和返回值中。</p>
 <pre><code>fun foo(a: &amp; const Int) {
 }
 </code></pre>
-<h3 id="数组"><a class="header" href="#数组">数组</a></h3>
+<h2 id="数组"><a class="header" href="#数组">数组</a></h2>
 <p>数组特指静态大小数组。如果需要动态数组，请参考标准库中的DArray。
 数组的括号写在类型前面</p>
 <pre><code>var a: [5]Int;
@@ -217,13 +224,14 @@ var p: *Int = &amp;i;
 var a: [size]Int;
 </code></pre>
 <p>目前constexpr只能赋值字面量，远没有C++的constexpr强大，待改进。</p>
-<h3 id="non-nullable"><a class="header" href="#non-nullable">Non-nullable</a></h3>
+<h2 id="空指针安全"><a class="header" href="#空指针安全">空指针安全</a></h2>
 <p>指针默认是不可以为null的，除非特殊声明。</p>
 <pre><code>var a: own*? B = null;
 var a: own* B = null; //compile error
 </code></pre>
 <p>在可空指针转为不可空时，编译器会自动插入空指针检查。</p>
-<h3 id="不可变性"><a class="header" href="#不可变性">不可变性</a></h3>
+<p>只有指针能为空，其他值类型不可以为空。</p>
+<h2 id="不可变性"><a class="header" href="#不可变性">不可变性</a></h2>
 <p>和C++类似，const可以修饰指针本身，也可以修饰指针所指对象。</p>
 <pre><code>var p : raw* const Int;
 var p : const raw* Int;
@@ -238,7 +246,7 @@ var p : const raw* const Int;
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="oo.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="stmt.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -252,7 +260,7 @@ var p : const raw* const Int;
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="oo.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="stmt.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

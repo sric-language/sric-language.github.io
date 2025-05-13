@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>编码约定 - sric doc</title>
+        <title>常见问题 - sric doc</title>
 
 
         <!-- Custom HTML head -->
@@ -155,34 +155,28 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="代码约定"><a class="header" href="#代码约定">代码约定</a></h2>
-<h3 id="源文件"><a class="header" href="#源文件">源文件</a></h3>
-<p>源文件使用UTF-8编码。</p>
-<h3 id="缩进"><a class="header" href="#缩进">缩进</a></h3>
-<p>使用4空格缩进，例如：</p>
-<pre><code>    if (cond) {
-        doTrue
-    }
-    else {
-        doFalse
-    }
+                        <h1 id="常见问题"><a class="header" href="#常见问题">常见问题</a></h1>
+<h3 id="中文乱码"><a class="header" href="#中文乱码">中文乱码</a></h3>
+<p>gitbash中，运行下面命令：</p>
+<pre><code>cmd "/c chcp 65001&gt;nul"
 </code></pre>
-<h3 id="命名"><a class="header" href="#命名">命名</a></h3>
-<ul>
-<li>类型名使用Pascal命名法</li>
-<li>模块名、函数名、变量名使用小写驼峰式命名。</li>
-<li>从来不要用全大写："FOO_BAR"</li>
-</ul>
+<p>cmd中运行下面命令;</p>
+<pre><code>chcp 65001&gt;nul
+</code></pre>
+<h3 id="编译器不支持c20"><a class="header" href="#编译器不支持c20">编译器不支持C++20</a></h3>
+<p>由于协程需要C++20版本，可以通过参数来指定C++版本（此时协程相关代码会编译报错）。</p>
+<pre><code>sric module.scm -fmake -c++17
+</code></pre>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="serial.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="conventions.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="faq.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="cmd.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -192,11 +186,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="serial.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="conventions.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="faq.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="cmd.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

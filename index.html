@@ -3,14 +3,8 @@
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-  <title>Sric语言</title>
+  <title>Sric Language</title>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1920">
-  <link rel="stylesheet" type="text/css" href="common.css"/>
-  <link rel="stylesheet" type="text/css" href="index.css"/>
-  <style type="text/css">
-
-  </style>
 
   <script type="text/javascript">
     window.onload=function(){
@@ -35,184 +29,16 @@
       if (!isZh) {
         window.location.href = 'index_en.html';
       }
+      else {
+        window.location.href = 'index_zh.html';
+      }
     }
   </script>
 </head>
 <body>
-  <div class="header">
-    
-    <div class="sitebar">
-      <div id="logo">
-        <img src="res/logo.png" alt="logo"/>
-      </div>
-      <div id="logo-name">
-        SRIC
-      </div>
-      <ul>
-        <li>
-          <a href='index.html'>首页</a>
-        </li>
-
-        <li>
-          <a href='download.html'>下载</a>
-        </li>
-
-        <li>
-          <a href='book/index.html'>文档</a>
-        </li>
-
-        <li>
-          <a href='apidoc.html'>API</a>
-        </li>
-
-        <li>
-          <a href='community_zh.html'>社区</a>
-        </li>
-        
-      </ul>
-    </div>
-
-    <div class="banner">
-
-      <div class="text-block">
-          <div class="slogon1">
-            <h2>Sric</h2>
-          </div>
-          <div class="slogon2">
-            <p>内存安全的高性能编程语言，用来开发高可靠性软件</p>
-          </div>
-          <a class="start-button" href="book/Start.html">开始使用</a>
-      </div>
-
-      <div class="code-block">
-          <img class="code-bg" src="res/code.png" alt="image"/>
-          <div class="code">
-            <pre>
-              import cstd::*;
-              struct Point {
-                  var x: Int;
-                  var y: Int;
-                  fun distance(t: & Point) : Float {
-                      var dx = t.x - x;
-                      var dy = t.y - y;
-                      return sqrt(dx*dx + dy*dy);
-                  }
-              }
-            </pre>
-          </div>
-      </div>
-    </div>
-
-
-  </div>
-  
-  <div class="features">
-
-    <h1 class="title">为什么选择Sric？</h1>
-
-    <p class="title2">各项能力拉满，编程语言界的六边形战士</p>
-
-    <div class="features-content">
-        <img src="res/features_zh.png" alt="image"/>
-
-        <div class="features-text">
-          <div class="fs-text">
-            <h3>性能</h3>
-            <p>Sric语言具有极快的运行性能，这得益于其没有垃圾收集器，支持低层内存操作的能力。在具有高效表现力的同时，依然保持低开销抽象能力。</p>
-          </div>
-
-          <div class="fs-text">
-            <h3>安全</h3>
-            <p>Sric语言是内存安全的，没有内存泄漏，没有悬垂指针等C++常见的内存问题。Sric的安全机制并不限制用户编写代码的方式，不会增加学习成本。</p>
-          </div>
-          
-          <div class="fs-text">
-            <h3>简单</h3>
-            <p>Sric则试图尽可能减少复杂性。减少没有必要的语法特性。例如没有C++的各种版本构造函数、没有函数重载、没有模板元编程、没有多继承、没有宏等。</p>
-          </div>
-        </div>
-    </div>
-  </div>
-
-  <div class="aplication">
-
-    <h1 class="title">Sric应用</h1>
-
-    <p class="title2">Sric有着广泛的应用领域，可轻松调用已有C/C++代码库，并被C++代码调用。可用来构建命令行软件、服务端软件、嵌入式软件、桌面软件、通过webassembly编写网页前端等。</p>
-
-    <div class="aplication-content">
-        <div class="aplication-item">
-          <img class="app-image" src="res/cmd.png" alt="image"/>
-          <div class="app-text">
-            <h3>命令行</h3>
-            <p>利用Sric快速开发CLI工具。Sric可以帮助你自信地维护你的应用程序。</p>
-          </div>
-        </div>
-
-        <div class="aplication-item">
-          <img class="app-image" src="res/wasm.png" alt="image"/>
-          <div class="app-text">
-            <h3>WebAssembly</h3>
-            <p>使用Sric来替换JavaScript，网页应用也能运行的很快。</p>
-          </div>
-        </div>
-
-        <div class="aplication-item">
-          <img class="app-image" src="res/net.png" alt="image"/>
-          <div class="app-text">
-            <h3>网络</h3>
-            <p>可预测的性能，资源占用小。Sric非常适合网络服务开发。</p>
-          </div>
-        </div>
-
-        <div class="aplication-item">
-          <img class="app-image" src="res/emb.png" alt="image"/>
-          <div class="app-text">
-            <h3>嵌入式</h3>
-            <p>针对低资源设备，需要低级控制而不想放弃高级便利。可以试试Sric。</p>
-          </div>
-        </div>
-    </div>
-  </div>
-
-  <div class="wase">
-      <div class="wase-text">
-        <h3>Wase跨平台GUI</h3>
-        <p>Wase是Sric开发的跨平台UI库，一套代码可同时编译运行在桌面端和Web浏览器中，未来将支持Android和iOS开发。Wase有着丰富的控件和优美的界面。支持配置文件创建UI，支持自定义样式。Wase使用自绘的方式现实，类似于Qt和Flutter，但是更加轻量级。Sric语言专门为其设计了逗号表达式语法，使它的声明式API类似于SwiftUI和React Native。</p>
-        <a class="demo-button" href="wase/run.html">在线Demo</a>
-      </div>
-      <div class="wase-image-block">
-        <img class="wase-image" src="res/wase.png" alt="image"/>
-      </div>
-  </div>
-
-
-  <div class="join">
-      <div class="join-text">
-        <h3>参与共建</h3>
-        <p>Sric是免费开源项目。作为新创建的项目，许多方面还不完善，未来大有可为。不管你是初学者还是经验丰富的开发者。我们欢迎你来贡献自己的力量，帮助Sric改进使用体验。</p>
-      </div>
-  </div>
-
-
-  <div class="footer">
-    <div class="footer-content">
-      <div class="footer-text">
-        <span>文档</span>
-        <a href='book/Start.html'>快速开始</a>
-        <a href='book/index.html'>编程指南</a>
-        <a href='apidoc.html'>API文档</a>
-      </div>
-      <div class="footer-text">
-        <span>社区</span>
-        <a href='https://www.zhihu.com/column/c_1842314344005775360'>知乎</a>
-        <a href='https://github.com/sric-language/sric'>Github</a>
-        <a href='https://gitee.com/chunquedong/sric'>Gitee</a>
-      </div>
-      <p class="footer-copyright"> 
-        Copyright (c) 2025 chunquedong
-      </p>
-    </div>
+  <div>
+    <a href='index_en.html'>English</a>
+    <a href='index_zhi.html'>中文</a>
   </div>
 </body>
 </html>
