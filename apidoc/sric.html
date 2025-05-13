@@ -2,9 +2,11 @@
 <head>
 <link rel="stylesheet" type="text/css" href="style.css"><head>
 <body>
-<div class="module"><p><span class="modulename">sric</span><span class="moduleversion">1.0</span></p></div><div class="index"><a href="#Atomic">Atomic</a><a href="#List">List</a><a href="#DArray">DArray</a><a href="#FileSystem">FileSystem</a><a href="#HashMap">HashMap</a><a href="#IOStream">IOStream</a><a href="#Buffer">Buffer</a><a href="#FileStream">FileStream</a><a href="#Linkable">Linkable</a><a href="#LinkedList">LinkedList</a><a href="#scError">scError</a><a href="#scWarn">scWarn</a><a href="#scInfo">scInfo</a><a href="#scDebug">scDebug</a><a href="#placementNew">placementNew</a><a href="#toShared">toShared</a><a href="#autoMove">autoMove</a><a href="#toWeak">toWeak</a><a href="#share">share</a><a href="#rawToOwn">rawToOwn</a><a href="#refToOwn">refToOwn</a><a href="#rawToRef">rawToRef</a><a href="#unsafeCast">unsafeCast</a><a href="#WeakPtr">WeakPtr</a><a href="#AutoMove">AutoMove</a><a href="#SharedPtr">SharedPtr</a><a href="#findModule">findModule</a><a href="#newInstance">newInstance</a><a href="#typeOf">typeOf</a><a href="#callPVFunc">callPVFunc</a><a href="#callVPFunc">callVPFunc</a><a href="#RFlags">RFlags</a><a href="#RTypeKind">RTypeKind</a><a href="#RComment">RComment</a><a href="#RField">RField</a><a href="#RFunc">RFunc</a><a href="#RType">RType</a><a href="#RModule">RModule</a><a href="#asStr">asStr</a><a href="#String">String</a><a href="#currentTimeMillis">currentTimeMillis</a><a href="#nanoTicks">nanoTicks</a><a href="#sleep">sleep</a><a href="#currentThreadId">currentThreadId</a><a href="#Tuple2">Tuple2</a><a href="#Tuple3">Tuple3</a><a href="#Tuple4">Tuple4</a><a href="#hashCode">hashCode</a><a href="#compare">compare</a><a href="#copy">copy</a><a href="#max">max</a><a href="#min">min</a><a href="#clamp">clamp</a><a href="#sc_assert">sc_assert</a><a href="#verify">verify</a></div>
+<div class="module"><p><span class="modulename">sric</span><span class="moduleversion">1.0</span></p></div><div class="index"><a href="#Atomic">Atomic</a><a href="#List">List</a><a href="#DArray">DArray</a><a href="#FileSystem">FileSystem</a><a href="#HashMap">HashMap</a><a href="#IOStream">IOStream</a><a href="#Buffer">Buffer</a><a href="#FileStream">FileStream</a><a href="#Linkable">Linkable</a><a href="#LinkedList">LinkedList</a><a href="#scError">scError</a><a href="#scWarn">scWarn</a><a href="#scInfo">scInfo</a><a href="#scDebug">scDebug</a><a href="#placementNew">placementNew</a><a href="#toShared">toShared</a><a href="#autoMove">autoMove</a><a href="#toWeak">toWeak</a><a href="#share">share</a><a href="#rawToOwn">rawToOwn</a><a href="#refToOwn">refToOwn</a><a href="#rawToRef">rawToRef</a><a href="#unsafeCast">unsafeCast</a><a href="#WeakPtr">WeakPtr</a><a href="#AutoMove">AutoMove</a><a href="#SharedPtr">SharedPtr</a><a href="#findModule">findModule</a><a href="#newInstance">newInstance</a><a href="#typeOf">typeOf</a><a href="#callPtrToVoid">callPtrToVoid</a><a href="#callVoidToPtr">callVoidToPtr</a><a href="#callInstanceToString">callInstanceToString</a><a href="#callInstanceStringToBool">callInstanceStringToBool</a><a href="#RFlags">RFlags</a><a href="#RTypeKind">RTypeKind</a><a href="#RComment">RComment</a><a href="#RField">RField</a><a href="#RFunc">RFunc</a><a href="#RType">RType</a><a href="#RModule">RModule</a><a href="#asStr">asStr</a><a href="#String">String</a><a href="#currentTimeMillis">currentTimeMillis</a><a href="#nanoTicks">nanoTicks</a><a href="#sleep">sleep</a><a href="#currentThreadId">currentThreadId</a><a href="#Tuple2">Tuple2</a><a href="#Tuple3">Tuple3</a><a href="#Tuple4">Tuple4</a><a href="#hashCode">hashCode</a><a href="#compare">compare</a><a href="#copy">copy</a><a href="#max">max</a><a href="#min">min</a><a href="#clamp">clamp</a><a href="#sc_assert">sc_assert</a><a href="#verify">verify</a><a href="#makePtr">makePtr</a><a href="#makeValue">makeValue</a><a href="#Promise">Promise</a></div>
 <div class="content"><div class="typedef" id="Atomic"><p class="typeinfo"><span class="kind">struct</span><span class="name">Atomic</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span></p>
-
+<div class="doc">
+* To manage a object shared between threads with atomic updates
+</div>
     <div class="typefield"></div>
     <div class="typefunc"><div class="func" id="get"><p class="funcinfo"><span class="kind">fun</span><span class="name">get</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : T</span></p></div>
     <div class="func" id="set"><p class="funcinfo"><span class="kind">fun</span><span class="name">set</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">t : </span><span class="type">T</span></span>)</span><span class="returnType"> : Void</span></p></div>
@@ -12,7 +14,9 @@
     </div>
 
 </div><div class="typedef" id="List"><p class="typeinfo"><span class="kind">tarit</span><span class="name">List</span><span class="flags">abstract extern </span></p>
-
+<div class="doc">
+* A Inteface for DArray for dynamic reflection
+</div>
     <div class="typefield"></div>
     <div class="typefunc"><div class="func" id="data"><p class="funcinfo"><span class="kind">fun</span><span class="name">data</span><span class="flags">abstract </span><span class="prams">()</span><span class="returnType"> : raw* Void</span></p></div>
     <div class="func" id="size"><p class="funcinfo"><span class="kind">fun</span><span class="name">size</span><span class="flags">abstract </span><span class="prams">()</span><span class="returnType"> : Int32</span></p></div>
@@ -22,7 +26,7 @@
 
 </div><div class="typedef" id="DArray"><p class="typeinfo"><span class="kind">struct</span><span class="name">DArray</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span></p>
 <div class="doc">
-* Dynamic Array
+* Dynamic Array. DArray is a sequence container that encapsulates dynamic size arrays.
 </div>
     <div class="typefield"></div>
     <div class="typefunc"><div class="func" id="data"><p class="funcinfo"><span class="kind">fun</span><span class="name">data</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : raw* Void</span></p></div>
@@ -48,7 +52,9 @@
     </div>
 
 </div><div class="typedef" id="FileSystem"><p class="typeinfo"><span class="kind">tarit</span><span class="name">FileSystem</span><span class="flags">abstract extern </span></p>
-
+<div class="doc">
+* The FileSystem provides facilities for performing operations on file systems
+</div>
     <div class="typefield"></div>
     <div class="typefunc"><div class="func" id="mkdirs"><p class="funcinfo"><span class="kind">fun</span><span class="name">mkdirs</span><span class="flags">extern static </span><span class="prams">(<span class="param"><span class="name">path : </span><span class="type">const raw* const Int8</span></span>)</span><span class="returnType"> : Bool</span></p></div>
     <div class="func" id="listFiles"><p class="funcinfo"><span class="kind">fun</span><span class="name">listFiles</span><span class="flags">extern static </span><span class="prams">(<span class="param"><span class="name">path : </span><span class="type">const raw* const Int8</span></span>, <span class="param"><span class="name">files : </span><span class="type">&sric::DArray$<sric::String></span></span>)</span><span class="returnType"> : Bool</span></p></div>
@@ -68,7 +74,9 @@
     </div>
 
 </div><div class="typedef" id="HashMap"><p class="typeinfo"><span class="kind">struct</span><span class="name">HashMap</span><span class="flags"></span><span class="gnericParams">$&lt;<span><span class="name">K : </span></span>, <span><span class="name">V : </span></span>&gt;</span></p>
-
+<div class="doc">
+* HashMap is an associative container that contains key-value pairs with unique keys. Search, insertion, and removal of elements have average constant-time complexity.
+</div>
     <div class="typefield"></div>
     <div class="typefunc"><div class="func" id="constGet"><p class="funcinfo"><span class="kind">fun</span><span class="name">constGet</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">k : </span><span class="type">const &K</span></span>)</span><span class="returnType"> : *? const V</span></p></div>
     <div class="func" id="getPtr"><p class="funcinfo"><span class="kind">fun</span><span class="name">getPtr</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">k : </span><span class="type">const &K</span></span>)</span><span class="returnType"> : *? V</span></p></div>
@@ -78,11 +86,15 @@
     <div class="func" id="clear"><p class="funcinfo"><span class="kind">fun</span><span class="name">clear</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : Void</span></p></div>
     <div class="func" id="remove"><p class="funcinfo"><span class="kind">fun</span><span class="name">remove</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">k : </span><span class="type">const &K</span></span>)</span><span class="returnType"> : Bool</span></p></div>
     <div class="func" id="contains"><p class="funcinfo"><span class="kind">fun</span><span class="name">contains</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">k : </span><span class="type">const &K</span></span>)</span><span class="returnType"> : Bool</span></p></div>
-    <div class="func" id="eachWhile"><p class="funcinfo"><span class="kind">fun</span><span class="name">eachWhile</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">f : </span><span class="type">fun(v : const &V, k : const &K):Bool</span></span>)</span><span class="returnType"> : Void</span></p></div>
+    <div class="func" id="eachWhile"><p class="funcinfo"><span class="kind">fun</span><span class="name">eachWhile</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">f : </span><span class="type">fun(v : const &V, k : const &K):Bool</span></span>)</span><span class="returnType"> : Void</span></p><div class="doc">
+    * Return true to continue, Return false to break.
+    </div></div>
     </div>
 
 </div><div class="typedef" id="IOStream"><p class="typeinfo"><span class="kind">struct</span><span class="name">IOStream</span><span class="flags">abstract extern </span></p>
-
+<div class="doc">
+* IOStream is used to read write data. These abstract devices allow the same code to handle input/output to files, memory streams, or custom adaptor devices that perform arbitrary operations (e.g. compression) on the fly.
+</div>
     <div class="typefield"></div>
     <div class="typefunc"><div class="func" id="canRead"><p class="funcinfo"><span class="kind">fun</span><span class="name">canRead</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : Bool</span></p></div>
     <div class="func" id="canWrite"><p class="funcinfo"><span class="kind">fun</span><span class="name">canWrite</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : Bool</span></p></div>
@@ -151,7 +163,9 @@
     <div class="typefunc"></div>
 
 </div><div class="typedef" id="LinkedList"><p class="typeinfo"><span class="kind">struct</span><span class="name">LinkedList</span><span class="flags"></span><span class="gnericParams">$&lt;<span><span class="name">T : </span><span class="type">sric::Linkable$<T></span></span>&gt;</span></p>
-
+<div class="doc">
+* LinkedList is a container that supports constant time insertion and removal of elements from anywhere in the container. Fast random access is not supported. It is usually implemented as a doubly-linked list. 
+</div>
     <div class="typefield"></div>
     <div class="typefunc"><div class="func" id="clear"><p class="funcinfo"><span class="kind">fun</span><span class="name">clear</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : Void</span></p></div>
     <div class="func" id="size"><p class="funcinfo"><span class="kind">fun</span><span class="name">size</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : Int32</span></p></div>
@@ -171,14 +185,18 @@
 <div class="func" id="scInfo"><p class="funcinfo"><span class="kind">fun</span><span class="name">scInfo</span><span class="flags">externc </span><span class="prams">(<span class="param"><span class="name">tag : </span><span class="type">raw* const Int8</span></span>, <span class="param"><span class="name">msg : </span><span class="type">raw* const Int8</span></span>, <span class="param"><span class="name">args : </span><span class="type">...</span></span>)</span><span class="returnType"> : Void</span></p></div>
 <div class="func" id="scDebug"><p class="funcinfo"><span class="kind">fun</span><span class="name">scDebug</span><span class="flags">externc </span><span class="prams">(<span class="param"><span class="name">tag : </span><span class="type">raw* const Int8</span></span>, <span class="param"><span class="name">msg : </span><span class="type">raw* const Int8</span></span>, <span class="param"><span class="name">args : </span><span class="type">...</span></span>)</span><span class="returnType"> : Void</span></p></div>
 <div class="typedef" id="WeakPtr"><p class="typeinfo"><span class="kind">struct</span><span class="name">WeakPtr</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span></p>
-
+<div class="doc">
+* WeakPtr is a smart pointer that holds a non-owning ("weak") reference to an object that is managed by own*. It must be converted to own* in order to access the referenced object.
+</div>
     <div class="typefield"></div>
     <div class="typefunc"><div class="func" id="set"><p class="funcinfo"><span class="kind">fun</span><span class="name">set</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">own*? T</span></span>)</span><span class="returnType"> : Void</span></p></div>
     <div class="func" id="lock"><p class="funcinfo"><span class="kind">fun</span><span class="name">lock</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : own*? T</span></p></div>
     </div>
 
 </div><div class="typedef" id="AutoMove"><p class="typeinfo"><span class="kind">struct</span><span class="name">AutoMove</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span></p>
-
+<div class="doc">
+* Auto move the ownership
+</div>
     <div class="typefield"></div>
     <div class="typefunc"><div class="func" id="set"><p class="funcinfo"><span class="kind">fun</span><span class="name">set</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">&T</span></span>)</span><span class="returnType"> : Void</span></p></div>
     <div class="func" id="take"><p class="funcinfo"><span class="kind">fun</span><span class="name">take</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : T</span></p></div>
@@ -186,21 +204,39 @@
     </div>
 
 </div><div class="typedef" id="SharedPtr"><p class="typeinfo"><span class="kind">struct</span><span class="name">SharedPtr</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span></p>
-
+<div class="doc">
+* SharedPtr is a smart pointer with pointerreference counters
+</div>
     <div class="typefield"></div>
     <div class="typefunc"><div class="func" id="set"><p class="funcinfo"><span class="kind">fun</span><span class="name">set</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">own*? T</span></span>)</span><span class="returnType"> : Void</span></p></div>
     <div class="func" id="get"><p class="funcinfo"><span class="kind">fun</span><span class="name">get</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : own*? T</span></p></div>
     </div>
 
 </div><div class="func" id="placementNew"><p class="funcinfo"><span class="kind">fun</span><span class="name">placementNew</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">raw* Void</span></span>, <span class="param"><span class="name">freeMemory : </span><span class="type">fun(p : raw* Void)</span></span>)</span><span class="returnType"> : own* T</span></p></div>
-<div class="func" id="toShared"><p class="funcinfo"><span class="kind">fun</span><span class="name">toShared</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">&own* T</span></span>)</span><span class="returnType"> : sric::SharedPtr$<T></span></p></div>
-<div class="func" id="autoMove"><p class="funcinfo"><span class="kind">fun</span><span class="name">autoMove</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">T</span></span>)</span><span class="returnType"> : sric::AutoMove$<T></span></p></div>
-<div class="func" id="toWeak"><p class="funcinfo"><span class="kind">fun</span><span class="name">toWeak</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">&own* T</span></span>)</span><span class="returnType"> : sric::WeakPtr$<T></span></p></div>
-<div class="func" id="share"><p class="funcinfo"><span class="kind">fun</span><span class="name">share</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">&own* T</span></span>)</span><span class="returnType"> : own* T</span></p></div>
-<div class="func" id="rawToOwn"><p class="funcinfo"><span class="kind">fun</span><span class="name">rawToOwn</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">raw* T</span></span>)</span><span class="returnType"> : own* T</span></p></div>
-<div class="func" id="refToOwn"><p class="funcinfo"><span class="kind">fun</span><span class="name">refToOwn</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">* T</span></span>)</span><span class="returnType"> : own* T</span></p></div>
-<div class="func" id="rawToRef"><p class="funcinfo"><span class="kind">fun</span><span class="name">rawToRef</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">raw* T</span></span>)</span><span class="returnType"> : * T</span></p></div>
-<div class="func" id="unsafeCast"><p class="funcinfo"><span class="kind">fun</span><span class="name">unsafeCast</span><span class="flags">extern unsafe </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">raw* Void</span></span>)</span><span class="returnType"> : T</span></p></div>
+<div class="func" id="toShared"><p class="funcinfo"><span class="kind">fun</span><span class="name">toShared</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">&own* T</span></span>)</span><span class="returnType"> : sric::SharedPtr$<T></span></p><div class="doc">
+* Convert own* to SharedPtr
+</div></div>
+<div class="func" id="autoMove"><p class="funcinfo"><span class="kind">fun</span><span class="name">autoMove</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">T</span></span>)</span><span class="returnType"> : sric::AutoMove$<T></span></p><div class="doc">
+* Convert own* to AutoMove
+</div></div>
+<div class="func" id="toWeak"><p class="funcinfo"><span class="kind">fun</span><span class="name">toWeak</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">&own* T</span></span>)</span><span class="returnType"> : sric::WeakPtr$<T></span></p><div class="doc">
+* Convert own* to WeakPtr
+</div></div>
+<div class="func" id="share"><p class="funcinfo"><span class="kind">fun</span><span class="name">share</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">&own* T</span></span>)</span><span class="returnType"> : own* T</span></p><div class="doc">
+* Fork own* to share
+</div></div>
+<div class="func" id="rawToOwn"><p class="funcinfo"><span class="kind">fun</span><span class="name">rawToOwn</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">raw* T</span></span>)</span><span class="returnType"> : own* T</span></p><div class="doc">
+* Convert raw pointer to own pointer
+</div></div>
+<div class="func" id="refToOwn"><p class="funcinfo"><span class="kind">fun</span><span class="name">refToOwn</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">* T</span></span>)</span><span class="returnType"> : own* T</span></p><div class="doc">
+* Convert ref pointer to own pointer
+</div></div>
+<div class="func" id="rawToRef"><p class="funcinfo"><span class="kind">fun</span><span class="name">rawToRef</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">raw* T</span></span>)</span><span class="returnType"> : * T</span></p><div class="doc">
+* Convert raw pointer to own pointer
+</div></div>
+<div class="func" id="unsafeCast"><p class="funcinfo"><span class="kind">fun</span><span class="name">unsafeCast</span><span class="flags">extern unsafe </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">raw* Void</span></span>)</span><span class="returnType"> : T</span></p><div class="doc">
+* Convert pointer type unsafely
+</div></div>
 <div class="typedef" id="RFlags"><p class="typeinfo"><span class="kind">struct</span><span class="name">RFlags</span><span class="flags"></span></p>
 
     <div class="typefield"><div class="field" id="Abstract"><p class="fieldinfo"><span class="kind">var</span><span class="name">Abstract</span><span class="flags">static </span><span class="type"> : const Int32</span></p></div>
@@ -300,15 +336,28 @@
     </div>
     <div class="typefunc"></div>
 
-</div><div class="func" id="findModule"><p class="funcinfo"><span class="kind">fun</span><span class="name">findModule</span><span class="flags">extern </span><span class="prams">(<span class="param"><span class="name">name : </span><span class="type">raw* const Int8</span></span>)</span><span class="returnType"> : *? sric::RModule</span></p></div>
-<div class="func" id="newInstance"><p class="funcinfo"><span class="kind">fun</span><span class="name">newInstance</span><span class="flags">extern </span><span class="prams">(<span class="param"><span class="name">type : </span><span class="type">&sric::RType</span></span>)</span><span class="returnType"> : own*? Void</span></p></div>
-<div class="func" id="typeOf"><p class="funcinfo"><span class="kind">fun</span><span class="name">typeOf</span><span class="flags">extern unsafe </span><span class="prams">(<span class="param"><span class="name">t : </span><span class="type">raw* Void</span></span>)</span><span class="returnType"> : raw* const Int8</span></p></div>
-<div class="func" id="callPVFunc"><p class="funcinfo"><span class="kind">fun</span><span class="name">callPVFunc</span><span class="flags">extern unsafe </span><span class="prams">(<span class="param"><span class="name">func : </span><span class="type">raw* Void</span></span>, <span class="param"><span class="name">arg : </span><span class="type">raw* Void</span></span>)</span><span class="returnType"> : Void</span></p></div>
-<div class="func" id="callVPFunc"><p class="funcinfo"><span class="kind">fun</span><span class="name">callVPFunc</span><span class="flags">extern unsafe </span><span class="prams">(<span class="param"><span class="name">func : </span><span class="type">raw* Void</span></span>)</span><span class="returnType"> : raw* Void</span></p></div>
+</div><div class="func" id="findModule"><p class="funcinfo"><span class="kind">fun</span><span class="name">findModule</span><span class="flags">extern </span><span class="prams">(<span class="param"><span class="name">name : </span><span class="type">raw* const Int8</span></span>)</span><span class="returnType"> : *? sric::RModule</span></p><div class="doc">
+* Find RModule by name
+</div></div>
+<div class="func" id="newInstance"><p class="funcinfo"><span class="kind">fun</span><span class="name">newInstance</span><span class="flags">extern </span><span class="prams">(<span class="param"><span class="name">type : </span><span class="type">&sric::RType</span></span>)</span><span class="returnType"> : own*? Void</span></p><div class="doc">
+* Alloc new Object from RType
+</div></div>
+<div class="func" id="typeOf"><p class="funcinfo"><span class="kind">fun</span><span class="name">typeOf</span><span class="flags">extern unsafe </span><span class="prams">(<span class="param"><span class="name">t : </span><span class="type">raw* Void</span></span>)</span><span class="returnType"> : raw* const Int8</span></p><div class="doc">
+* Get type name by object. The object type must be virtual or abstruct.
+</div></div>
+<div class="func" id="callPtrToVoid"><p class="funcinfo"><span class="kind">fun</span><span class="name">callPtrToVoid</span><span class="flags">extern unsafe </span><span class="prams">(<span class="param"><span class="name">func : </span><span class="type">raw* Void</span></span>, <span class="param"><span class="name">arg : </span><span class="type">raw* Void</span></span>)</span><span class="returnType"> : Void</span></p></div>
+<div class="func" id="callVoidToPtr"><p class="funcinfo"><span class="kind">fun</span><span class="name">callVoidToPtr</span><span class="flags">extern unsafe </span><span class="prams">(<span class="param"><span class="name">func : </span><span class="type">raw* Void</span></span>)</span><span class="returnType"> : raw* Void</span></p></div>
+<div class="func" id="callInstanceToString"><p class="funcinfo"><span class="kind">fun</span><span class="name">callInstanceToString</span><span class="flags">extern unsafe </span><span class="prams">(<span class="param"><span class="name">func : </span><span class="type">raw* Void</span></span>, <span class="param"><span class="name">instance : </span><span class="type">raw* Void</span></span>)</span><span class="returnType"> : sric::String</span></p></div>
+<div class="func" id="callInstanceStringToBool"><p class="funcinfo"><span class="kind">fun</span><span class="name">callInstanceStringToBool</span><span class="flags">extern unsafe </span><span class="prams">(<span class="param"><span class="name">func : </span><span class="type">raw* Void</span></span>, <span class="param"><span class="name">instance : </span><span class="type">raw* Void</span></span>, <span class="param"><span class="name">s : </span><span class="type">sric::String</span></span>)</span><span class="returnType"> : Bool</span></p></div>
 <div class="typedef" id="String"><p class="typeinfo"><span class="kind">struct</span><span class="name">String</span><span class="flags">extern </span></p>
-
+<div class="doc">
+* String stores and manipulates sequences of character-like objects.
+* The String is always UTF-8 encoding.
+</div>
     <div class="typefield"></div>
-    <div class="typefunc"><div class="func" id="c_str"><p class="funcinfo"><span class="kind">fun</span><span class="name">c_str</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : raw* const Int8</span></p></div>
+    <div class="typefunc"><div class="func" id="c_str"><p class="funcinfo"><span class="kind">fun</span><span class="name">c_str</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : raw* const Int8</span></p><div class="doc">
+    * Get C style string
+    </div></div>
     <div class="func" id="data"><p class="funcinfo"><span class="kind">fun</span><span class="name">data</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : raw* Int8</span></p></div>
     <div class="func" id="size"><p class="funcinfo"><span class="kind">fun</span><span class="name">size</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : Int32</span></p></div>
     <div class="func" id="copy"><p class="funcinfo"><span class="kind">fun</span><span class="name">copy</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : sric::String</span></p></div>
@@ -359,7 +408,9 @@
     </div></div>
     </div>
 
-</div><div class="func" id="asStr"><p class="funcinfo"><span class="kind">fun</span><span class="name">asStr</span><span class="flags">extern </span><span class="prams">(<span class="param"><span class="name">cstr : </span><span class="type">raw* const Int8</span></span>)</span><span class="returnType"> : sric::String</span></p></div>
+</div><div class="func" id="asStr"><p class="funcinfo"><span class="kind">fun</span><span class="name">asStr</span><span class="flags">extern </span><span class="prams">(<span class="param"><span class="name">cstr : </span><span class="type">raw* const Int8</span></span>)</span><span class="returnType"> : sric::String</span></p><div class="doc">
+* Convert C style string to String
+</div></div>
 <div class="func" id="currentTimeMillis"><p class="funcinfo"><span class="kind">fun</span><span class="name">currentTimeMillis</span><span class="flags">extern </span><span class="prams">()</span><span class="returnType"> : Int64</span></p><div class="doc">
 * return the milliseconds from midnight, January 1, 1970 UTC.
 </div></div>
@@ -371,7 +422,7 @@
 * sleep current thread millitm second
 </div></div>
 <div class="func" id="currentThreadId"><p class="funcinfo"><span class="kind">fun</span><span class="name">currentThreadId</span><span class="flags">extern </span><span class="prams">()</span><span class="returnType"> : UInt64</span></p><div class="doc">
-* Thread ID
+* Get current thread ID
 </div></div>
 <div class="typedef" id="Tuple2"><p class="typeinfo"><span class="kind">struct</span><span class="name">Tuple2</span><span class="flags"></span><span class="gnericParams">$&lt;<span><span class="name">T1 : </span></span>, <span><span class="name">T2 : </span></span>&gt;</span></p>
 
@@ -397,13 +448,41 @@
     </div>
     <div class="typefunc"></div>
 
+</div><div class="typedef" id="Promise"><p class="typeinfo"><span class="kind">struct</span><span class="name">Promise</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span></p>
+<div class="doc">
+* Promise is a coroutine return type.
+</div>
+    <div class="typefield"></div>
+    <div class="typefunc"><div class="func" id="get_result"><p class="funcinfo"><span class="kind">fun</span><span class="name">get_result</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : T</span></p></div>
+    <div class="func" id="is_done"><p class="funcinfo"><span class="kind">fun</span><span class="name">is_done</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : Bool</span></p></div>
+    <div class="func" id="then"><p class="funcinfo"><span class="kind">fun</span><span class="name">then</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">cb : </span><span class="type">fun(error : Int32, value : T)</span></span>)</span><span class="returnType"> : Void</span></p></div>
+    </div>
+
 </div><div class="func" id="hashCode"><p class="funcinfo"><span class="kind">fun</span><span class="name">hashCode</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">const &T</span></span>)</span><span class="returnType"> : UInt32</span></p></div>
 <div class="func" id="compare"><p class="funcinfo"><span class="kind">fun</span><span class="name">compare</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">a : </span><span class="type">const &T</span></span>, <span class="param"><span class="name">b : </span><span class="type">const &T</span></span>)</span><span class="returnType"> : Int32</span></p></div>
-<div class="func" id="copy"><p class="funcinfo"><span class="kind">fun</span><span class="name">copy</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">a : </span><span class="type">const &T</span></span>)</span><span class="returnType"> : T</span></p></div>
-<div class="func" id="max"><p class="funcinfo"><span class="kind">fun</span><span class="name">max</span><span class="flags"></span><span class="gnericParams">$&lt;<span><span class="name">T : </span><span class="type">Float64</span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">a : </span><span class="type">T</span></span>, <span class="param"><span class="name">b : </span><span class="type">T</span></span>)</span><span class="returnType"> : T</span></p></div>
-<div class="func" id="min"><p class="funcinfo"><span class="kind">fun</span><span class="name">min</span><span class="flags"></span><span class="gnericParams">$&lt;<span><span class="name">T : </span><span class="type">Float64</span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">a : </span><span class="type">T</span></span>, <span class="param"><span class="name">b : </span><span class="type">T</span></span>)</span><span class="returnType"> : T</span></p></div>
-<div class="func" id="clamp"><p class="funcinfo"><span class="kind">fun</span><span class="name">clamp</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">v : </span><span class="type">Float64</span></span>, <span class="param"><span class="name">min : </span><span class="type">Float64</span></span>, <span class="param"><span class="name">max : </span><span class="type">Float64</span></span>)</span><span class="returnType"> : Float64</span></p></div>
-<div class="func" id="sc_assert"><p class="funcinfo"><span class="kind">fun</span><span class="name">sc_assert</span><span class="flags">externc </span><span class="prams">(<span class="param"><span class="name">cond : </span><span class="type">Bool</span></span>, <span class="param"><span class="name">msg : </span><span class="type">raw*? const Int8</span></span>)</span><span class="returnType"> : Void</span></p></div>
-<div class="func" id="verify"><p class="funcinfo"><span class="kind">fun</span><span class="name">verify</span><span class="flags">extern </span><span class="prams">(<span class="param"><span class="name">cond : </span><span class="type">Bool</span></span>, <span class="param"><span class="name">msg : </span><span class="type">raw*? const Int8</span></span>)</span><span class="returnType"> : Void</span></p></div>
+<div class="func" id="copy"><p class="funcinfo"><span class="kind">fun</span><span class="name">copy</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">a : </span><span class="type">const &T</span></span>)</span><span class="returnType"> : T</span></p><div class="doc">
+* Common copy template. If own pointer call share() others call .copy() method.
+</div></div>
+<div class="func" id="max"><p class="funcinfo"><span class="kind">fun</span><span class="name">max</span><span class="flags"></span><span class="gnericParams">$&lt;<span><span class="name">T : </span><span class="type">Float64</span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">a : </span><span class="type">T</span></span>, <span class="param"><span class="name">b : </span><span class="type">T</span></span>)</span><span class="returnType"> : T</span></p><div class="doc">
+* Return the larger one.
+</div></div>
+<div class="func" id="min"><p class="funcinfo"><span class="kind">fun</span><span class="name">min</span><span class="flags"></span><span class="gnericParams">$&lt;<span><span class="name">T : </span><span class="type">Float64</span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">a : </span><span class="type">T</span></span>, <span class="param"><span class="name">b : </span><span class="type">T</span></span>)</span><span class="returnType"> : T</span></p><div class="doc">
+* Return the smaller one.
+</div></div>
+<div class="func" id="clamp"><p class="funcinfo"><span class="kind">fun</span><span class="name">clamp</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">v : </span><span class="type">Float64</span></span>, <span class="param"><span class="name">min : </span><span class="type">Float64</span></span>, <span class="param"><span class="name">max : </span><span class="type">Float64</span></span>)</span><span class="returnType"> : Float64</span></p><div class="doc">
+* Clamp between the min and max. If it's less than min then return min, if it's greater than max return max, otherwise return itself.
+</div></div>
+<div class="func" id="sc_assert"><p class="funcinfo"><span class="kind">fun</span><span class="name">sc_assert</span><span class="flags">externc </span><span class="prams">(<span class="param"><span class="name">cond : </span><span class="type">Bool</span></span>, <span class="param"><span class="name">msg : </span><span class="type">raw*? const Int8</span></span>)</span><span class="returnType"> : Void</span></p><div class="doc">
+* Enabled in debug mode. Verify that cond is true, otherwise print msg and abort.
+</div></div>
+<div class="func" id="verify"><p class="funcinfo"><span class="kind">fun</span><span class="name">verify</span><span class="flags">extern </span><span class="prams">(<span class="param"><span class="name">cond : </span><span class="type">Bool</span></span>, <span class="param"><span class="name">msg : </span><span class="type">raw*? const Int8</span></span>)</span><span class="returnType"> : Void</span></p><div class="doc">
+* Verify that cond is true, otherwise print msg and abort.
+</div></div>
+<div class="func" id="makePtr"><p class="funcinfo"><span class="kind">fun</span><span class="name">makePtr</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">args : </span><span class="type">...</span></span>)</span><span class="returnType"> : own* T</span></p><div class="doc">
+* Alloc and call C++ ctor by args.
+</div></div>
+<div class="func" id="makeValue"><p class="funcinfo"><span class="kind">fun</span><span class="name">makeValue</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">args : </span><span class="type">...</span></span>)</span><span class="returnType"> : T</span></p><div class="doc">
+* Call C++ ctor by args.
+</div></div>
 </div></body>
 </html>

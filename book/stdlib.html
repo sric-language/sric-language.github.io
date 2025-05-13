@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>模块化 - sric doc</title>
+        <title>标准库基础 - sric doc</title>
 
 
         <!-- Custom HTML head -->
@@ -155,34 +155,70 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="模块化"><a class="header" href="#模块化">模块化</a></h2>
-<p>每个语言对模块的定义都有点不太一样，sric中模块既是命名空间，也是编译单元，也是部署单元。</p>
-<h3 id="模块定义"><a class="header" href="#模块定义">模块定义</a></h3>
-<p>模块通过构建脚本来定义，构建脚本以scm为扩展名:</p>
-<pre><code>name = demo
-summary = demo library
-outType = lib
-version = 1.0
-depends = sys 1.0
-srcDirs = src/
+                        <h2 id="标准库"><a class="header" href="#标准库">标准库</a></h2>
+<h3 id="概述"><a class="header" href="#概述">概述</a></h3>
+<ul>
+<li>sric: 自带标准库</li>
+<li>cstd： C语言库</li>
+<li>jsonc: JSON解析和压缩库</li>
+<li>serial： 序列化库，基于动态反射功能。</li>
+</ul>
+<p><a href="/apidoc.html">标准库文档</a></p>
+<h3 id="使用c语言库"><a class="header" href="#使用c语言库">使用C语言库</a></h3>
+<p>cstd模块只导出了一部分常用的C函数，期待您的补充。</p>
+<p>如果使用到没有导出的C语言库，可自行导出。例如:</p>
+<pre><code>externc fun printf(format: raw* const Int8, args: ...);
+
+fun main() {
+    printf("Hello World\n");
+}
 </code></pre>
-<p>源码目录srcDirs需要以<code>/</code>结尾，编译器会自动搜索目录下的所有.sric文件。</p>
-<h3 id="模块导入"><a class="header" href="#模块导入">模块导入</a></h3>
-<p>在代码里面导入外部模块:</p>
-<pre><code>import sric::*;
-import sric::DArray;
+<p>使用externc声明即可。宏按照const变量来声明。
+更多请参见<a href="cpp.html">C++交互</a>。</p>
+<h3 id="string"><a class="header" href="#string">String</a></h3>
+<p>在Sric中字符串是raw* const Int8类型的，可以自动转为String类型。</p>
+<pre><code>var str: String = "abc";
 </code></pre>
-<p>其中<code>*</code>表示导入模块下的所有符号。导入的模块必须在构建脚本的depends字段声明。</p>
+<p>有些情况下可能需要手动转String:</p>
+<pre><code>var str = asStr("abc");
+</code></pre>
+<h3 id="darray"><a class="header" href="#darray">DArray</a></h3>
+<p>DArray类似于C++的std::vector。用于存储需要动态增长大小的数据。</p>
+<pre><code>var a : DArray$&lt;Int&gt;;
+a.add(1);
+a.add(2);
+
+verify(a[0] == 1);
+</code></pre>
+<h3 id="hashmap"><a class="header" href="#hashmap">HashMap</a></h3>
+<p>HashMap用来存储key-value数据。</p>
+<pre><code>var map = HashMap$&lt;Int, String&gt;{};
+map.set(1, "1");
+map.set(2, "2");
+
+verify(map[2] == "2");
+</code></pre>
+<h3 id="读写文件"><a class="header" href="#读写文件">读写文件</a></h3>
+<p>可用FileStream来读写文件。</p>
+<p>写入文件：</p>
+<pre><code>var stream = FileStream::open("tmp.txt", "wb");
+stream.writeStr("Hello\nWorld");
+</code></pre>
+<p>读取文件:</p>
+<pre><code>var stream = FileStream::open("tmp.txt", "rb");
+var line = stream.readAllStr();
+</code></pre>
+<p>第二个参数的含义，参见C语言的fopen函数。</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="operator.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="module.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="stdlib.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="reflect.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -192,11 +228,11 @@ import sric::DArray;
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="operator.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="module.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="stdlib.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="reflect.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

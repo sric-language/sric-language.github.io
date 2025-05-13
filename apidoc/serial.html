@@ -2,7 +2,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="style.css"><head>
 <body>
-<div class="module"><p><span class="modulename">serial</span><span class="moduleversion">1.0</span></p></div><div class="index"><a href="#sizeOfType">sizeOfType</a><a href="#findRType">findRType</a><a href="#isSerializable">isSerializable</a><a href="#TypeName">TypeName</a><a href="#Decoder">Decoder</a><a href="#Encoder">Encoder</a></div>
+<div class="module"><p><span class="modulename">serial</span><span class="moduleversion">1.0</span></p></div><div class="index"><a href="#sizeOfType">sizeOfType</a><a href="#findRType">findRType</a><a href="#isSimpleSerial">isSimpleSerial</a><a href="#isSerializable">isSerializable</a><a href="#findInstanceMethod">findInstanceMethod</a><a href="#TypeName">TypeName</a><a href="#Decoder">Decoder</a><a href="#Encoder">Encoder</a></div>
 <div class="content"><div class="typedef" id="TypeName"><p class="typeinfo"><span class="kind">struct</span><span class="name">TypeName</span><span class="flags"></span></p>
 
     <div class="typefield"><div class="field" id="name"><p class="fieldinfo"><span class="kind">var</span><span class="name">name</span><span class="flags"></span><span class="type"> : sric::String</span></p></div>
@@ -13,11 +13,14 @@
 
 </div><div class="func" id="sizeOfType"><p class="funcinfo"><span class="kind">fun</span><span class="name">sizeOfType</span><span class="flags">unsafe </span><span class="prams">(<span class="param"><span class="name">typeName : </span><span class="type">raw* const Int8</span></span>)</span><span class="returnType"> : Int32</span></p></div>
 <div class="func" id="findRType"><p class="funcinfo"><span class="kind">fun</span><span class="name">findRType</span><span class="flags">unsafe </span><span class="prams">(<span class="param"><span class="name">typeQname : </span><span class="type">raw* const Int8</span></span>)</span><span class="returnType"> : raw*? sric::RType</span></p></div>
+<div class="func" id="isSimpleSerial"><p class="funcinfo"><span class="kind">fun</span><span class="name">isSimpleSerial</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">f : </span><span class="type">&sric::RType</span></span>)</span><span class="returnType"> : Bool</span></p></div>
 <div class="func" id="isSerializable"><p class="funcinfo"><span class="kind">fun</span><span class="name">isSerializable</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">f : </span><span class="type">&sric::RField</span></span>)</span><span class="returnType"> : Bool</span></p></div>
+<div class="func" id="findInstanceMethod"><p class="funcinfo"><span class="kind">fun</span><span class="name">findInstanceMethod</span><span class="flags">unsafe </span><span class="prams">(<span class="param"><span class="name">rtype : </span><span class="type">raw*? sric::RType</span></span>, <span class="param"><span class="name">name : </span><span class="type">raw* const Int8</span></span>)</span><span class="returnType"> : raw*? sric::RFunc</span></p></div>
 <div class="typedef" id="Decoder"><p class="typeinfo"><span class="kind">struct</span><span class="name">Decoder</span><span class="flags"></span></p>
 
     <div class="typefield"></div>
     <div class="typefunc"><div class="func" id="decode"><p class="funcinfo"><span class="kind">fun</span><span class="name">decode</span><span class="flags">unsafe </span><span class="prams">(<span class="param"><span class="name">str : </span><span class="type">&sric::String</span></span>)</span><span class="returnType"> : own*? Void</span></p></div>
+    <div class="func" id="decodeMap"><p class="funcinfo"><span class="kind">fun</span><span class="name">decodeMap</span><span class="flags">unsafe </span><span class="prams">(<span class="param"><span class="name">str : </span><span class="type">&sric::String</span></span>)</span><span class="returnType"> : sric::HashMap$<sric::String, own* Void></span></p></div>
     </div>
 
 </div><div class="typedef" id="Encoder"><p class="typeinfo"><span class="kind">struct</span><span class="name">Encoder</span><span class="flags"></span></p>

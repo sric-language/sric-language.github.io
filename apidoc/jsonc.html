@@ -2,7 +2,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="style.css"><head>
 <body>
-<div class="module"><p><span class="modulename">jsonc</span><span class="moduleversion">1.0</span></p></div><div class="index"><a href="#Type">Type</a><a href="#JsonIterator">JsonIterator</a><a href="#Value">Value</a><a href="#JsonNode">JsonNode</a><a href="#JsonAllocator">JsonAllocator</a><a href="#JsonParser">JsonParser</a><a href="#HimlParser">HimlParser</a></div>
+<div class="module"><p><span class="modulename">jsonc</span><span class="moduleversion">2.0</span></p></div><div class="index"><a href="#Type">Type</a><a href="#JsonIterator">JsonIterator</a><a href="#Value">Value</a><a href="#JsonNode">JsonNode</a><a href="#JsonAllocator">JsonAllocator</a><a href="#JsonParser">JsonParser</a><a href="#HimlParser">HimlParser</a></div>
 <div class="content"><div class="typedef" id="Type"><p class="typeinfo"><span class="kind">enum</span><span class="name">Type</span><span class="flags">extern </span></p>
 
     <div class="typefield"><div class="field" id="Null"><p class="fieldinfo"><span class="kind">var</span><span class="name">Null</span><span class="flags"></span><span class="type"> : jsonc::Type</span></p></div>
@@ -82,14 +82,19 @@
     <div class="typefunc"><div class="func" id="init"><p class="funcinfo"><span class="kind">fun</span><span class="name">init</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">allocator : </span><span class="type">raw* jsonc::JsonAllocator</span></span>)</span><span class="returnType"> : Void</span></p></div>
     <div class="func" id="parse"><p class="funcinfo"><span class="kind">fun</span><span class="name">parse</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">src : </span><span class="type">raw* Int8</span></span>)</span><span class="returnType"> : raw*? jsonc::Value</span></p></div>
     <div class="func" id="get_error"><p class="funcinfo"><span class="kind">fun</span><span class="name">get_error</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : raw* Int32</span></p></div>
+    <div class="func" id="get_end"><p class="funcinfo"><span class="kind">fun</span><span class="name">get_end</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : raw* Int8</span></p></div>
+    <div class="func" id="has_error"><p class="funcinfo"><span class="kind">fun</span><span class="name">has_error</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : Bool</span></p></div>
     </div>
 
 </div><div class="typedef" id="HimlParser"><p class="typeinfo"><span class="kind">struct</span><span class="name">HimlParser</span><span class="flags">extern </span></p>
 
-    <div class="typefield"></div>
+    <div class="typefield"><div class="field" id="insertTopLevelObject"><p class="fieldinfo"><span class="kind">var</span><span class="name">insertTopLevelObject</span><span class="flags"></span><span class="type"> : Bool</span></p></div>
+    </div>
     <div class="typefunc"><div class="func" id="init"><p class="funcinfo"><span class="kind">fun</span><span class="name">init</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">allocator : </span><span class="type">raw* jsonc::JsonAllocator</span></span>)</span><span class="returnType"> : Void</span></p></div>
     <div class="func" id="parse"><p class="funcinfo"><span class="kind">fun</span><span class="name">parse</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">src : </span><span class="type">raw* Int8</span></span>)</span><span class="returnType"> : raw*? jsonc::Value</span></p></div>
     <div class="func" id="get_error"><p class="funcinfo"><span class="kind">fun</span><span class="name">get_error</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : raw* Int32</span></p></div>
+    <div class="func" id="get_end"><p class="funcinfo"><span class="kind">fun</span><span class="name">get_end</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : raw* Int8</span></p></div>
+    <div class="func" id="has_error"><p class="funcinfo"><span class="kind">fun</span><span class="name">has_error</span><span class="flags"></span><span class="prams">()</span><span class="returnType"> : Bool</span></p></div>
     </div>
 
 </div></div></body>
