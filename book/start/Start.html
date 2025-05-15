@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>简介 - sric doc</title>
+        <title>快速开始 - sric doc</title>
 
 
         <!-- Custom HTML head -->
@@ -12,33 +12,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="highlight-css" href="highlight.css">
-        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
-        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
 
         <!-- Provide site root and default themes to javascript -->
         <script>
-            const path_to_root = "";
+            const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc.js"></script>
+        <script src="../toc.js"></script>
     </head>
     <body>
     <div id="body-container">
@@ -91,7 +91,7 @@
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
-                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
             </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -126,7 +126,7 @@
                     <h1 class="menu-title">sric doc</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
 
@@ -155,23 +155,73 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="sric编程语言"><a class="header" href="#sric编程语言">Sric编程语言</a></h2>
-<p>内存安全的高性能编程语言</p>
-<h3 id="特性"><a class="header" href="#特性">特性</a></h3>
-<ul>
-<li>高性能：支持底层内存操作，没有垃圾收集器，和C++一样快。</li>
-<li>内存安全：没有内存泄漏、没有悬垂指针等C++常见内存问题。</li>
-<li>和C++无缝集成：生成人类可读的C++代码。</li>
-<li>丰富的特性: 面向对象、空指针安全、动态反射、模板泛型、闭包、协程等特性。</li>
-<li>工具：VSCode插件和 LSP 支持。</li>
-</ul>
+                        <h1 id="安装"><a class="header" href="#安装">安装</a></h1>
+<p><a href="build.html">从源码构建</a></p>
+<h1 id="ide"><a class="header" href="#ide">IDE</a></h1>
+<ol>
+<li>在vscode插件市场中搜索'sric-language',并安装。</li>
+<li>在插件的设置页配置sricHome指向sric目录(bin的上一级)。</li>
+</ol>
+<p>配置好后重启vscode。如果有跳转到定义、自动完成、大纲视图等功能，说明配置成功。如果重新编译sric源码，需要先关闭vscode。</p>
+<h1 id="hello-world"><a class="header" href="#hello-world">Hello World</a></h1>
+<ol>
+<li>创建一个空文件夹作为工作空间</li>
+<li>创建文件main.sric，内容如下:</li>
+</ol>
+<pre><code>import cstd::*;
+
+fun main(): Int {
+    printf("Hello World\n");
+    return 0;
+}
+
+</code></pre>
+<ol start="3">
+<li>创建module.scm文件，内容如下:</li>
+</ol>
+<pre><code>name = hello
+summary = hello
+outType = exe
+version = 1.0
+depends = sric 1.0, cstd 1.0
+srcDirs = ./
+</code></pre>
+<ol start="4">
+<li>编译和运行</li>
+</ol>
+<pre><code>sric module.scm -fmake
+</code></pre>
+<p>构建debug版本:</p>
+<pre><code>sric module.scm -fmake -debug
+</code></pre>
+<ol>
+<li>运行</li>
+</ol>
+<p>编译后控制台会打印输出文件路径，加上引号来运行。例如:</p>
+<pre><code>'C:\Users\xxx\fmakeRepo\msvc\test-1.0-debug\bin\test'
+</code></pre>
+<h2 id="使用fmake构建"><a class="header" href="#使用fmake构建">使用fmake构建</a></h2>
+<p>不加-fmake构建后，只生成C++代码（位置在 "sric/output" 目录）。</p>
+<pre><code>sric hello.scm
+</code></pre>
+<p>然后再单独手动运行fmake编译:</p>
+<pre><code>fan fmake output/hello.fmake -debug
+</code></pre>
+<h2 id="调试"><a class="header" href="#调试">调试</a></h2>
+<p>可通过生成IDE项目来调试生成的C++代码。</p>
+<pre><code>fan fmake output/hello.fmake -debug -G
+</code></pre>
+<p>生成的项目文件在上层目录的build文件夹下。</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../start/build.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
-                            <a rel="next prefetch" href="intro/why.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../start/example.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -181,8 +231,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../start/build.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
-                    <a rel="next prefetch" href="intro/why.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../start/example.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
@@ -197,13 +250,13 @@
         </script>
 
 
-        <script src="elasticlunr.min.js"></script>
-        <script src="mark.min.js"></script>
-        <script src="searcher.js"></script>
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
 
-        <script src="clipboard.min.js"></script>
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
 

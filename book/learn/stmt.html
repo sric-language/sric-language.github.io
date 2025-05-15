@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>简介 - sric doc</title>
+        <title>语句和表达式 - sric doc</title>
 
 
         <!-- Custom HTML head -->
@@ -12,33 +12,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="highlight-css" href="highlight.css">
-        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
-        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
 
         <!-- Provide site root and default themes to javascript -->
         <script>
-            const path_to_root = "";
+            const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc.js"></script>
+        <script src="../toc.js"></script>
     </head>
     <body>
     <div id="body-container">
@@ -91,7 +91,7 @@
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
-                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
             </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -126,7 +126,7 @@
                     <h1 class="menu-title">sric doc</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
 
@@ -155,23 +155,82 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="sric编程语言"><a class="header" href="#sric编程语言">Sric编程语言</a></h2>
-<p>内存安全的高性能编程语言</p>
-<h3 id="特性"><a class="header" href="#特性">特性</a></h3>
+                        <h2 id="语句"><a class="header" href="#语句">语句</a></h2>
 <ul>
-<li>高性能：支持底层内存操作，没有垃圾收集器，和C++一样快。</li>
-<li>内存安全：没有内存泄漏、没有悬垂指针等C++常见内存问题。</li>
-<li>和C++无缝集成：生成人类可读的C++代码。</li>
-<li>丰富的特性: 面向对象、空指针安全、动态反射、模板泛型、闭包、协程等特性。</li>
-<li>工具：VSCode插件和 LSP 支持。</li>
+<li>所有语句使用分号结尾。</li>
+<li>不支持do while语句和goto语句，其他和C++一致。</li>
+<li>switch语句不支持自动贯穿，如果想贯穿需要用fallthrough关键字</li>
 </ul>
+<pre><code>switch (i) {
+    case 1:
+        fallthrough;
+    case 2:
+        printf("%d\n", i);
+}
+</code></pre>
+<h3 id="unsafe"><a class="header" href="#unsafe">Unsafe</a></h3>
+<p>在unsafe块中解引用裸指针</p>
+<pre><code>var p: *Int;
+...
+unsafe {
+    var i = *p;
+}
+</code></pre>
+<p>Unsafe 函数必须在unsafe块中调用</p>
+<pre><code>unsafe fun foo() { ... }
+
+fun main() {
+    unsafe {
+        foo();
+    }
+}
+</code></pre>
+<h2 id="表达式"><a class="header" href="#表达式">表达式</a></h2>
+<ul>
+<li>除了位运算的优先级外其他和C/C++相同，位运算优先级高于等于运算符。</li>
+</ul>
+<pre><code>if (i &amp; Mask != 0) {}
+//same as
+if ((i &amp; Mask) != 0) {}
+</code></pre>
+<ul>
+<li>只支持<code>++i</code>，不支持<code>i++</code></li>
+</ul>
+<h3 id="with块"><a class="header" href="#with块">With块</a></h3>
+<p>with块不是C++的命名初始化， 它可以包含任何语句.</p>
+<pre><code>struct A {
+    var i: Int;
+    fun init() { ... }
+}
+
+var a  = A { .init(); .i = 0; };
+var a: own* A = new A { .i = 0; };
+</code></pre>
+<h3 id="指针访问"><a class="header" href="#指针访问">指针访问</a></h3>
+<p>指针也通过<code>.</code>来访问，不用<code>-&gt;</code></p>
+<pre><code>var a: A;
+var b: own* A;
+a.foo();
+b.foo();
+</code></pre>
+<h3 id="类型转换和判断"><a class="header" href="#类型转换和判断">类型转换和判断:</a></h3>
+<p>as表达式用来做动态类型转换和数字类型转换。</p>
+<pre><code>var a = p as own* A;
+var b = p is own* A;
+</code></pre>
+<p>其他类型转换使用unsafeCast函数来完成。</p>
+<h2 id="异常处理"><a class="header" href="#异常处理">异常处理</a></h2>
+<p>Sric不支持异常处理，也不捕获C++异常。</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../learn/types.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
-                            <a rel="next prefetch" href="intro/why.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../learn/oo.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -181,8 +240,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../learn/types.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
-                    <a rel="next prefetch" href="intro/why.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../learn/oo.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
@@ -197,13 +259,13 @@
         </script>
 
 
-        <script src="elasticlunr.min.js"></script>
-        <script src="mark.min.js"></script>
-        <script src="searcher.js"></script>
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
 
-        <script src="clipboard.min.js"></script>
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
 

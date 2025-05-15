@@ -177,7 +177,7 @@ Sric语言大部分灵感来自C++，在C++基础上做了两件事情：</p>
 <h4 id="性能"><a class="header" href="#性能">性能</a></h4>
 <p>“现代计算机性能足够快”是个童年的谎言，硬件的发展远赶不上问题复杂度的增长。我遇到的每个行业都有性能问题。要解决性能问题，首先就不能有GC。有垃圾收集的语言始终存在隐形的性能天花板。需要有底层内存操作的能力，并且能灵活的在栈中分配内存，这是高性能语言需要具备的条件。Sric从设计之初就拥有和C/C++一样的性能。</p>
 <h4 id="内存安全"><a class="header" href="#内存安全">内存安全</a></h4>
-<p>内存安全和性能是可兼得的。但Rust的机制却限制了代码的功能，强迫用户编写复杂且低效的代码，并增加了学习成本。Sric则采用了另一种方式，对开发者来说不需要做任何事情就能获得内存安全。<a href="memory.html">Sric内存安全原理</a></p>
+<p>内存安全和性能是可兼得的。但Rust的机制却限制了代码的功能，强迫用户编写复杂且低效的代码，并增加了学习成本。Sric则采用了另一种方式，对开发者来说不需要做任何事情就能获得内存安全。<a href="intro/memory.html">Sric内存安全原理</a></p>
 <h4 id="抽象能力"><a class="header" href="#抽象能力">抽象能力</a></h4>
 <p>面向对象是编程语言抽象能力的重要表现。尽管由于滥用继承导致现今人们对面向对象有些不好的印象，但我觉得面向对象在某些场合还是有用的。并且从语言上对继承做了一些限制。</p>
 <h4 id="简单和容易"><a class="header" href="#简单和容易">简单和容易</a></h4>
@@ -451,7 +451,7 @@ struct Point {
 <p>内存安全包括很多方面。数组越界、空指针、未初始化指针等，这些加简单的检查即可。因为使用所有权机制，也不存在内存泄漏、双重释放等问题。所以内存安全核心问题是怎么检测悬垂指针。Sric的非所有权指针负责主要的内存检测任务。</p>
 <p>在Sric中非所有权指针是一个胖指针，它包括实际指针以及一个检测码等内容。对象内存内部也有一个相同的检测码。在创建指针的时候，指针的检测码和对象的检测码是一致的。当内存释放时，这个检测码被赋0。每次在使用指针时对比指针的检测码和对象的检测码是否相同，如果不同则说明对象内存已经释放掉了。这时候及时报错，不让错误传播到其他地方，这样很容易定位到问题。</p>
 <p>虽然原理比较简单，但是需要考虑衍生指针怎么处理（指针指向内存中部，而不是内存头）、内存数组怎么处理、堆上分配和栈上分配怎么处理、非合作对象怎么处理（C++中定义的类没有地方存检测码）。幸运的是Sric已经把大部分问题都解决了。</p>
-<p>Address Sanitizer也被用来做内存安全检测。但Address Sanitizer没法检测内存释放以后又被重新分配给其他对象的情况，还有指针指向数组预分配内存的情况会漏检。Address Sanitizer的内存占用和运行开销也比较大。相比起来Sric检查的更全面，运行时开销非常小，没有平台限制。</p>
+<p>Address Sanitizer也被用来做内存安全检测。但Address Sanitizer没法检测内存释放以后又被重新分配给其他对象的情况。Address Sanitizer的内存占用和运行开销也比较大。还有不能跨平台，第三方库等重新编译等问题。相比起来Sric检查的更全面，运行时开销非常小，没有平台限制。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="安装"><a class="header" href="#安装">安装</a></h1>
 <h3 id="1安装需要的软件"><a class="header" href="#1安装需要的软件">1.安装需要的软件</a></h3>
 <ul>
@@ -488,7 +488,7 @@ sh build_debug.sh
 </code></pre>
 <p>添加sric的"bin"目录到你的环境变量（配置完环境变量需要重启git bash）</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="安装-1"><a class="header" href="#安装-1">安装</a></h1>
-<p><a href="build.html">从源码构建</a></p>
+<p><a href="start/build.html">从源码构建</a></p>
 <h1 id="ide"><a class="header" href="#ide">IDE</a></h1>
 <ol>
 <li>在vscode插件市场中搜索'sric-language',并安装。</li>
@@ -662,7 +662,9 @@ readonly var i: Int = 0;
 <li>protected表示当前模块内可见，或者继承的子类可见。</li>
 <li>readonly只能用来修饰变量，不能修饰函数。表示公开读，私有写。</li>
 </ul>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="指针"><a class="header" href="#指针">指针</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="值类型"><a class="header" href="#值类型">值类型</a></h2>
+<p>Sric中变量默认是值类型的，值类型在传递和赋值的时候会自动拷贝。而指针类型在传递和赋值的时候只拷贝了指针本身，指针指向的对象没有被拷贝。</p>
+<h2 id="指针"><a class="header" href="#指针">指针</a></h2>
 <ul>
 <li>指针分为所有权指针、非所有权指针、裸指针。</li>
 <li>和C/C++不同的是，指针的＊号放在类型的前方。</li>
@@ -673,8 +675,7 @@ var p: * Int;          //非所有权指针
 var p: &amp; Int;          //引用
 var p: raw* Int;       //裸指针
 </code></pre>
-<h4 id="值类型"><a class="header" href="#值类型">值类型</a></h4>
-<p>Sric中变量默认是值类型的，值类型在传递和赋值的时候会自动拷贝。而指针类型在传递和赋值的时候只拷贝了指针本身，指针指向的对象没有被拷贝。</p>
+<p>Sric也有和C++类似的一系列智能指针，以库的形式提供。包括UniquePtr、SharedPtr、WeakPtr等，见标准库相关章节的描述。</p>
 <h4 id="内存分配"><a class="header" href="#内存分配">内存分配</a></h4>
 <p>指针可以通过值类型取地址获得，但更常用的是通过new关键字在堆上分配内存。</p>
 <pre><code>var i: own* Int = new Int;
@@ -706,13 +707,20 @@ unsafe {
     var i = *p;
 }
 </code></pre>
-<p>本地字段取地址后为非所有权指针(数组除外）。</p>
+<h2 id="取地址"><a class="header" href="#取地址">取地址</a></h2>
+<p>值类型取地址运算后获得其指针。本地字段取地址后为非所有权指针(数组除外）。</p>
 <pre><code>var i: Int = 0;
 var p: *Int = &amp;i;
 </code></pre>
 <p>其他类型的指针可以自动转为裸指针类型。</p>
-<h4 id="指针运算"><a class="header" href="#指针运算">指针运算</a></h4>
+<h2 id="指针运算"><a class="header" href="#指针运算">指针运算</a></h2>
 <p>只有裸指针才能进行指针运算。指针运算只能在unsafe块，或者unsafe函数中进行。</p>
+<pre><code>var p : raw* Int = ...;
+unsafe {
+    ++p;
+    p = p + 2;
+}
+</code></pre>
 <h2 id="引用"><a class="header" href="#引用">引用</a></h2>
 <p>引用的概念同C++，但在sric中引用只能用在函数参数和返回值中。</p>
 <pre><code>fun foo(a: &amp; const Int) {
@@ -737,7 +745,7 @@ var a: [size]Int;
 var a: own* B = null; //compile error
 </code></pre>
 <p>在可空指针转为不可空时，编译器会自动插入空指针检查。</p>
-<p>只有指针能为空，其他值类型不可以为空。</p>
+<p>只有指针能为空，其他值类型和引用不可以为空。</p>
 <h2 id="不可变性-1"><a class="header" href="#不可变性-1">不可变性</a></h2>
 <p>和C++类似，const可以修饰指针本身，也可以修饰指针所指对象。</p>
 <pre><code>var p : raw* const Int;
@@ -954,18 +962,29 @@ foo(fun(a:Int):Int{
 });
 </code></pre>
 <p>暂不支持闭包的返回类型推断，需要显式制定返回类型。</p>
-<p>默认通过值来捕获外部变量，不支持C++类似的引用捕获。</p>
+<p>默认通过值来捕获外部变量。</p>
 <pre><code>var i = 0;
 var f = fun(a:Int):Int{
     return a + i;
 };
 </code></pre>
-<p>如果想引用捕获，可以自己取地址。</p>
+<h2 id="引用捕获"><a class="header" href="#引用捕获">引用捕获</a></h2>
+<p>不支持C++的引用捕获。如果想引用捕获，可以自己取地址。</p>
 <pre><code>var i = 0;
 var ri = &amp;i;
 var f = fun(a:Int):Int{
     return a + *ri;
 };
+</code></pre>
+<h2 id="移动捕获"><a class="header" href="#移动捕获">移动捕获</a></h2>
+<p>不支持C++的移动捕获。AutoMove用来包装对象，避免显示使用move指令。可用用来让闭包不过不可拷贝对象：</p>
+<pre><code>var arr: DArray;
+var autoMove = AutoMove { .set(arr); };
+
+var f = fun() {
+    var s = autoMove.get().size();
+}
+
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="操作符重载-1"><a class="header" href="#操作符重载-1">操作符重载</a></h3>
 <pre><code>struct A {
@@ -1019,7 +1038,7 @@ import sric::DArray;
 <li>jsonc: JSON解析和压缩库</li>
 <li>serial： 序列化库，基于动态反射功能。</li>
 </ul>
-<p><a href="/apidoc.html">标准库文档</a></p>
+<p><a href="stdlib//apidoc.html">标准库文档</a></p>
 <h3 id="使用c语言库"><a class="header" href="#使用c语言库">使用C语言库</a></h3>
 <p>cstd模块只导出了一部分常用的C函数，期待您的补充。</p>
 <p>如果使用到没有导出的C语言库，可自行导出。例如:</p>
@@ -1030,7 +1049,7 @@ fun main() {
 }
 </code></pre>
 <p>使用externc声明即可。宏按照const变量来声明。
-更多请参见<a href="cpp.html">C++交互</a>。</p>
+更多请参见<a href="stdlib/cpp.html">C++交互</a>。</p>
 <h3 id="string"><a class="header" href="#string">String</a></h3>
 <p>在Sric中字符串是raw* const Int8类型的，可以自动转为String类型。</p>
 <pre><code>var str: String = "abc";
@@ -1065,6 +1084,30 @@ stream.writeStr("Hello\nWorld");
 var line = stream.readAllStr();
 </code></pre>
 <p>第二个参数的含义，参见C语言的fopen函数。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="智能指针"><a class="header" href="#智能指针">智能指针</a></h1>
+<p>Sric提高了类似与C++的一组智能指针。包括UniquePtr、SharedPtr、WeakPtr等。</p>
+<h2 id="uniqueptr"><a class="header" href="#uniqueptr">UniquePtr</a></h2>
+<p>尽管own<em>性能已经接近裸指针，但有些性能敏感的情况下推荐使用UniquePtr。相比于own</em>，UniquePtr是零开销的。UniquePtr的限制是同时只能有一个所有者，没有类似与own*的share功能。
+UniquePtr使用makeUnique函数来创建。</p>
+<pre><code>var p : UniquePtr&lt;Int&gt; = makeUnique$&lt;Int&gt;();
+</code></pre>
+<h2 id="sharedptr"><a class="header" href="#sharedptr">SharedPtr</a></h2>
+<p>SharedPtr是自动引用计数的，有一定的开销。可从现有的own*获取。例如:</p>
+<pre><code>var p = new Int;
+var sp: SharedPtr$&lt;Int&gt; = toShared(p);
+</code></pre>
+<p>SharedPtr可通own*相互转换:</p>
+<pre><code>var p = sharedPtr.getOwn();
+sharedPtr.set(p);
+</code></pre>
+<h2 id="weakptr"><a class="header" href="#weakptr">WeakPtr</a></h2>
+<p>使用own*和SharedPtr都可能产生循环引用，导致内存泄漏。可使用WeakPtr来打破循环引用。</p>
+<pre><code>var p = new Int;
+var wp: WeakPtr$&lt;Int&gt; = toWeak(p);
+</code></pre>
+<p>使用时通过lock方法转化为own*，然后进行使用。</p>
+<pre><code>var sp : own* Int = wp.lock();
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="反射"><a class="header" href="#反射">反射</a></h3>
 <p>默认不启用反射，需要手动添加reflect标记。</p>
 <pre><code>reflect struct Point {

@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>简介 - sric doc</title>
+        <title>为什么使用Sric - sric doc</title>
 
 
         <!-- Custom HTML head -->
@@ -12,33 +12,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" id="highlight-css" href="highlight.css">
-        <link rel="stylesheet" id="tomorrow-night-css" href="tomorrow-night.css">
-        <link rel="stylesheet" id="ayu-highlight-css" href="ayu-highlight.css">
+        <link rel="stylesheet" id="highlight-css" href="../highlight.css">
+        <link rel="stylesheet" id="tomorrow-night-css" href="../tomorrow-night.css">
+        <link rel="stylesheet" id="ayu-highlight-css" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
 
         <!-- Provide site root and default themes to javascript -->
         <script>
-            const path_to_root = "";
+            const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc.js"></script>
+        <script src="../toc.js"></script>
     </head>
     <body>
     <div id="body-container">
@@ -91,7 +91,7 @@
             <!-- populated by js -->
             <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
             <noscript>
-                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
             </noscript>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle">
                 <div class="sidebar-resize-indicator"></div>
@@ -126,7 +126,7 @@
                     <h1 class="menu-title">sric doc</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
 
@@ -155,23 +155,36 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="sric编程语言"><a class="header" href="#sric编程语言">Sric编程语言</a></h2>
-<p>内存安全的高性能编程语言</p>
-<h3 id="特性"><a class="header" href="#特性">特性</a></h3>
-<ul>
-<li>高性能：支持底层内存操作，没有垃圾收集器，和C++一样快。</li>
-<li>内存安全：没有内存泄漏、没有悬垂指针等C++常见内存问题。</li>
-<li>和C++无缝集成：生成人类可读的C++代码。</li>
-<li>丰富的特性: 面向对象、空指针安全、动态反射、模板泛型、闭包、协程等特性。</li>
-<li>工具：VSCode插件和 LSP 支持。</li>
-</ul>
+                        <h2 id="为什么要用sric"><a class="header" href="#为什么要用sric">为什么要用Sric</a></h2>
+<p>Sric是内存安全的高新性能编程语言。
+Sric语言大部分灵感来自C++，在C++基础上做了两件事情：</p>
+<ol>
+<li>减少特性、减少复杂性。</li>
+<li>增加内存安全性。</li>
+</ol>
+<h3 id="设计哲学"><a class="header" href="#设计哲学">设计哲学</a></h3>
+<h4 id="性能"><a class="header" href="#性能">性能</a></h4>
+<p>“现代计算机性能足够快”是个童年的谎言，硬件的发展远赶不上问题复杂度的增长。我遇到的每个行业都有性能问题。要解决性能问题，首先就不能有GC。有垃圾收集的语言始终存在隐形的性能天花板。需要有底层内存操作的能力，并且能灵活的在栈中分配内存，这是高性能语言需要具备的条件。Sric从设计之初就拥有和C/C++一样的性能。</p>
+<h4 id="内存安全"><a class="header" href="#内存安全">内存安全</a></h4>
+<p>内存安全和性能是可兼得的。但Rust的机制却限制了代码的功能，强迫用户编写复杂且低效的代码，并增加了学习成本。Sric则采用了另一种方式，对开发者来说不需要做任何事情就能获得内存安全。<a href="memory.html">Sric内存安全原理</a></p>
+<h4 id="抽象能力"><a class="header" href="#抽象能力">抽象能力</a></h4>
+<p>面向对象是编程语言抽象能力的重要表现。尽管由于滥用继承导致现今人们对面向对象有些不好的印象，但我觉得面向对象在某些场合还是有用的。并且从语言上对继承做了一些限制。</p>
+<h4 id="简单和容易"><a class="header" href="#简单和容易">简单和容易</a></h4>
+<p>C++和Rust都走到了这条的对立面，企图用复杂的特性覆盖所有。Sric则试图尽可能减少特性，避免复杂性。例如没有C++的各种版本构造函数、没有函数重载、没有模板元编程、没有多继承， 没有Rust的宏、复杂的包模块机制、生命期标注等。</p>
+<p>Sric并不致力于提供语法糖。过多的语法糖会提高学习成本，有时候反而降低可读性。语法糖不是越多越好，而是权衡学习成本和收益。</p>
+<h4 id="c交互"><a class="header" href="#c交互">C++交互</a></h4>
+<p>Sric能够与C++无缝隙交互，它能生成人类可读的C++代码。C++和C历史悠久，有大量优秀的第三方库。Sric可以融入C++生态，轻松调用遗产代码，或者非常容易的调用操作系统API。</p>
+<p>并且Sric代码也可以容易的被C++语言调用，这样能与不愿意学习Sric的开发者更好的协作。例如我们可以内部使用Sric开发，对外部提供C++接口。</p>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../intro/intro.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
-                            <a rel="next prefetch" href="intro/why.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../intro/Tour.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -181,8 +194,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../intro/intro.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
-                    <a rel="next prefetch" href="intro/why.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../intro/Tour.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
@@ -197,13 +213,13 @@
         </script>
 
 
-        <script src="elasticlunr.min.js"></script>
-        <script src="mark.min.js"></script>
-        <script src="searcher.js"></script>
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
 
-        <script src="clipboard.min.js"></script>
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
 
