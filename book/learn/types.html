@@ -183,6 +183,7 @@ var p: raw* Int;       //裸指针
 var p2 = move p1;
 var p3 = share(p1);
 </code></pre>
+<p>own指针不是唯一所有权的。使用share函数，从一个所有权指针分裂出新的所有权指针，多个指针指向同一个内存地址。</p>
 <h4 id="非所有权指针"><a class="header" href="#非所有权指针">非所有权指针</a></h4>
 <ul>
 <li>非所有权指针使用没有限制，不会像Rust一样有很多限制。</li>
