@@ -210,7 +210,9 @@
     <div class="typefield"></div>
     <div class="typefunc"><div class="func" id="set"><p class="funcinfo"><span class="kind">fun</span><span class="name">set</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">p : </span><span class="type">own*? T</span></span>)</span><span class="flags"></span><span class="returnType"> : Void</span></p></div>
     <div class="func" id="getOwn"><p class="funcinfo"><span class="kind">fun</span><span class="name">getOwn</span><span class="flags"></span><span class="prams">()</span><span class="flags"></span><span class="returnType"> : own*? T</span></p></div>
-    <div class="func" id="get"><p class="funcinfo"><span class="kind">fun</span><span class="name">get</span><span class="flags"></span><span class="prams">()</span><span class="flags"></span><span class="returnType"> : *? T</span></p></div>
+    <div class="func" id="getPtr"><p class="funcinfo"><span class="kind">fun</span><span class="name">getPtr</span><span class="flags"></span><span class="prams">()</span><span class="flags"></span><span class="returnType"> : *? T</span></p></div>
+    <div class="func" id="get"><p class="funcinfo"><span class="kind">fun</span><span class="name">get</span><span class="flags"></span><span class="prams">()</span><span class="flags"></span><span class="returnType"> : &T</span></p></div>
+    <div class="func" id="isNull"><p class="funcinfo"><span class="kind">fun</span><span class="name">isNull</span><span class="flags"></span><span class="prams">()</span><span class="flags"></span><span class="returnType"> : Bool</span></p></div>
     </div>
 
 </div><div class="typedef" id="UniquePtr"><p class="typeinfo"><span class="kind">struct</span><span class="name">UniquePtr</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span></p>
@@ -218,8 +220,10 @@
 * smart pointer with unique object ownership semantics
 </div>
     <div class="typefield"></div>
-    <div class="typefunc"><div class="func" id="get"><p class="funcinfo"><span class="kind">fun</span><span class="name">get</span><span class="flags"></span><span class="prams">()</span><span class="flags"></span><span class="returnType"> : *? T</span></p></div>
+    <div class="typefunc"><div class="func" id="get"><p class="funcinfo"><span class="kind">fun</span><span class="name">get</span><span class="flags"></span><span class="prams">()</span><span class="flags"></span><span class="returnType"> : &T</span></p></div>
+    <div class="func" id="getPtr"><p class="funcinfo"><span class="kind">fun</span><span class="name">getPtr</span><span class="flags"></span><span class="prams">()</span><span class="flags"></span><span class="returnType"> : *? T</span></p></div>
     <div class="func" id="getRaw"><p class="funcinfo"><span class="kind">fun</span><span class="name">getRaw</span><span class="flags"></span><span class="prams">()</span><span class="flags"></span><span class="returnType"> : raw*? T</span></p></div>
+    <div class="func" id="isNull"><p class="funcinfo"><span class="kind">fun</span><span class="name">isNull</span><span class="flags"></span><span class="prams">()</span><span class="flags"></span><span class="returnType"> : Bool</span></p></div>
     </div>
 
 </div><div class="func" id="makeUnique"><p class="funcinfo"><span class="kind">fun</span><span class="name">makeUnique</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">()</span><span class="flags"></span><span class="returnType"> : sric::UniquePtr$<T></span></p></div>

@@ -162,8 +162,9 @@
 <ul>
 <li>高性能：支持底层内存操作，没有垃圾收集器，和C++一样快。</li>
 <li>内存安全：没有内存泄漏、没有悬垂指针等C++常见内存问题。</li>
-<li>和C++无缝集成：生成人类可读的C++代码。</li>
-<li>丰富的特性: 面向对象、空指针安全、动态反射、模板泛型、闭包、协程等特性。</li>
+<li>容易学习：比C++和Rust简单很多。</li>
+<li>和C++交互：生成人类可读的C++代码。</li>
+<li>丰富的特性：面向对象、空指针安全、动态反射、模板泛型、闭包、协程等特性。</li>
 <li>工具：VSCode插件和 LSP 支持。</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="为什么要用sric"><a class="header" href="#为什么要用sric">为什么要用Sric</a></h2>
@@ -362,6 +363,13 @@ var c = Color::red;
 
 fun main() {
     foo(a : 10);
+}
+</code></pre>
+<h3 id="协程"><a class="header" href="#协程">协程</a></h3>
+<pre><code>async fun test2() : Int {
+    var i = 0;
+    i = await testCallback();
+    return i + 1;
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="从c到sric"><a class="header" href="#从c到sric">从C++到Sric</a></h2>
@@ -973,6 +981,10 @@ var f = fun(a:Int):Int{
     return a + i;
 };
 </code></pre>
+<h2 id="静态闭包"><a class="header" href="#静态闭包">静态闭包</a></h2>
+<p>静态闭包指无状态的闭包，用static修饰，等于函数指针。</p>
+<pre><code>var f : fun(a:Int) static : Int;
+</code></pre>
 <h2 id="引用捕获"><a class="header" href="#引用捕获">引用捕获</a></h2>
 <p>不支持C++的引用捕获。如果想引用捕获，可以自己取地址。</p>
 <pre><code>var i = 0;
@@ -1127,7 +1139,7 @@ reflect struct Point {
     var y: Int;
 }
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="协程"><a class="header" href="#协程">协程</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="协程-1"><a class="header" href="#协程-1">协程</a></h2>
 <p>Sric的协程和Javascript的几乎完全一致，下面是协程的例子：</p>
 <pre><code>async fun test2() : Int {
     var i = 0;

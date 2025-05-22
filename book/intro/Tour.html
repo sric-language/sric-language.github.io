@@ -333,6 +333,13 @@ fun main() {
     foo(a : 10);
 }
 </code></pre>
+<h3 id="协程"><a class="header" href="#协程">协程</a></h3>
+<pre><code>async fun test2() : Int {
+    var i = 0;
+    i = await testCallback();
+    return i + 1;
+}
+</code></pre>
 
                     </main>
 
