@@ -155,7 +155,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h2 id="闭包"><a class="header" href="#闭包">闭包</a></h2>
+                        <h2 id="闭包lambda"><a class="header" href="#闭包lambda">闭包/Lambda</a></h2>
 <p>匿名函数使用fun关键字定义</p>
 <pre><code>fun foo(f: fun(a:Int):Int) {
     f(1);
@@ -166,7 +166,8 @@ foo(fun(a:Int):Int{
     return a + 1;
 });
 </code></pre>
-<p>暂不支持闭包的返回类型推断，需要显式制定返回类型。</p>
+<p>暂不支持闭包的返回类型推断，需要显式指定返回类型。</p>
+<h2 id="捕获变量"><a class="header" href="#捕获变量">捕获变量</a></h2>
 <p>默认通过值来捕获外部变量。</p>
 <pre><code>var i = 0;
 var f = fun(a:Int):Int{
@@ -174,7 +175,7 @@ var f = fun(a:Int):Int{
 };
 </code></pre>
 <h2 id="静态闭包"><a class="header" href="#静态闭包">静态闭包</a></h2>
-<p>静态闭包指无状态的闭包，用static修饰，等于函数指针。</p>
+<p>静态闭包指无状态的闭包，用static修饰。不可捕获变量。</p>
 <pre><code>var f : fun(a:Int) static : Int;
 </code></pre>
 <h2 id="引用捕获"><a class="header" href="#引用捕获">引用捕获</a></h2>
@@ -186,7 +187,7 @@ var f = fun(a:Int):Int{
 };
 </code></pre>
 <h2 id="移动捕获"><a class="header" href="#移动捕获">移动捕获</a></h2>
-<p>不支持C++的移动捕获。AutoMove用来包装对象，避免显示使用move指令。可用用来让闭包不过不可拷贝对象：</p>
+<p>不支持C++的移动捕获。AutoMove用来包装对象，避免显式使用move指令：</p>
 <pre><code>var arr: DArray;
 var autoMove = AutoMove { .set(arr); };
 

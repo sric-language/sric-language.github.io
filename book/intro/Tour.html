@@ -296,12 +296,12 @@ add        a,b,c;
 <p>模块是命名空间，也是编译单元和部署单元。</p>
 <p>一个模块包含好多源文件和文件夹.</p>
 <p>模块通过构建脚本来定义:</p>
-<pre><code>name = std
-summary = standard library
-outType = lib
+<pre><code>name = hello
+summary = hello
+outType = exe
 version = 1.0
-depends = sys 1.0
-srcDirs = src/
+depends = sric 1.0, cstd 1.0
+srcDirs = ./
 </code></pre>
 <p>在代码里面导入外部模块:</p>
 <pre><code>import std::*;

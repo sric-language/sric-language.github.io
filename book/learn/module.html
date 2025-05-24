@@ -156,15 +156,15 @@
                 <div id="content" class="content">
                     <main>
                         <h2 id="模块化"><a class="header" href="#模块化">模块化</a></h2>
-<p>每个语言对模块的定义都有点不太一样，sric中模块既是命名空间，也是编译单元，也是部署单元。</p>
+<p>sric中模块既是命名空间，也是编译单元，也是部署单元。软件由多个相互依赖的模块组成。</p>
 <h3 id="模块定义"><a class="header" href="#模块定义">模块定义</a></h3>
 <p>模块通过构建脚本来定义，构建脚本以scm为扩展名:</p>
-<pre><code>name = demo
-summary = demo library
-outType = lib
+<pre><code>name = hello
+summary = hello
+outType = exe
 version = 1.0
-depends = sys 1.0
-srcDirs = src/
+depends = sric 1.0, cstd 1.0
+srcDirs = ./
 </code></pre>
 <p>源码目录srcDirs需要以<code>/</code>结尾，编译器会自动搜索目录下的所有.sric文件。</p>
 <h3 id="模块导入"><a class="header" href="#模块导入">模块导入</a></h3>

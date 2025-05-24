@@ -155,19 +155,23 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h3 id="泛型"><a class="header" href="#泛型">泛型</a></h3>
-<p>泛型和C++不同的是使用'$&lt;'开头，这是为了消除泛型参数和小于运算符的歧义。</p>
+                        <h2 id="模板"><a class="header" href="#模板">模板</a></h2>
+<h3 id="模板定义"><a class="header" href="#模板定义">模板定义</a></h3>
+<p>模板和C++不同的是使用'$&lt;'开头，这是为了消除泛型参数和小于运算符的歧义。</p>
 <pre><code>struct Tree$&lt;T&gt; {
 }
 </code></pre>
-<p>泛型参数可以有示例类型，编译时以示例类型来做类型检查。</p>
-<pre><code>private struct Compareable$&lt;T&gt; {
-    operator fun compare(t: *T): Int;
+<p>模板参数可以有示例类型，编译时以示例类型来做类型检查。例如:</p>
+<pre><code>abstract struct Linkable$&lt;T&gt; {
+    var next: own*? T;
+    var previous: *? T;
 }
-strcut Tree$&lt;T : Compareable&gt; {
+
+struct LinkedList$&lt;T: Linkable$&lt;T&gt;&gt; {
 }
 </code></pre>
-<p>泛型模板实例化时，可以传入任意满足示例类型的类型。不需要继承示例类型。</p>
+<h3 id="模板实例化"><a class="header" href="#模板实例化">模板实例化</a></h3>
+<p>泛型模板实例化时，可以传入任意满足示例类型的类型。</p>
 <pre><code>var tree = Tree$&lt;Int&gt; {};
 </code></pre>
 

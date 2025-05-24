@@ -328,12 +328,12 @@ add        a,b,c;
 <p>模块是命名空间，也是编译单元和部署单元。</p>
 <p>一个模块包含好多源文件和文件夹.</p>
 <p>模块通过构建脚本来定义:</p>
-<pre><code>name = std
-summary = standard library
-outType = lib
+<pre><code>name = hello
+summary = hello
+outType = exe
 version = 1.0
-depends = sys 1.0
-srcDirs = src/
+depends = sric 1.0, cstd 1.0
+srcDirs = ./
 </code></pre>
 <p>在代码里面导入外部模块:</p>
 <pre><code>import std::*;
@@ -607,9 +607,12 @@ fun main(): Int {
 <pre><code>var c : Int8 = 'A';
 </code></pre>
 <h3 id="注释"><a class="header" href="#注释">注释</a></h3>
-<p>普通注释</p>
+<p>单行注释</p>
 <pre><code>//comment
-/*
+
+</code></pre>
+<p>多行注释</p>
+<pre><code>/*
  comment
 */
 </code></pre>
@@ -644,7 +647,6 @@ fun main(): Int {
 <li>函数使用fun开始</li>
 <li>返回值是Void时，可省略返回值</li>
 <li>函数的名称必须是唯一值的，不支持通过参数重载</li>
-<li>函数的参数默认是不可变的</li>
 </ul>
 <pre><code>fun foo(a: Int): Int { return 0; }
 fun foo2() {}
@@ -695,7 +697,7 @@ var p: raw* Int;       //裸指针
 <p>new后面的类型没有括号（因为Sric不支持有参构造函数）。new分配的对象为所有权指针。</p>
 <h4 id="所有权指针"><a class="header" href="#所有权指针">所有权指针</a></h4>
 <ul>
-<li>所有权指针表示拥有所指对象，在作用域消失时需要释放对象。</li>
+<li>所有权指针表示拥有所指对象，在作用域结束时自动释放对象。</li>
 <li>传递或者赋值所有权指针时需要显式移动或者拷贝。</li>
 </ul>
 <pre><code>var p1: own* Int = ...;
@@ -705,7 +707,7 @@ var p3 = share(p1);
 <p>使用share函数，从一个所有权指针分裂出新的所有权指针，多个指针指向同一个内存地址。</p>
 <h4 id="非所有权指针"><a class="header" href="#非所有权指针">非所有权指针</a></h4>
 <ul>
-<li>非所有权指针使用没有限制，不会像Rust一样有很多限制。</li>
+<li>非所有权指针使用没有限制，不会像Rust那样有借用限制。</li>
 <li>程序会在运行时检查所引用的对象是否有效。</li>
 <li>所有权指针可以自动转换成非所有权指针和裸指针。</li>
 </ul>
@@ -720,12 +722,12 @@ unsafe {
     var i = *p;
 }
 </code></pre>
+<p>其他类型的指针可以自动转为裸指针类型。</p>
 <h2 id="取地址"><a class="header" href="#取地址">取地址</a></h2>
 <p>值类型取地址运算后获得其指针。本地字段取地址后为非所有权指针(数组除外）。</p>
 <pre><code>var i: Int = 0;
 var p: *Int = &amp;i;
 </code></pre>
-<p>其他类型的指针可以自动转为裸指针类型。</p>
 <h2 id="指针运算"><a class="header" href="#指针运算">指针运算</a></h2>
 <p>只有裸指针才能进行指针运算。指针运算只能在unsafe块，或者unsafe函数中进行。</p>
 <pre><code>var p : raw* Int = ...;
@@ -739,6 +741,7 @@ unsafe {
 <pre><code>fun foo(a: &amp; const Int) {
 }
 </code></pre>
+<p>引用可以理解为自动解引用的指针。给引用赋值会修改原始的内容。</p>
 <h2 id="数组-1"><a class="header" href="#数组-1">数组</a></h2>
 <p>数组特指静态大小数组。如果需要动态数组，请参考标准库中的DArray。
 数组的括号写在类型前面</p>
@@ -747,18 +750,18 @@ unsafe {
 <p>数组初始化时可以省略数组大小，由编译器自动推断</p>
 <pre><code>var a = []Int { 1,3,4 };
 </code></pre>
-<p>为了能通过变量指定数组大小，特意增加了constexpr关键字。</p>
+<p>数组大小也可用constexpr变量来指定。</p>
 <pre><code>constexpr var size: const Int = 15;
 var a: [size]Int;
 </code></pre>
-<p>目前constexpr只能赋值字面量，远没有C++的constexpr强大，待改进。</p>
+<p>目前constexpr变量只能通过字面量初始化。</p>
 <h2 id="空指针安全"><a class="header" href="#空指针安全">空指针安全</a></h2>
-<p>指针默认是不可以为null的，除非特殊声明。</p>
+<p>指针默认是不可以为null的，除非加问号声明。</p>
 <pre><code>var a: own*? B = null;
 var a: own* B = null; //compile error
 </code></pre>
-<p>在可空指针转为不可空时，编译器会自动插入空指针检查。</p>
-<p>只有指针能为空，其他值类型和引用不可以为空。</p>
+<p>在必要时编译器会自动插入空指针检查，以保证空指针安全。</p>
+<p>只有指针可以赋值为null，值类型和引用不能为空。</p>
 <h2 id="不可变性-1"><a class="header" href="#不可变性-1">不可变性</a></h2>
 <p>和C++类似，const可以修饰指针本身，也可以修饰指针所指对象。</p>
 <pre><code>var p : raw* const Int;
@@ -840,7 +843,7 @@ var b = p is own* A;
 }
 var p = Point { .y = 1; };
 </code></pre>
-<p>初始化的语法叫做with块，不同于C的命名初始化。with块可以保护任何语句，并且可以用在非初始化场景。例如</p>
+<p>初始化的语法叫做with块，不同于C的命名初始化。with块可以包含任何语句，并且可以用在非初始化场景。例如</p>
 <pre><code>var point = Point { .y = 1; };
 point {
     .x = 2; if (a) { .y = 3; }
@@ -861,7 +864,7 @@ var p = Point { .init(1); };
 <ul>
 <li>类型可以由方法，非静态成员函数，有一个隐藏的this指针。</li>
 <li>方法必须出现在数据成员之后。</li>
-<li>this的可变性修饰在函数后部，返回类型之前，例如:</li>
+<li>this的可变性修饰在函数名称后，例如:</li>
 </ul>
 <pre><code>struct Point {
     fun length() const : Float {
@@ -869,7 +872,7 @@ var p = Point { .init(1); };
     }
 }
 </code></pre>
-<p>struct可以包含静态函数，但不能保护静态字段。静态函数没有隐式的this指针。</p>
+<p>struct可以包含静态函数和字段。静态函数没有隐式的this指针。</p>
 <pre><code>strcut Point {
     static fun foo() {
     }
@@ -928,42 +931,42 @@ fun foo(c: Color) {}
 
 foo(Color::Red);
 </code></pre>
-<p>并且可以可选的设置为一个整数值。</p>
-<h2 id="联合体"><a class="header" href="#联合体">联合体</a></h2>
-<p>sric暂不支持union。可以使用强制类型转换来替代。</p>
-<pre><code>struct U {
-    var data: [8]Int8;
+<p>可以设置大小:</p>
+<pre><code>enum Color : UInt8 {
+    Red, Green = 2, Blue
 }
-
-var i = unsafeCast$&lt;raw*Int&gt;(&amp;u.data);
-
 </code></pre>
-<p>或者使用继承多态来满足需求。</p>
+<h2 id="联合体"><a class="header" href="#联合体">联合体</a></h2>
+<p>sric暂不支持union。可使用继承多态来满足需求。</p>
 <h2 id="不安全结构"><a class="header" href="#不安全结构">不安全结构</a></h2>
-<p>unsafe结构完全和对应的C++类一致，不包含安全检查需要的标记位。extern结构默认是unsafe的。
-unsafe里的this的类型是裸指针，而不是安全指针。如果对象是独立分配的，可以通过rawToRef转为安全指针。</p>
+<p>unsafe结构完全和对应的C++类一致，不包含安全检查需要的标记位。extern结构默认是unsafe的。</p>
+<p>unsafe里的this的类型是裸指针，而不是安全指针。如果对象是独立用new关键字分配的，可以通过rawToRef转为安全指针。</p>
 <pre><code>unsafe struct A {
     fun foo() {
         var self = rawToRef(this);
     }
 }
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h3 id="泛型"><a class="header" href="#泛型">泛型</a></h3>
-<p>泛型和C++不同的是使用'$&lt;'开头，这是为了消除泛型参数和小于运算符的歧义。</p>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="模板"><a class="header" href="#模板">模板</a></h2>
+<h3 id="模板定义"><a class="header" href="#模板定义">模板定义</a></h3>
+<p>模板和C++不同的是使用'$&lt;'开头，这是为了消除泛型参数和小于运算符的歧义。</p>
 <pre><code>struct Tree$&lt;T&gt; {
 }
 </code></pre>
-<p>泛型参数可以有示例类型，编译时以示例类型来做类型检查。</p>
-<pre><code>private struct Compareable$&lt;T&gt; {
-    operator fun compare(t: *T): Int;
+<p>模板参数可以有示例类型，编译时以示例类型来做类型检查。例如:</p>
+<pre><code>abstract struct Linkable$&lt;T&gt; {
+    var next: own*? T;
+    var previous: *? T;
 }
-strcut Tree$&lt;T : Compareable&gt; {
+
+struct LinkedList$&lt;T: Linkable$&lt;T&gt;&gt; {
 }
 </code></pre>
-<p>泛型模板实例化时，可以传入任意满足示例类型的类型。不需要继承示例类型。</p>
+<h3 id="模板实例化"><a class="header" href="#模板实例化">模板实例化</a></h3>
+<p>泛型模板实例化时，可以传入任意满足示例类型的类型。</p>
 <pre><code>var tree = Tree$&lt;Int&gt; {};
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="闭包-1"><a class="header" href="#闭包-1">闭包</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="闭包lambda"><a class="header" href="#闭包lambda">闭包/Lambda</a></h2>
 <p>匿名函数使用fun关键字定义</p>
 <pre><code>fun foo(f: fun(a:Int):Int) {
     f(1);
@@ -974,7 +977,8 @@ foo(fun(a:Int):Int{
     return a + 1;
 });
 </code></pre>
-<p>暂不支持闭包的返回类型推断，需要显式制定返回类型。</p>
+<p>暂不支持闭包的返回类型推断，需要显式指定返回类型。</p>
+<h2 id="捕获变量"><a class="header" href="#捕获变量">捕获变量</a></h2>
 <p>默认通过值来捕获外部变量。</p>
 <pre><code>var i = 0;
 var f = fun(a:Int):Int{
@@ -982,7 +986,7 @@ var f = fun(a:Int):Int{
 };
 </code></pre>
 <h2 id="静态闭包"><a class="header" href="#静态闭包">静态闭包</a></h2>
-<p>静态闭包指无状态的闭包，用static修饰，等于函数指针。</p>
+<p>静态闭包指无状态的闭包，用static修饰。不可捕获变量。</p>
 <pre><code>var f : fun(a:Int) static : Int;
 </code></pre>
 <h2 id="引用捕获"><a class="header" href="#引用捕获">引用捕获</a></h2>
@@ -994,7 +998,7 @@ var f = fun(a:Int):Int{
 };
 </code></pre>
 <h2 id="移动捕获"><a class="header" href="#移动捕获">移动捕获</a></h2>
-<p>不支持C++的移动捕获。AutoMove用来包装对象，避免显示使用move指令。可用用来让闭包不过不可拷贝对象：</p>
+<p>不支持C++的移动捕获。AutoMove用来包装对象，避免显式使用move指令：</p>
 <pre><code>var arr: DArray;
 var autoMove = AutoMove { .set(arr); };
 
@@ -1004,6 +1008,7 @@ var f = fun() {
 
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="操作符重载-1"><a class="header" href="#操作符重载-1">操作符重载</a></h3>
+<p>使用operator关键字来实现操作符重载。</p>
 <pre><code>struct A {
     operator fun mult(a: A): A { ... }
 }
@@ -1030,15 +1035,15 @@ add        a,b,c;
 <pre><code>x { .add(a).add(b).add(c); }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="模块化"><a class="header" href="#模块化">模块化</a></h2>
-<p>每个语言对模块的定义都有点不太一样，sric中模块既是命名空间，也是编译单元，也是部署单元。</p>
+<p>sric中模块既是命名空间，也是编译单元，也是部署单元。软件由多个相互依赖的模块组成。</p>
 <h3 id="模块定义"><a class="header" href="#模块定义">模块定义</a></h3>
 <p>模块通过构建脚本来定义，构建脚本以scm为扩展名:</p>
-<pre><code>name = demo
-summary = demo library
-outType = lib
+<pre><code>name = hello
+summary = hello
+outType = exe
 version = 1.0
-depends = sys 1.0
-srcDirs = src/
+depends = sric 1.0, cstd 1.0
+srcDirs = ./
 </code></pre>
 <p>源码目录srcDirs需要以<code>/</code>结尾，编译器会自动搜索目录下的所有.sric文件。</p>
 <h3 id="模块导入"><a class="header" href="#模块导入">模块导入</a></h3>
@@ -1123,8 +1128,9 @@ sharedPtr.set(p);
 var wp: WeakPtr$&lt;Int&gt; = toWeak(p);
 </code></pre>
 <p>使用时通过lock方法转化为own*，然后进行使用。</p>
-<pre><code>var sp : own* Int = wp.lock();
+<pre><code>var sp : own*? Int = wp.lock();
 </code></pre>
+<p>如果WeakPtr引用的对象已经被释放，则lock方法返回null。</p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="反射"><a class="header" href="#反射">反射</a></h3>
 <p>默认不启用反射，需要手动添加reflect标记。</p>
 <pre><code>reflect struct Point {
@@ -1298,8 +1304,7 @@ unsafe fun testSimple() {
 }
 </code></pre>
 <h3 id="简单模式序列化"><a class="header" href="#简单模式序列化">简单模式序列化</a></h3>
-<p>正常情况下自定义类被序列化对象，可通过SimpleSerial注解将其序列化为字符串。
-例如我们想要把Insets序列化为"1 2 3 4"而不是"Insets{top=1,right=2,bottom=3,left=4}"</p>
+<p>正常情况下自定义类被序列化为HiML对象，可通过SimpleSerial注解将其序列化为字符串。例如我们想要把Insets序列化为"1 2 3 4"而不是"Insets{top=1,right=2,bottom=3,left=4}"</p>
 <pre><code>//@SimpleSerial
 reflect struct Insets {
     var top: Int = 0;
