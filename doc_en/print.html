@@ -260,7 +260,7 @@ var a  = A { .init(); .i = 0; };
 var a: own* A = new A { .i = 0; };
 </code></pre>
 <h3 id="pointer-usage"><a class="header" href="#pointer-usage">Pointer Usage</a></h3>
-<p>Always access by '.'</p>
+<p>Always access by <code>.</code></p>
 <pre><code>var a: A;
 var b: own* A;
 a.foo();
@@ -276,7 +276,7 @@ var b = p is own* A;
 var a: [15]Int;
 </code></pre>
 <h3 id="generic-type"><a class="header" href="#generic-type">Generic Type</a></h3>
-<p>Generic params start with '$&lt;'</p>
+<p>Generic params start with <code>$&lt;</code></p>
 <pre><code>struct Bar$&lt;T&gt; {
     fun foo() {
         ...
@@ -306,7 +306,7 @@ private
 protected
 readonly
 </code></pre>
-<p>'readonly' means public read access, private write access.</p>
+<p><code>readonly</code> means public read access, private write access.</p>
 <h3 id="operator-overloading"><a class="header" href="#operator-overloading">Operator Overloading</a></h3>
 <pre><code>struct A {
     operator fun mult(a: A): A { ... }
@@ -379,9 +379,10 @@ fun main() {
 <div class="table-wrapper"><table><thead><tr><th>C++</th><th>Sric</th></tr></thead><tbody>
 <tr><td>int</td><td>Int</td></tr>
 <tr><td>short</td><td>Int16</td></tr>
-<tr><td>int64_t</td><td>Int32</td></tr>
+<tr><td>int32_t</td><td>Int32</td></tr>
 <tr><td>unsigned int</td><td>UInt32</td></tr>
-<tr><td>int64_t</td><td>Int32</td></tr>
+<tr><td>int64_t</td><td>Int64</td></tr>
+<tr><td>uint64_t</td><td>UInt64</td></tr>
 <tr><td>float</td><td>Float32</td></tr>
 <tr><td>double</td><td>Float/Float64</td></tr>
 <tr><td>void</td><td>Void</td></tr>
@@ -821,7 +822,7 @@ var b = p is own* A;
 </code></pre>
 <p>Other conversions use unsafeCast.</p>
 <h3 id="error-handling"><a class="header" href="#error-handling">Error Handling</a></h3>
-<p>Sric has no exception handling (won't catch C++ exceptions either).</p>
+<p>Sric has no exception handling.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="struct"><a class="header" href="#struct">Struct</a></h2>
 <p>Classes don't have parameterized constructors - callers must initialize them manually:</p>
 <pre><code>struct Point {
@@ -837,17 +838,6 @@ point {
     .x = 2; if (a) { .y = 3; }
 }
 </code></pre>
-<p>Alternatively, provide an initialization method (conventionally named init):</p>
-<pre><code>struct Point {
-    var x: Int;
-    var y: Int;
-
-    fun init(a: Int) {
-        this { .y = a; }
-    }
-}
-var p = Point { .init(1); };
-</code></pre>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
 <ul>
 <li>Types can have methods (non-static member functions with implicit this pointer)</li>
@@ -860,6 +850,7 @@ var p = Point { .init(1); };
     }
 }
 </code></pre>
+<h2 id="static-members"><a class="header" href="#static-members">Static Members</a></h2>
 <p>Structs can contain static functions/fields (no implicit this):</p>
 <pre><code>struct Point {
     static fun foo() {
@@ -870,11 +861,11 @@ Point::foo();
 <h2 id="inheritance-1"><a class="header" href="#inheritance-1">Inheritance</a></h2>
 <ul>
 <li>No multiple inheritance (Java-like)</li>
-<li>Base classes must be marked virtual or abstract</li>
+<li>Base classes must be marked <code>virtual</code> or <code>abstract</code></li>
 <li>Traits (like Java interfaces) can't have data members or method implementations</li>
 <li>Inheritance list: class first (if any), then traits</li>
-<li>Overriding requires override marker</li>
-<li>Use super to call parent methods</li>
+<li>Overriding requires <code>override</code> marker</li>
+<li>Use <code>super</code> to call parent methods</li>
 </ul>
 <pre><code>virtual struct B {
     virtual fun foo() {}
@@ -1112,6 +1103,9 @@ var wp: WeakPtr$&lt;Int&gt; = toWeak(p);
 <pre><code class="language-sric">var sp : own*? Int = wp.lock();
 </code></pre>
 <p>Returns null if referenced object was freed.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="wase"><a class="header" href="#wase">Wase</a></h1>
+<p>Wase is a cross-platform UI library developed by Sric. With a single codebase, it can be compiled and run on both desktop and web browsers, with future support for Android and iOS development. Wase offers a rich set of controls and elegant interfaces. Support creation UI from configuration file and support custom styles. It employs a self-rendering approach, similar to Qt and Flutter, but is more lightweight. The Sric language has specially designed comma-expression syntax for Wase, enabling a declarative API style comparable to SwiftUI and React Native.</p>
+<p>learn more: https://github.com/sric-language/wase</p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="reflection"><a class="header" href="#reflection">Reflection</a></h3>
 <p>Reflection is disabled by default and requires explicit <code>reflect</code> marker:</p>
 <pre><code class="language-sric">reflect struct Point {
@@ -1331,7 +1325,7 @@ reflect struct Insets {
 <li>Never use ALL_CAPS naming style</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="frequently-asked-questions"><a class="header" href="#frequently-asked-questions">Frequently Asked Questions</a></h1>
-<h3 id="chinese-character-encoding-issues"><a class="header" href="#chinese-character-encoding-issues">Chinese Character Encoding Issues</a></h3>
+<h3 id="unicode-character-encoding-issues"><a class="header" href="#unicode-character-encoding-issues">Unicode Character Encoding Issues</a></h3>
 <p>In Git Bash, run:</p>
 <pre><code>cmd "/c chcp 65001&gt;nul"
 </code></pre>

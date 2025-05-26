@@ -225,7 +225,7 @@ var a  = A { .init(); .i = 0; };
 var a: own* A = new A { .i = 0; };
 </code></pre>
 <h3 id="pointer-usage"><a class="header" href="#pointer-usage">Pointer Usage</a></h3>
-<p>Always access by '.'</p>
+<p>Always access by <code>.</code></p>
 <pre><code>var a: A;
 var b: own* A;
 a.foo();
@@ -241,7 +241,7 @@ var b = p is own* A;
 var a: [15]Int;
 </code></pre>
 <h3 id="generic-type"><a class="header" href="#generic-type">Generic Type</a></h3>
-<p>Generic params start with '$&lt;'</p>
+<p>Generic params start with <code>$&lt;</code></p>
 <pre><code>struct Bar$&lt;T&gt; {
     fun foo() {
         ...
@@ -271,7 +271,7 @@ private
 protected
 readonly
 </code></pre>
-<p>'readonly' means public read access, private write access.</p>
+<p><code>readonly</code> means public read access, private write access.</p>
 <h3 id="operator-overloading"><a class="header" href="#operator-overloading">Operator Overloading</a></h3>
 <pre><code>struct A {
     operator fun mult(a: A): A { ... }

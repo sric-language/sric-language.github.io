@@ -2,7 +2,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="style.css"><head>
 <body>
-<div class="module"><p><span class="modulename">sric</span><span class="moduleversion">1.0</span></p></div><div class="index"><a href="#Atomic">Atomic</a><a href="#List">List</a><a href="#DArray">DArray</a><a href="#FileSystem">FileSystem</a><a href="#HashMap">HashMap</a><a href="#IOStream">IOStream</a><a href="#Buffer">Buffer</a><a href="#FileStream">FileStream</a><a href="#Linkable">Linkable</a><a href="#LinkedList">LinkedList</a><a href="#scError">scError</a><a href="#scWarn">scWarn</a><a href="#scInfo">scInfo</a><a href="#scDebug">scDebug</a><a href="#makeUnique">makeUnique</a><a href="#toShared">toShared</a><a href="#autoMove">autoMove</a><a href="#toWeak">toWeak</a><a href="#share">share</a><a href="#rawToOwn">rawToOwn</a><a href="#refToOwn">refToOwn</a><a href="#rawToRef">rawToRef</a><a href="#unsafeCast">unsafeCast</a><a href="#WeakPtr">WeakPtr</a><a href="#AutoMove">AutoMove</a><a href="#SharedPtr">SharedPtr</a><a href="#UniquePtr">UniquePtr</a><a href="#findModule">findModule</a><a href="#newInstance">newInstance</a><a href="#typeOf">typeOf</a><a href="#callPtrToVoid">callPtrToVoid</a><a href="#callVoidToPtr">callVoidToPtr</a><a href="#callInstanceToString">callInstanceToString</a><a href="#callInstanceStringToBool">callInstanceStringToBool</a><a href="#RFlags">RFlags</a><a href="#RTypeKind">RTypeKind</a><a href="#RComment">RComment</a><a href="#RField">RField</a><a href="#RFunc">RFunc</a><a href="#RType">RType</a><a href="#RModule">RModule</a><a href="#asStr">asStr</a><a href="#String">String</a><a href="#currentTimeMillis">currentTimeMillis</a><a href="#nanoTicks">nanoTicks</a><a href="#sleep">sleep</a><a href="#currentThreadId">currentThreadId</a><a href="#Tuple2">Tuple2</a><a href="#Tuple3">Tuple3</a><a href="#Tuple4">Tuple4</a><a href="#hashCode">hashCode</a><a href="#compare">compare</a><a href="#copy">copy</a><a href="#max">max</a><a href="#min">min</a><a href="#clamp">clamp</a><a href="#sc_assert">sc_assert</a><a href="#verify">verify</a><a href="#makePtr">makePtr</a><a href="#makeValue">makeValue</a><a href="#Promise">Promise</a></div>
+<div class="module"><p><span class="modulename">sric</span><span class="moduleversion">1.0</span></p></div><div class="index"><a href="#Atomic">Atomic</a><a href="#List">List</a><a href="#DArray">DArray</a><a href="#FileSystem">FileSystem</a><a href="#HashMap">HashMap</a><a href="#IOStream">IOStream</a><a href="#Buffer">Buffer</a><a href="#FileStream">FileStream</a><a href="#Linkable">Linkable</a><a href="#LinkedList">LinkedList</a><a href="#scError">scError</a><a href="#scWarn">scWarn</a><a href="#scInfo">scInfo</a><a href="#scDebug">scDebug</a><a href="#makeUnique">makeUnique</a><a href="#toShared">toShared</a><a href="#autoMove">autoMove</a><a href="#toWeak">toWeak</a><a href="#share">share</a><a href="#rawToOwn">rawToOwn</a><a href="#refToOwn">refToOwn</a><a href="#rawToRef">rawToRef</a><a href="#unsafeCast">unsafeCast</a><a href="#WeakPtr">WeakPtr</a><a href="#AutoMove">AutoMove</a><a href="#SharedPtr">SharedPtr</a><a href="#UniquePtr">UniquePtr</a><a href="#findModule">findModule</a><a href="#newInstance">newInstance</a><a href="#typeOf">typeOf</a><a href="#callPtrToVoid">callPtrToVoid</a><a href="#callVoidToPtr">callVoidToPtr</a><a href="#callInstanceToString">callInstanceToString</a><a href="#callInstanceStringToBool">callInstanceStringToBool</a><a href="#RFlags">RFlags</a><a href="#RTypeKind">RTypeKind</a><a href="#RComment">RComment</a><a href="#RField">RField</a><a href="#RFunc">RFunc</a><a href="#RType">RType</a><a href="#RModule">RModule</a><a href="#asStr">asStr</a><a href="#String">String</a><a href="#currentTimeMillis">currentTimeMillis</a><a href="#nanoTicks">nanoTicks</a><a href="#sleep">sleep</a><a href="#currentThreadId">currentThreadId</a><a href="#hashCode">hashCode</a><a href="#compare">compare</a><a href="#copy">copy</a><a href="#max">max</a><a href="#min">min</a><a href="#clamp">clamp</a><a href="#sc_assert">sc_assert</a><a href="#verify">verify</a><a href="#makePtr">makePtr</a><a href="#makeValue">makeValue</a><a href="#Promise">Promise</a><a href="#Tuple2">Tuple2</a><a href="#Tuple3">Tuple3</a><a href="#Tuple4">Tuple4</a><a href="#Optional">Optional</a><a href="#ArrayRef">ArrayRef</a></div>
 <div class="content"><div class="typedef" id="Atomic"><p class="typeinfo"><span class="kind">struct</span><span class="name">Atomic</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span></p>
 <div class="doc">
 * To manage a object shared between threads with atomic updates
@@ -438,31 +438,7 @@
 <div class="func" id="currentThreadId"><p class="funcinfo"><span class="kind">fun</span><span class="name">currentThreadId</span><span class="flags">extern </span><span class="prams">()</span><span class="flags"></span><span class="returnType"> : UInt64</span></p><div class="doc">
 * Get current thread ID
 </div></div>
-<div class="typedef" id="Tuple2"><p class="typeinfo"><span class="kind">struct</span><span class="name">Tuple2</span><span class="flags"></span><span class="gnericParams">$&lt;<span><span class="name">T1 : </span></span>, <span><span class="name">T2 : </span></span>&gt;</span></p>
-
-    <div class="typefield"><div class="field" id="_0"><p class="fieldinfo"><span class="kind">var</span><span class="name">_0</span><span class="flags"></span><span class="type"> : T1</span></p></div>
-    <div class="field" id="_1"><p class="fieldinfo"><span class="kind">var</span><span class="name">_1</span><span class="flags"></span><span class="type"> : T2</span></p></div>
-    </div>
-    <div class="typefunc"></div>
-
-</div><div class="typedef" id="Tuple3"><p class="typeinfo"><span class="kind">struct</span><span class="name">Tuple3</span><span class="flags"></span><span class="gnericParams">$&lt;<span><span class="name">T1 : </span></span>, <span><span class="name">T2 : </span></span>, <span><span class="name">T3 : </span></span>&gt;</span></p>
-
-    <div class="typefield"><div class="field" id="_0"><p class="fieldinfo"><span class="kind">var</span><span class="name">_0</span><span class="flags"></span><span class="type"> : T1</span></p></div>
-    <div class="field" id="_1"><p class="fieldinfo"><span class="kind">var</span><span class="name">_1</span><span class="flags"></span><span class="type"> : T2</span></p></div>
-    <div class="field" id="_2"><p class="fieldinfo"><span class="kind">var</span><span class="name">_2</span><span class="flags"></span><span class="type"> : T3</span></p></div>
-    </div>
-    <div class="typefunc"></div>
-
-</div><div class="typedef" id="Tuple4"><p class="typeinfo"><span class="kind">struct</span><span class="name">Tuple4</span><span class="flags"></span><span class="gnericParams">$&lt;<span><span class="name">T1 : </span></span>, <span><span class="name">T2 : </span></span>, <span><span class="name">T3 : </span></span>, <span><span class="name">T4 : </span></span>&gt;</span></p>
-
-    <div class="typefield"><div class="field" id="_0"><p class="fieldinfo"><span class="kind">var</span><span class="name">_0</span><span class="flags"></span><span class="type"> : T1</span></p></div>
-    <div class="field" id="_1"><p class="fieldinfo"><span class="kind">var</span><span class="name">_1</span><span class="flags"></span><span class="type"> : T2</span></p></div>
-    <div class="field" id="_2"><p class="fieldinfo"><span class="kind">var</span><span class="name">_2</span><span class="flags"></span><span class="type"> : T3</span></p></div>
-    <div class="field" id="_3"><p class="fieldinfo"><span class="kind">var</span><span class="name">_3</span><span class="flags"></span><span class="type"> : T4</span></p></div>
-    </div>
-    <div class="typefunc"></div>
-
-</div><div class="typedef" id="Promise"><p class="typeinfo"><span class="kind">struct</span><span class="name">Promise</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span></p>
+<div class="typedef" id="Promise"><p class="typeinfo"><span class="kind">struct</span><span class="name">Promise</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span></p>
 <div class="doc">
 * Promise is a coroutine return type.
 </div>
@@ -498,5 +474,51 @@
 <div class="func" id="makeValue"><p class="funcinfo"><span class="kind">fun</span><span class="name">makeValue</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span><span class="prams">(<span class="param"><span class="name">args : </span><span class="type">...</span></span>)</span><span class="flags"></span><span class="returnType"> : T</span></p><div class="doc">
 * Call C++ ctor by args.
 </div></div>
-</div></body>
+<div class="typedef" id="Tuple2"><p class="typeinfo"><span class="kind">struct</span><span class="name">Tuple2</span><span class="flags"></span><span class="gnericParams">$&lt;<span><span class="name">T1 : </span></span>, <span><span class="name">T2 : </span></span>&gt;</span></p>
+
+    <div class="typefield"><div class="field" id="_0"><p class="fieldinfo"><span class="kind">var</span><span class="name">_0</span><span class="flags"></span><span class="type"> : T1</span></p></div>
+    <div class="field" id="_1"><p class="fieldinfo"><span class="kind">var</span><span class="name">_1</span><span class="flags"></span><span class="type"> : T2</span></p></div>
+    </div>
+    <div class="typefunc"></div>
+
+</div><div class="typedef" id="Tuple3"><p class="typeinfo"><span class="kind">struct</span><span class="name">Tuple3</span><span class="flags"></span><span class="gnericParams">$&lt;<span><span class="name">T1 : </span></span>, <span><span class="name">T2 : </span></span>, <span><span class="name">T3 : </span></span>&gt;</span></p>
+
+    <div class="typefield"><div class="field" id="_0"><p class="fieldinfo"><span class="kind">var</span><span class="name">_0</span><span class="flags"></span><span class="type"> : T1</span></p></div>
+    <div class="field" id="_1"><p class="fieldinfo"><span class="kind">var</span><span class="name">_1</span><span class="flags"></span><span class="type"> : T2</span></p></div>
+    <div class="field" id="_2"><p class="fieldinfo"><span class="kind">var</span><span class="name">_2</span><span class="flags"></span><span class="type"> : T3</span></p></div>
+    </div>
+    <div class="typefunc"></div>
+
+</div><div class="typedef" id="Tuple4"><p class="typeinfo"><span class="kind">struct</span><span class="name">Tuple4</span><span class="flags"></span><span class="gnericParams">$&lt;<span><span class="name">T1 : </span></span>, <span><span class="name">T2 : </span></span>, <span><span class="name">T3 : </span></span>, <span><span class="name">T4 : </span></span>&gt;</span></p>
+
+    <div class="typefield"><div class="field" id="_0"><p class="fieldinfo"><span class="kind">var</span><span class="name">_0</span><span class="flags"></span><span class="type"> : T1</span></p></div>
+    <div class="field" id="_1"><p class="fieldinfo"><span class="kind">var</span><span class="name">_1</span><span class="flags"></span><span class="type"> : T2</span></p></div>
+    <div class="field" id="_2"><p class="fieldinfo"><span class="kind">var</span><span class="name">_2</span><span class="flags"></span><span class="type"> : T3</span></p></div>
+    <div class="field" id="_3"><p class="fieldinfo"><span class="kind">var</span><span class="name">_3</span><span class="flags"></span><span class="type"> : T4</span></p></div>
+    </div>
+    <div class="typefunc"></div>
+
+</div><div class="typedef" id="Optional"><p class="typeinfo"><span class="kind">struct</span><span class="name">Optional</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span></p>
+<div class="doc">
+* Optional represent either an expected value of type T or an unexpected error
+</div>
+    <div class="typefield"></div>
+    <div class="typefunc"><div class="func" id="value"><p class="funcinfo"><span class="kind">fun</span><span class="name">value</span><span class="flags"></span><span class="prams">()</span><span class="flags"></span><span class="returnType"> : &T</span></p></div>
+    <div class="func" id="hasValue"><p class="funcinfo"><span class="kind">fun</span><span class="name">hasValue</span><span class="flags"></span><span class="prams">()</span><span class="flags">const </span><span class="returnType"> : Bool</span></p></div>
+    <div class="func" id="getError"><p class="funcinfo"><span class="kind">fun</span><span class="name">getError</span><span class="flags"></span><span class="prams">()</span><span class="flags"></span><span class="returnType"> : Int32</span></p></div>
+    <div class="func" id="setValue"><p class="funcinfo"><span class="kind">fun</span><span class="name">setValue</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">t : </span><span class="type">T</span></span>)</span><span class="flags"></span><span class="returnType"> : Void</span></p></div>
+    <div class="func" id="setError"><p class="funcinfo"><span class="kind">fun</span><span class="name">setError</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">e : </span><span class="type">Int32</span></span>)</span><span class="flags"></span><span class="returnType"> : Void</span></p></div>
+    </div>
+
+</div><div class="typedef" id="ArrayRef"><p class="typeinfo"><span class="kind">struct</span><span class="name">ArrayRef</span><span class="flags">extern </span><span class="gnericParams">$&lt;<span><span class="name">T : </span></span>&gt;</span></p>
+
+    <div class="typefield"></div>
+    <div class="typefunc"><div class="func" id="init"><p class="funcinfo"><span class="kind">fun</span><span class="name">init</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">d : </span><span class="type">raw* T</span></span>, <span class="param"><span class="name">s : </span><span class="type">Int32</span></span>)</span><span class="flags"></span><span class="returnType"> : Void</span></p></div>
+    <div class="func" id="data"><p class="funcinfo"><span class="kind">fun</span><span class="name">data</span><span class="flags"></span><span class="prams">()</span><span class="flags"></span><span class="returnType"> : raw*? T</span></p></div>
+    <div class="func" id="size"><p class="funcinfo"><span class="kind">fun</span><span class="name">size</span><span class="flags"></span><span class="prams">()</span><span class="flags"></span><span class="returnType"> : Int32</span></p></div>
+    <div class="func" id="get"><p class="funcinfo"><span class="kind">fun</span><span class="name">get</span><span class="flags">unsafe operator </span><span class="prams">(<span class="param"><span class="name">i : </span><span class="type">Int32</span></span>)</span><span class="flags"></span><span class="returnType"> : &T</span></p></div>
+    <div class="func" id="set"><p class="funcinfo"><span class="kind">fun</span><span class="name">set</span><span class="flags">unsafe operator </span><span class="prams">(<span class="param"><span class="name">i : </span><span class="type">Int32</span></span>, <span class="param"><span class="name">d : </span><span class="type">T</span></span>)</span><span class="flags"></span><span class="returnType"> : Void</span></p></div>
+    </div>
+
+</div></div></body>
 </html>

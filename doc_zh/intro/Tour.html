@@ -241,7 +241,7 @@ var b = p is own* A;
 var a: [15]Int;
 </code></pre>
 <h3 id="泛型类型"><a class="header" href="#泛型类型">泛型类型</a></h3>
-<p>泛型类型通过'$&lt;'开头</p>
+<p>泛型类型通过<code>$&lt;</code>开头</p>
 <pre><code>struct Bar$&lt;T&gt; {
     fun foo() {
         ...
@@ -272,7 +272,7 @@ private
 protected
 readonly
 </code></pre>
-<p>'readonly' 的意思是公开读，私有写。</p>
+<p><code>readonly</code> 的意思是公开读，私有写。</p>
 <h3 id="操作符重载"><a class="header" href="#操作符重载">操作符重载</a></h3>
 <pre><code>struct A {
     operator fun mult(a: A): A { ... }

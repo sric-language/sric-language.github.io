@@ -240,7 +240,7 @@ var a: [size]Int;
 var a: own* B = null; //compile error
 </code></pre>
 <p>在必要时编译器会自动插入空指针检查，以保证空指针安全。</p>
-<p>只有指针可以赋值为null，值类型和引用不能为空。</p>
+<p>只有指针可以赋值为<code>null</code>，值类型和引用不能为空。</p>
 <h2 id="不可变性"><a class="header" href="#不可变性">不可变性</a></h2>
 <p>和C++类似，const可以修饰指针本身，也可以修饰指针所指对象。</p>
 <pre><code>var p : raw* const Int;

@@ -273,7 +273,7 @@ var b = p is own* A;
 var a: [15]Int;
 </code></pre>
 <h3 id="泛型类型"><a class="header" href="#泛型类型">泛型类型</a></h3>
-<p>泛型类型通过'$&lt;'开头</p>
+<p>泛型类型通过<code>$&lt;</code>开头</p>
 <pre><code>struct Bar$&lt;T&gt; {
     fun foo() {
         ...
@@ -304,7 +304,7 @@ private
 protected
 readonly
 </code></pre>
-<p>'readonly' 的意思是公开读，私有写。</p>
+<p><code>readonly</code> 的意思是公开读，私有写。</p>
 <h3 id="操作符重载"><a class="header" href="#操作符重载">操作符重载</a></h3>
 <pre><code>struct A {
     operator fun mult(a: A): A { ... }
@@ -377,9 +377,10 @@ fun main() {
 <div class="table-wrapper"><table><thead><tr><th>C++</th><th>Sric</th></tr></thead><tbody>
 <tr><td>int</td><td>Int</td></tr>
 <tr><td>short</td><td>Int16</td></tr>
-<tr><td>int64_t</td><td>Int32</td></tr>
+<tr><td>int32_t</td><td>Int32</td></tr>
 <tr><td>unsigned int</td><td>UInt32</td></tr>
-<tr><td>int64_t</td><td>Int32</td></tr>
+<tr><td>int64_t</td><td>Int64</td></tr>
+<tr><td>uint64_t</td><td>UInt64</td></tr>
 <tr><td>float</td><td>Float32</td></tr>
 <tr><td>double</td><td>Float/Float64</td></tr>
 <tr><td>void</td><td>Void</td></tr>
@@ -760,7 +761,7 @@ var a: [size]Int;
 var a: own* B = null; //compile error
 </code></pre>
 <p>在必要时编译器会自动插入空指针检查，以保证空指针安全。</p>
-<p>只有指针可以赋值为null，值类型和引用不能为空。</p>
+<p>只有指针可以赋值为<code>null</code>，值类型和引用不能为空。</p>
 <h2 id="不可变性-1"><a class="header" href="#不可变性-1">不可变性</a></h2>
 <p>和C++类似，const可以修饰指针本身，也可以修饰指针所指对象。</p>
 <pre><code>var p : raw* const Int;
@@ -832,7 +833,7 @@ var b = p is own* A;
 </code></pre>
 <p>其他类型转换使用unsafeCast函数来完成。</p>
 <h2 id="异常处理"><a class="header" href="#异常处理">异常处理</a></h2>
-<p>Sric不支持异常处理，也不捕获C++异常。</p>
+<p>Sric不支持异常处理。</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="结构"><a class="header" href="#结构">结构</a></h2>
 <p>类没有有参构造函数，需要调用者自己初始化。</p>
 <pre><code>struct Point {
@@ -848,17 +849,6 @@ point {
     .x = 2; if (a) { .y = 3; }
 }
 </code></pre>
-<p>也可以提供一个初始化的方法，约定名称为init。</p>
-<pre><code>struct Point {
-    var x: Int;
-    var y: Int;
-
-    fun init(a: Int) {
-        this { .y = a; }
-    }
-}
-var p = Point { .init(1); };
-</code></pre>
 <h2 id="方法"><a class="header" href="#方法">方法</a></h2>
 <ul>
 <li>类型可以由方法，非静态成员函数，有一个隐藏的this指针。</li>
@@ -871,6 +861,7 @@ var p = Point { .init(1); };
     }
 }
 </code></pre>
+<h2 id="静态成员"><a class="header" href="#静态成员">静态成员</a></h2>
 <p>struct可以包含静态函数和字段。静态函数没有隐式的this指针。</p>
 <pre><code>strcut Point {
     static fun foo() {
@@ -882,11 +873,11 @@ Point::foo();
 <h2 id="继承-1"><a class="header" href="#继承-1">继承</a></h2>
 <ul>
 <li>不支持多继承，类似于Java</li>
-<li>被继承的类需要标记为virtual或者abstract</li>
+<li>被继承的类需要标记为<code>virtual</code>或者<code>abstract</code></li>
 <li>Trait相当与Java的interface，不能有数据成员和方法实现。</li>
 <li>继承的分号后面必须先写类（如果有）再写Trait。</li>
-<li>重写父类的virutal或者abstract方法时，需要加override标记。</li>
-<li>使用super关键字调用父类方法。</li>
+<li>重写父类的virutal或者abstract方法时，需要加<code>override</code>标记。</li>
+<li>使用<code>super</code>关键字调用父类方法。</li>
 </ul>
 <pre><code>virtual strcut B {
     virtual fun foo() {}
@@ -948,7 +939,7 @@ foo(Color::Red);
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="模板"><a class="header" href="#模板">模板</a></h2>
 <h3 id="模板定义"><a class="header" href="#模板定义">模板定义</a></h3>
-<p>模板和C++不同的是使用'$&lt;'开头，这是为了消除泛型参数和小于运算符的歧义。</p>
+<p>模板和C++不同的是使用<code>$&lt;</code>开头，这是为了消除泛型参数和小于运算符的歧义。</p>
 <pre><code>struct Tree$&lt;T&gt; {
 }
 </code></pre>
@@ -1007,7 +998,7 @@ var f = fun() {
 
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="操作符重载-1"><a class="header" href="#操作符重载-1">操作符重载</a></h3>
-<p>使用operator关键字来实现操作符重载。</p>
+<p>使用<code>operator</code>关键字来实现操作符重载。</p>
 <pre><code>struct A {
     operator fun mult(a: A): A { ... }
 }
@@ -1130,6 +1121,9 @@ var wp: WeakPtr$&lt;Int&gt; = toWeak(p);
 <pre><code>var sp : own*? Int = wp.lock();
 </code></pre>
 <p>如果WeakPtr引用的对象已经被释放，则lock方法返回null。</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="wase"><a class="header" href="#wase">Wase</a></h1>
+<p>Wase是Sric开发的跨平台UI库，一套代码可同时编译运行在桌面端和Web浏览器中，未来将支持Android和iOS开发。Wase有着丰富的控件和优美的界面。支持配置文件创建UI，支持自定义样式。Wase使用自绘的方式现实，类似于Qt和Flutter，但是更加轻量级。Sric语言专门为其设计了逗号表达式语法，使它的声明式API类似于SwiftUI和React Native。</p>
+<p>learn more: https://github.com/sric-language/wase</p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="反射"><a class="header" href="#反射">反射</a></h3>
 <p>默认不启用反射，需要手动添加reflect标记。</p>
 <pre><code>reflect struct Point {
@@ -1360,7 +1354,7 @@ reflect struct Insets {
 <pre><code>sric module.scm -fmake -c++17
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="命令行工具"><a class="header" href="#命令行工具">命令行工具</a></h1>
-<h2 id="构建参数"><a class="header" href="#构建参数">构建参数</a></h2>
+<h2 id="用法"><a class="header" href="#用法">用法</a></h2>
 <p>sric命令有以下参数：</p>
 <ul>
 <li>-debug 在Debug模式编译（默认release模式）</li>
