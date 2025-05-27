@@ -822,7 +822,7 @@ var b = p is own* A;
 </code></pre>
 <p>Other conversions use unsafeCast.</p>
 <h3 id="error-handling"><a class="header" href="#error-handling">Error Handling</a></h3>
-<p>Sric has no exception handling.</p>
+<p>Since Sric does not support exception handling, Optional can serve as an alternative for error return.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="struct"><a class="header" href="#struct">Struct</a></h2>
 <p>Classes don't have parameterized constructors - callers must initialize them manually:</p>
 <pre><code>struct Point {
@@ -913,8 +913,6 @@ foo(Color::Red);
     Red, Green = 2, Blue
 }
 </code></pre>
-<h2 id="unions"><a class="header" href="#unions">Unions</a></h2>
-<p>Sric doesn't currently support unions. Use inheritance polymorphism instead.</p>
 <h2 id="unsafe-structures"><a class="header" href="#unsafe-structures">Unsafe Structures</a></h2>
 <p>Unsafe structs match their C++ counterparts exactly, without safety check markers. Extern structs are unsafe by default.</p>
 <p>Within unsafe structs, this is a raw pointer (not safe pointer). Objects allocated with new can be converted to safe pointers using rawToRef:</p>

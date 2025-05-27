@@ -174,8 +174,6 @@ foo(Color::Red);
     Red, Green = 2, Blue
 }
 </code></pre>
-<h2 id="联合体"><a class="header" href="#联合体">联合体</a></h2>
-<p>sric暂不支持union。可使用继承多态来满足需求。</p>
 <h2 id="不安全结构"><a class="header" href="#不安全结构">不安全结构</a></h2>
 <p>unsafe结构完全和对应的C++类一致，不包含安全检查需要的标记位。extern结构默认是unsafe的。</p>
 <p>unsafe里的this的类型是裸指针，而不是安全指针。如果对象是独立用new关键字分配的，可以通过rawToRef转为安全指针。</p>

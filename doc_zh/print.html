@@ -833,7 +833,7 @@ var b = p is own* A;
 </code></pre>
 <p>其他类型转换使用unsafeCast函数来完成。</p>
 <h2 id="异常处理"><a class="header" href="#异常处理">异常处理</a></h2>
-<p>Sric不支持异常处理。</p>
+<p>Sric不支持异常处理，可用Optional来返回错误。</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="结构"><a class="header" href="#结构">结构</a></h2>
 <p>类没有有参构造函数，需要调用者自己初始化。</p>
 <pre><code>struct Point {
@@ -926,8 +926,6 @@ foo(Color::Red);
     Red, Green = 2, Blue
 }
 </code></pre>
-<h2 id="联合体"><a class="header" href="#联合体">联合体</a></h2>
-<p>sric暂不支持union。可使用继承多态来满足需求。</p>
 <h2 id="不安全结构"><a class="header" href="#不安全结构">不安全结构</a></h2>
 <p>unsafe结构完全和对应的C++类一致，不包含安全检查需要的标记位。extern结构默认是unsafe的。</p>
 <p>unsafe里的this的类型是裸指针，而不是安全指针。如果对象是独立用new关键字分配的，可以通过rawToRef转为安全指针。</p>
