@@ -156,12 +156,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="智能指针"><a class="header" href="#智能指针">智能指针</a></h1>
-<p>Sric提高了类似与C++的一组智能指针。包括UniquePtr、SharedPtr、WeakPtr等。</p>
-<h2 id="uniqueptr"><a class="header" href="#uniqueptr">UniquePtr</a></h2>
-<p>尽管own<em>性能已经接近裸指针，但有些性能敏感的情况下推荐使用UniquePtr。相比于own</em>，UniquePtr是零开销的。UniquePtr的限制是同时只能有一个所有者，没有类似与own*的share功能。
-UniquePtr使用makeUnique函数来创建。</p>
-<pre><code>var p : UniquePtr&lt;Int&gt; = makeUnique$&lt;Int&gt;();
-</code></pre>
+<p>Sric提高了类似与C++的一组智能指针。包括SharedPtr、WeakPtr等。</p>
 <h2 id="sharedptr"><a class="header" href="#sharedptr">SharedPtr</a></h2>
 <p>SharedPtr是自动引用计数的，有一定的开销。可从现有的own*获取。例如:</p>
 <pre><code>var p = new Int;

@@ -167,8 +167,9 @@ var p: own* Int;       // Owning pointer
 var p: * Int;          // Non-owning pointer
 var p: &amp; Int;          // Reference
 var p: raw* Int;       // Raw pointer
+var p: uniq* Int;      // Unique pointer
 </code></pre>
-<p>Sric also provides C++-style smart pointers (UniquePtr, SharedPtr, WeakPtr) via standard library.</p>
+<p>Sric also provides C++-style smart pointers (SharedPtr, WeakPtr) via standard library.</p>
 <h3 id="memory-allocation"><a class="header" href="#memory-allocation">Memory Allocation</a></h3>
 <p>Get pointers via address-of operator or <code>new</code>:</p>
 <pre><code class="language-sric">var i: own* Int = new Int;  // Parentheses omitted (no constructors)
@@ -181,6 +182,11 @@ var p: raw* Int;       // Raw pointer
 <pre><code class="language-sric">var p1: own* Int = ...;
 var p2 = move p1;          // Transfer ownership
 var p3 = share(p1);        // Shared ownership
+</code></pre>
+<h4 id="unique-pointers"><a class="header" href="#unique-pointers">Unique Pointers</a></h4>
+<p>uniq* is zero-overhead. Similar to own*, but without a share() method.</p>
+<pre><code class="language-sric">var p1: uniq* Int = makeUniq$&lt;T&gt;();
+var p2 = move p1;
 </code></pre>
 <h4 id="non-owning-pointers"><a class="header" href="#non-owning-pointers">Non-owning Pointers</a></h4>
 <ul>

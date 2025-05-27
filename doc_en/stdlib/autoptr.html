@@ -156,11 +156,7 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="smart-pointers"><a class="header" href="#smart-pointers">Smart Pointers</a></h1>
-<p>Sric provides C++-style smart pointers including UniquePtr, SharedPtr, and WeakPtr.</p>
-<h2 id="uniqueptr"><a class="header" href="#uniqueptr">UniquePtr</a></h2>
-<p>While <code>own*</code> performance approaches raw pointers, UniquePtr is recommended for performance-critical cases as it has zero overhead. Unlike <code>own*</code>, UniquePtr cannot be shared (no equivalent to <code>share</code> function). Create using <code>makeUnique</code>:</p>
-<pre><code class="language-sric">var p : UniquePtr&lt;Int&gt; = makeUnique$&lt;Int&gt;();
-</code></pre>
+<p>Sric provides C++-style smart pointers including SharedPtr, and WeakPtr.</p>
 <h2 id="sharedptr"><a class="header" href="#sharedptr">SharedPtr</a></h2>
 <p>Reference-counted with some overhead. Can be created from existing own*:</p>
 <pre><code class="language-sric">var p = new Int;

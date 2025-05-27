@@ -196,6 +196,7 @@ var p: own* Int;       //ownership pointer
 var p: * Int;          //non-owning pointer
 var p: &amp; Int;          //reference
 var p: raw* Int;       //unsafe raw pointer
+var p: uniq* Int;      //unique pointer
 </code></pre>
 <h3 id="explicit-copy-or-move"><a class="header" href="#explicit-copy-or-move">Explicit Copy or Move</a></h3>
 <p>Move or share ownership pointer</p>
@@ -692,8 +693,9 @@ var p: own* Int;       // Owning pointer
 var p: * Int;          // Non-owning pointer
 var p: &amp; Int;          // Reference
 var p: raw* Int;       // Raw pointer
+var p: uniq* Int;      // Unique pointer
 </code></pre>
-<p>Sric also provides C++-style smart pointers (UniquePtr, SharedPtr, WeakPtr) via standard library.</p>
+<p>Sric also provides C++-style smart pointers (SharedPtr, WeakPtr) via standard library.</p>
 <h3 id="memory-allocation"><a class="header" href="#memory-allocation">Memory Allocation</a></h3>
 <p>Get pointers via address-of operator or <code>new</code>:</p>
 <pre><code class="language-sric">var i: own* Int = new Int;  // Parentheses omitted (no constructors)
@@ -706,6 +708,11 @@ var p: raw* Int;       // Raw pointer
 <pre><code class="language-sric">var p1: own* Int = ...;
 var p2 = move p1;          // Transfer ownership
 var p3 = share(p1);        // Shared ownership
+</code></pre>
+<h4 id="unique-pointers"><a class="header" href="#unique-pointers">Unique Pointers</a></h4>
+<p>uniq* is zero-overhead. Similar to own*, but without a share() method.</p>
+<pre><code class="language-sric">var p1: uniq* Int = makeUniq$&lt;T&gt;();
+var p2 = move p1;
 </code></pre>
 <h4 id="non-owning-pointers"><a class="header" href="#non-owning-pointers">Non-owning Pointers</a></h4>
 <ul>
@@ -1078,11 +1085,7 @@ var line = stream.readAllStr();
 </code></pre>
 <p>Mode strings match C's fopen().</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="smart-pointers"><a class="header" href="#smart-pointers">Smart Pointers</a></h1>
-<p>Sric provides C++-style smart pointers including UniquePtr, SharedPtr, and WeakPtr.</p>
-<h2 id="uniqueptr"><a class="header" href="#uniqueptr">UniquePtr</a></h2>
-<p>While <code>own*</code> performance approaches raw pointers, UniquePtr is recommended for performance-critical cases as it has zero overhead. Unlike <code>own*</code>, UniquePtr cannot be shared (no equivalent to <code>share</code> function). Create using <code>makeUnique</code>:</p>
-<pre><code class="language-sric">var p : UniquePtr&lt;Int&gt; = makeUnique$&lt;Int&gt;();
-</code></pre>
+<p>Sric provides C++-style smart pointers including SharedPtr, and WeakPtr.</p>
 <h2 id="sharedptr"><a class="header" href="#sharedptr">SharedPtr</a></h2>
 <p>Reference-counted with some overhead. Can be created from existing own*:</p>
 <pre><code class="language-sric">var p = new Int;
