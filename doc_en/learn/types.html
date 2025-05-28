@@ -184,7 +184,7 @@ var p2 = move p1;          // Transfer ownership
 var p3 = share(p1);        // Shared ownership
 </code></pre>
 <h4 id="unique-pointers"><a class="header" href="#unique-pointers">Unique Pointers</a></h4>
-<p>uniq* is zero-overhead. Similar to own*, but without a share() method.</p>
+<p><code>uniq*</code> is zero-overhead. Similar to <code>own*</code>, but without a share() method.</p>
 <pre><code class="language-sric">var p1: uniq* Int = makeUniq$&lt;T&gt;();
 var p2 = move p1;
 </code></pre>
@@ -192,7 +192,7 @@ var p2 = move p1;
 <ul>
 <li>No borrowing restrictions like Rust</li>
 <li>Runtime validity checks</li>
-<li>Implicit conversion from owning pointers:</li>
+<li>Implicit conversion from <code>own*</code>/<code>uniq*</code>:</li>
 </ul>
 <pre><code class="language-sric">var p1: own* Int = ...;
 var p4: * Int = p1;       // Non-owning
@@ -225,7 +225,7 @@ unsafe {
 <pre><code class="language-sric">fun foo(a: &amp; const Int) {}  // Auto-dereferencing
 </code></pre>
 <h2 id="arrays"><a class="header" href="#arrays">Arrays</a></h2>
-<p>Fixed-size arrays (for dynamic arrays see DArray):</p>
+<p>Fixed-size arrays (for dynamic arrays see <code>DArray</code>):</p>
 <pre><code class="language-sric">var a: [5]Int;                // Explicit size
 var a = []Int { 1,3,4 };      // Size inference
 constexpr var size = 15;

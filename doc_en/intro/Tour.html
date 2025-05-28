@@ -170,7 +170,7 @@ var p1 = p; //compiler error;
 var p2 = move p;
 var p3 = share(p2);
 </code></pre>
-<p>Move or copy if the struct has ownership pointer:</p>
+<p>Move or copy a struct with ownership pointer:</p>
 <pre><code>struct A {
     var i: own* Int;
     fun copy(): A { ... }
@@ -181,14 +181,14 @@ var b = move a;
 var c = a.copy();
 </code></pre>
 <h3 id="unsafe"><a class="header" href="#unsafe">Unsafe</a></h3>
-<p>Dereference raw pointer in unsafe block</p>
+<p>Dereference a raw pointer in an <code>unsafe</code> block/function:</p>
 <pre><code>var p: raw* Int;
 ...
 unsafe {
     var i = *p;
 }
 </code></pre>
-<p>Unsafe function must call in unsafe block</p>
+<p>Unsafe functions must be called in an <code>unsafe</code> block/function:</p>
 <pre><code>unsafe fun foo() { ... }
 
 fun main() {
@@ -198,7 +198,7 @@ fun main() {
 }
 </code></pre>
 <h3 id="inheritance"><a class="header" href="#inheritance">Inheritance</a></h3>
-<p>Single inheritance</p>
+<p>Single inheritance, similar to Java:</p>
 <pre><code>trait I {
     virtual fun foo();
 }
@@ -215,8 +215,8 @@ struct A : B, I {
 }
 
 </code></pre>
-<h3 id="with-block"><a class="header" href="#with-block">With Block</a></h3>
-<p>The with Block is not C++ designated initialization. It can contain any statement.</p>
+<h3 id="with-block"><a class="header" href="#with-block">With-Block</a></h3>
+<p>A with-block is not like C++'s named initialization; it can contain any statements:</p>
 <pre><code>struct A {
     var i: Int;
     fun init() { ... }
@@ -237,7 +237,7 @@ b.foo();
 var b = p is own* A;
 </code></pre>
 <h3 id="array"><a class="header" href="#array">Array</a></h3>
-<p>static size Array</p>
+<p>Statically sized arrays:</p>
 <pre><code>var a  = []Int { 1,2,3 };
 var a: [15]Int;
 </code></pre>
@@ -261,7 +261,7 @@ var b: Bar$&lt;Int&gt;;
 var b: own* B = a;
 </code></pre>
 <h3 id="immutable"><a class="header" href="#immutable">Immutable</a></h3>
-<p>Just like C++</p>
+<p>Similar to C++:</p>
 <pre><code>var p : raw* const Int;
 var p : const raw* Int;
 var p : const raw* const Int;
@@ -272,7 +272,7 @@ private
 protected
 readonly
 </code></pre>
-<p><code>readonly</code> means public read access, private write access.</p>
+<p><code>readonly</code> means publicly readable but privately writable.</p>
 <h3 id="operator-overloading"><a class="header" href="#operator-overloading">Operator Overloading</a></h3>
 <pre><code>struct A {
     operator fun mult(a: A): A { ... }
@@ -280,7 +280,7 @@ readonly
 
 var c = a * b;
 </code></pre>
-<p>operator methods:</p>
+<p>Overloadable operators:</p>
 <pre><code>methods    symbol
 ------     ------
 plus       a + b 
@@ -314,7 +314,7 @@ import std::Vec;
 
 foo(fun(a:Int){ ... });
 </code></pre>
-<h3 id="typealias"><a class="header" href="#typealias">Typealias</a></h3>
+<h3 id="type-alias"><a class="header" href="#type-alias">Type Alias</a></h3>
 <p>typealias:</p>
 <pre><code>typealias VecInt = std::Vec$&lt;Int&gt;;
 </code></pre>
@@ -325,7 +325,7 @@ foo(fun(a:Int){ ... });
 
 var c = Color::red;
 </code></pre>
-<h3 id="default-param-and-named-arg"><a class="header" href="#default-param-and-named-arg">Default Param and Named Arg</a></h3>
+<h3 id="default-params-and-named-args"><a class="header" href="#default-params-and-named-args">Default Params and Named Args</a></h3>
 <pre><code>fun foo(a: Int, b: Int = 0) {
 }
 

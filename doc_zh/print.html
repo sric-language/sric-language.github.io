@@ -160,11 +160,11 @@
 <p>内存安全的高性能编程语言</p>
 <h3 id="特性"><a class="header" href="#特性">特性</a></h3>
 <ul>
-<li>高性能：支持底层内存操作，没有垃圾收集器，和C++一样快。</li>
+<li>极限性能：支持底层内存操作，没有垃圾收集器，和C++一样快。</li>
 <li>内存安全：没有内存泄漏、没有悬垂指针等C++常见内存问题。</li>
 <li>容易学习：比C++和Rust简单很多。</li>
 <li>和C++交互：生成人类可读的C++代码。</li>
-<li>丰富的特性：面向对象、空指针安全、动态反射、模板泛型、闭包、协程等特性。</li>
+<li>现代特性：面向对象、空指针安全、动态反射、模板泛型、闭包、协程等特性。</li>
 <li>工具：VSCode插件和 LSP 支持。</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="为什么要用sric"><a class="header" href="#为什么要用sric">为什么要用Sric</a></h2>
@@ -708,7 +708,7 @@ var p3 = share(p1);
 </code></pre>
 <p>使用share函数，从一个所有权指针分裂出新的所有权指针，多个指针指向同一个内存地址。</p>
 <h4 id="唯一所有权指针"><a class="header" href="#唯一所有权指针">唯一所有权指针</a></h4>
-<p>uniq<em>是零开销的。和own</em>类似，但没有share()方法。</p>
+<p><code>uniq*</code>是零开销的。和<code>own*</code>类似，但没有share()方法。</p>
 <pre><code>var p1: uniq* Int = makeUniq$&lt;T&gt;();
 var p2 = move p1;
 </code></pre>
@@ -716,7 +716,7 @@ var p2 = move p1;
 <ul>
 <li>非所有权指针使用没有限制，不会像Rust那样有借用限制。</li>
 <li>程序会在运行时检查所引用的对象是否有效。</li>
-<li>所有权指针可以自动转换成非所有权指针和裸指针。</li>
+<li><code>own*</code>和<code>uniq*</code>可以自动转换成非所有权指针和裸指针。</li>
 </ul>
 <pre><code>var p1: own* Int = ...;
 var p4: * Int = p1;
@@ -750,7 +750,7 @@ unsafe {
 </code></pre>
 <p>引用可以理解为自动解引用的指针。给引用赋值会修改原始的内容。</p>
 <h2 id="数组-1"><a class="header" href="#数组-1">数组</a></h2>
-<p>数组特指静态大小数组。如果需要动态数组，请参考标准库中的DArray。
+<p>数组特指静态大小数组。如果需要动态数组，请参考标准库中的<code>DArray</code>。
 数组的括号写在类型前面</p>
 <pre><code>var a: [5]Int;
 </code></pre>
@@ -1123,7 +1123,7 @@ var wp: WeakPtr$&lt;Int&gt; = toWeak(p);
 <p>如果WeakPtr引用的对象已经被释放，则lock方法返回null。</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="wase"><a class="header" href="#wase">Wase</a></h1>
 <p>Wase是Sric开发的跨平台UI库，一套代码可同时编译运行在桌面端和Web浏览器中，未来将支持Android和iOS开发。Wase有着丰富的控件和优美的界面。支持配置文件创建UI，支持自定义样式。Wase使用自绘的方式现实，类似于Qt和Flutter，但是更加轻量级。Sric语言专门为其设计了逗号表达式语法，使它的声明式API类似于SwiftUI和React Native。</p>
-<p>learn more: https://github.com/sric-language/wase</p>
+<p>learn more: <a href="https://github.com/sric-language/wase">https://github.com/sric-language/wase</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="反射"><a class="header" href="#反射">反射</a></h3>
 <p>默认不启用反射，需要手动添加reflect标记。</p>
 <pre><code>reflect struct Point {

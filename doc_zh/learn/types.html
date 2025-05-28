@@ -186,7 +186,7 @@ var p3 = share(p1);
 </code></pre>
 <p>使用share函数，从一个所有权指针分裂出新的所有权指针，多个指针指向同一个内存地址。</p>
 <h4 id="唯一所有权指针"><a class="header" href="#唯一所有权指针">唯一所有权指针</a></h4>
-<p>uniq<em>是零开销的。和own</em>类似，但没有share()方法。</p>
+<p><code>uniq*</code>是零开销的。和<code>own*</code>类似，但没有share()方法。</p>
 <pre><code>var p1: uniq* Int = makeUniq$&lt;T&gt;();
 var p2 = move p1;
 </code></pre>
@@ -194,7 +194,7 @@ var p2 = move p1;
 <ul>
 <li>非所有权指针使用没有限制，不会像Rust那样有借用限制。</li>
 <li>程序会在运行时检查所引用的对象是否有效。</li>
-<li>所有权指针可以自动转换成非所有权指针和裸指针。</li>
+<li><code>own*</code>和<code>uniq*</code>可以自动转换成非所有权指针和裸指针。</li>
 </ul>
 <pre><code>var p1: own* Int = ...;
 var p4: * Int = p1;
@@ -228,7 +228,7 @@ unsafe {
 </code></pre>
 <p>引用可以理解为自动解引用的指针。给引用赋值会修改原始的内容。</p>
 <h2 id="数组"><a class="header" href="#数组">数组</a></h2>
-<p>数组特指静态大小数组。如果需要动态数组，请参考标准库中的DArray。
+<p>数组特指静态大小数组。如果需要动态数组，请参考标准库中的<code>DArray</code>。
 数组的括号写在类型前面</p>
 <pre><code>var a: [5]Int;
 </code></pre>

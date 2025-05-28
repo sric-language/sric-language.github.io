@@ -160,11 +160,11 @@
 <p>A memory-safe low-level systems programming language.</p>
 <h2 id="features"><a class="header" href="#features">Features</a></h2>
 <ul>
-<li>High-performance: low-level memeory access without GC.</li>
+<li>Blazing fast: low-level memeory access without GC.</li>
 <li>Memory safe: no memory leak, no dangling pointer.</li>
 <li>Easy to learn: simpler than C++ and Rust.</li>
 <li>Interoperate with C++: compile to human readable C++ code.</li>
-<li>Rich features: object-oriented, null safe, dynamic reflection，template, closure, coroutine.</li>
+<li>Modern features: object-oriented, null safe, dynamic reflection，template, closure, coroutine.</li>
 <li>Tools: VSCode plugin and LSP support.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="why-sric"><a class="header" href="#why-sric">Why Sric</a></h2>
@@ -205,7 +205,7 @@ var p1 = p; //compiler error;
 var p2 = move p;
 var p3 = share(p2);
 </code></pre>
-<p>Move or copy if the struct has ownership pointer:</p>
+<p>Move or copy a struct with ownership pointer:</p>
 <pre><code>struct A {
     var i: own* Int;
     fun copy(): A { ... }
@@ -216,14 +216,14 @@ var b = move a;
 var c = a.copy();
 </code></pre>
 <h3 id="unsafe"><a class="header" href="#unsafe">Unsafe</a></h3>
-<p>Dereference raw pointer in unsafe block</p>
+<p>Dereference a raw pointer in an <code>unsafe</code> block/function:</p>
 <pre><code>var p: raw* Int;
 ...
 unsafe {
     var i = *p;
 }
 </code></pre>
-<p>Unsafe function must call in unsafe block</p>
+<p>Unsafe functions must be called in an <code>unsafe</code> block/function:</p>
 <pre><code>unsafe fun foo() { ... }
 
 fun main() {
@@ -233,7 +233,7 @@ fun main() {
 }
 </code></pre>
 <h3 id="inheritance"><a class="header" href="#inheritance">Inheritance</a></h3>
-<p>Single inheritance</p>
+<p>Single inheritance, similar to Java:</p>
 <pre><code>trait I {
     virtual fun foo();
 }
@@ -250,8 +250,8 @@ struct A : B, I {
 }
 
 </code></pre>
-<h3 id="with-block"><a class="header" href="#with-block">With Block</a></h3>
-<p>The with Block is not C++ designated initialization. It can contain any statement.</p>
+<h3 id="with-block"><a class="header" href="#with-block">With-Block</a></h3>
+<p>A with-block is not like C++'s named initialization; it can contain any statements:</p>
 <pre><code>struct A {
     var i: Int;
     fun init() { ... }
@@ -272,7 +272,7 @@ b.foo();
 var b = p is own* A;
 </code></pre>
 <h3 id="array"><a class="header" href="#array">Array</a></h3>
-<p>static size Array</p>
+<p>Statically sized arrays:</p>
 <pre><code>var a  = []Int { 1,2,3 };
 var a: [15]Int;
 </code></pre>
@@ -296,7 +296,7 @@ var b: Bar$&lt;Int&gt;;
 var b: own* B = a;
 </code></pre>
 <h3 id="immutable"><a class="header" href="#immutable">Immutable</a></h3>
-<p>Just like C++</p>
+<p>Similar to C++:</p>
 <pre><code>var p : raw* const Int;
 var p : const raw* Int;
 var p : const raw* const Int;
@@ -307,7 +307,7 @@ private
 protected
 readonly
 </code></pre>
-<p><code>readonly</code> means public read access, private write access.</p>
+<p><code>readonly</code> means publicly readable but privately writable.</p>
 <h3 id="operator-overloading"><a class="header" href="#operator-overloading">Operator Overloading</a></h3>
 <pre><code>struct A {
     operator fun mult(a: A): A { ... }
@@ -315,7 +315,7 @@ readonly
 
 var c = a * b;
 </code></pre>
-<p>operator methods:</p>
+<p>Overloadable operators:</p>
 <pre><code>methods    symbol
 ------     ------
 plus       a + b 
@@ -349,7 +349,7 @@ import std::Vec;
 
 foo(fun(a:Int){ ... });
 </code></pre>
-<h3 id="typealias"><a class="header" href="#typealias">Typealias</a></h3>
+<h3 id="type-alias"><a class="header" href="#type-alias">Type Alias</a></h3>
 <p>typealias:</p>
 <pre><code>typealias VecInt = std::Vec$&lt;Int&gt;;
 </code></pre>
@@ -360,7 +360,7 @@ foo(fun(a:Int){ ... });
 
 var c = Color::red;
 </code></pre>
-<h3 id="default-param-and-named-arg"><a class="header" href="#default-param-and-named-arg">Default Param and Named Arg</a></h3>
+<h3 id="default-params-and-named-args"><a class="header" href="#default-params-and-named-args">Default Params and Named Args</a></h3>
 <pre><code>fun foo(a: Int, b: Int = 0) {
 }
 
@@ -434,7 +434,7 @@ struct Point {
 <li>No implicit copying of large objects</li>
 <li>No define multi var per statement</li>
 <li>No nested class, nested function</li>
-<li>No class, just struct</li>
+<li>No class, only struct</li>
 <li>No namespace</li>
 <li>No macro</li>
 <li>No forward declarations</li>
@@ -442,7 +442,7 @@ struct Point {
 <li>No friend class</li>
 <li>No multiple inheritance</li>
 <li>No virtual,private inheritance</li>
-<li>No i++ just ++i</li>
+<li>No i++ only ++i</li>
 <li>No switch auto fallthrough</li>
 <li>No template specialization</li>
 <li>No various constructors</li>
@@ -710,7 +710,7 @@ var p2 = move p1;          // Transfer ownership
 var p3 = share(p1);        // Shared ownership
 </code></pre>
 <h4 id="unique-pointers"><a class="header" href="#unique-pointers">Unique Pointers</a></h4>
-<p>uniq* is zero-overhead. Similar to own*, but without a share() method.</p>
+<p><code>uniq*</code> is zero-overhead. Similar to <code>own*</code>, but without a share() method.</p>
 <pre><code class="language-sric">var p1: uniq* Int = makeUniq$&lt;T&gt;();
 var p2 = move p1;
 </code></pre>
@@ -718,7 +718,7 @@ var p2 = move p1;
 <ul>
 <li>No borrowing restrictions like Rust</li>
 <li>Runtime validity checks</li>
-<li>Implicit conversion from owning pointers:</li>
+<li>Implicit conversion from <code>own*</code>/<code>uniq*</code>:</li>
 </ul>
 <pre><code class="language-sric">var p1: own* Int = ...;
 var p4: * Int = p1;       // Non-owning
@@ -751,7 +751,7 @@ unsafe {
 <pre><code class="language-sric">fun foo(a: &amp; const Int) {}  // Auto-dereferencing
 </code></pre>
 <h2 id="arrays"><a class="header" href="#arrays">Arrays</a></h2>
-<p>Fixed-size arrays (for dynamic arrays see DArray):</p>
+<p>Fixed-size arrays (for dynamic arrays see <code>DArray</code>):</p>
 <pre><code class="language-sric">var a: [5]Int;                // Explicit size
 var a = []Int { 1,3,4 };      // Size inference
 constexpr var size = 15;
@@ -1106,7 +1106,7 @@ var wp: WeakPtr$&lt;Int&gt; = toWeak(p);
 <p>Returns null if referenced object was freed.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="wase"><a class="header" href="#wase">Wase</a></h1>
 <p>Wase is a cross-platform UI library developed by Sric. With a single codebase, it can be compiled and run on both desktop and web browsers, with future support for Android and iOS development. Wase offers a rich set of controls and elegant interfaces. Support creation UI from configuration file and support custom styles. It employs a self-rendering approach, similar to Qt and Flutter, but is more lightweight. The Sric language has specially designed comma-expression syntax for Wase, enabling a declarative API style comparable to SwiftUI and React Native.</p>
-<p>learn more: https://github.com/sric-language/wase</p>
+<p>learn more: <a href="https://github.com/sric-language/wase">https://github.com/sric-language/wase</a></p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="reflection"><a class="header" href="#reflection">Reflection</a></h3>
 <p>Reflection is disabled by default and requires explicit <code>reflect</code> marker:</p>
 <pre><code class="language-sric">reflect struct Point {
