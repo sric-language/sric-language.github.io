@@ -159,13 +159,12 @@
 <h3 id="overview"><a class="header" href="#overview">Overview</a></h3>
 <ul>
 <li><code>sric</code>: Built-in standard library</li>
-<li><code>cstd</code>: C standard library wrappers</li>
 <li><code>jsonc</code>: JSON parsing/compression</li>
 <li><code>serial</code>: Serialization using dynamic reflection</li>
 </ul>
 <p><a href="/apidoc.html">API Documentation</a></p>
 <h3 id="using-c-libraries"><a class="header" href="#using-c-libraries">Using C Libraries</a></h3>
-<p>The <code>cstd</code> module only exports common C functions - contributions welcome.</p>
+<p>The <code>sric</code> module only exports common C functions.</p>
 <p>To use unexported C functions:</p>
 <pre><code class="language-sric">externc fun printf(format: raw* const Int8, args: ...);
 

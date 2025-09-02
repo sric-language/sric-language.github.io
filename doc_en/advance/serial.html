@@ -188,6 +188,15 @@ unsafe fun testSimple() {
     var y: Float;
 }
 </code></pre>
+<p>Dynamically decide using the _isTransient method.</p>
+<pre><code>reflect struct Point {
+    var x: Int;
+
+    fun _isTransient(): Bool {
+        return false;
+    }
+}
+</code></pre>
 <h3 id="post-deserialization-handling"><a class="header" href="#post-deserialization-handling">Post-Deserialization Handling</a></h3>
 <p>The _onDeserialize method is automatically called after deserialization:</p>
 <pre><code class="language-sric">reflect struct Point {

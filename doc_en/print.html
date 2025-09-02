@@ -332,7 +332,7 @@ add        a,b,c;
 summary = hello
 outType = exe
 version = 1.0
-depends = sric 1.0, cstd 1.0
+depends = sric 1.0
 srcDirs = ./
 </code></pre>
 <p>import external module in code:</p>
@@ -411,7 +411,7 @@ public:
 };
 </code></pre>
 <p>Sric:</p>
-<pre><code>import cstd::*;
+<pre><code>import sric::*;
 
 struct Point {
     var x: Int;
@@ -526,7 +526,7 @@ sh build_debug.sh
 <p>Create a file named main.sric with the following content:</p>
 </li>
 </ol>
-<pre><code>import cstd::*;
+<pre><code>import sric::*;
 
 fun main(): Int {
     printf("Hello World\n");
@@ -540,7 +540,7 @@ fun main(): Int {
 summary = hello  
 outType = exe  
 version = 1.0  
-depends = sric 1.0, cstd 1.0  
+depends = sric 1.0
 srcDirs = ./
 </code></pre>
 <ol start="4">
@@ -570,8 +570,7 @@ srcDirs = ./
 </code></pre>
 <p>The generated project files are located in the build folder under the parent directory.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="guess-number-game"><a class="header" href="#guess-number-game">Guess Number Game</a></h2>
-<pre><code>import cstd::*;
-import sric::*;
+<pre><code>import sric::*;
 
 fun main(): Int {
     //init random seed
@@ -1034,7 +1033,7 @@ add        a,b,c;
 summary = hello
 outType = exe
 version = 1.0
-depends = sric 1.0, cstd 1.0
+depends = sric 1.0
 srcDirs = ./
 </code></pre>
 <p>The source directory srcDirs must end with <code>/.</code> The compiler will automatically search all .sric files in the directory.</p>
@@ -1048,13 +1047,12 @@ import sric::DArray;
 <h3 id="overview"><a class="header" href="#overview">Overview</a></h3>
 <ul>
 <li><code>sric</code>: Built-in standard library</li>
-<li><code>cstd</code>: C standard library wrappers</li>
 <li><code>jsonc</code>: JSON parsing/compression</li>
 <li><code>serial</code>: Serialization using dynamic reflection</li>
 </ul>
 <p><a href="stdlib//apidoc.html">API Documentation</a></p>
 <h3 id="using-c-libraries"><a class="header" href="#using-c-libraries">Using C Libraries</a></h3>
-<p>The <code>cstd</code> module only exports common C functions - contributions welcome.</p>
+<p>The <code>sric</code> module only exports common C functions.</p>
 <p>To use unexported C functions:</p>
 <pre><code class="language-sric">externc fun printf(format: raw* const Int8, args: ...);
 
@@ -1281,6 +1279,15 @@ unsafe fun testSimple() {
     var x: Int;
     //@Transient
     var y: Float;
+}
+</code></pre>
+<p>Dynamically decide using the _isTransient method.</p>
+<pre><code>reflect struct Point {
+    var x: Int;
+
+    fun _isTransient(): Bool {
+        return false;
+    }
 }
 </code></pre>
 <h3 id="post-deserialization-handling"><a class="header" href="#post-deserialization-handling">Post-Deserialization Handling</a></h3>

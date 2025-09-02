@@ -332,7 +332,7 @@ add        a,b,c;
 summary = hello
 outType = exe
 version = 1.0
-depends = sric 1.0, cstd 1.0
+depends = sric 1.0
 srcDirs = ./
 </code></pre>
 <p>在代码里面导入外部模块:</p>
@@ -411,7 +411,7 @@ public:
 };
 </code></pre>
 <p>Sric:</p>
-<pre><code>import cstd::*;
+<pre><code>import sric::*;
 
 struct Point {
     var x: Int;
@@ -522,7 +522,7 @@ sh build_debug.sh
 <li>创建一个空文件夹作为工作空间</li>
 <li>创建文件main.sric，内容如下:</li>
 </ol>
-<pre><code>import cstd::*;
+<pre><code>import sric::*;
 
 fun main(): Int {
     printf("Hello World\n");
@@ -537,7 +537,7 @@ fun main(): Int {
 summary = hello
 outType = exe
 version = 1.0
-depends = sric 1.0, cstd 1.0
+depends = sric 1.0
 srcDirs = ./
 </code></pre>
 <ol start="4">
@@ -567,8 +567,7 @@ srcDirs = ./
 </code></pre>
 <p>生成的项目文件在上层目录的build文件夹下。</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="猜数字游戏"><a class="header" href="#猜数字游戏">猜数字游戏</a></h2>
-<pre><code>import cstd::*;
-import sric::*;
+<pre><code>import sric::*;
 
 fun main(): Int {
     //init random seed
@@ -1050,7 +1049,7 @@ add        a,b,c;
 summary = hello
 outType = exe
 version = 1.0
-depends = sric 1.0, cstd 1.0
+depends = sric 1.0
 srcDirs = ./
 </code></pre>
 <p>源码目录srcDirs需要以<code>/</code>结尾，编译器会自动搜索目录下的所有.sric文件。</p>
@@ -1064,7 +1063,6 @@ import sric::DArray;
 <h3 id="概述"><a class="header" href="#概述">概述</a></h3>
 <ul>
 <li>sric: 自带标准库</li>
-<li>cstd： C语言库</li>
 <li>jsonc: JSON解析和压缩库</li>
 <li>serial： 序列化库，基于动态反射功能。</li>
 </ul>
@@ -1298,6 +1296,15 @@ unsafe fun testSimple() {
 
     //@Transient
     var y: Float;
+}
+</code></pre>
+<p>如果本身不想序列化，可以通过_isTransient方法来动态决定</p>
+<pre><code>reflect struct Point {
+    var x: Int;
+
+    fun _isTransient(): Bool {
+        return false;
+    }
 }
 </code></pre>
 <h3 id="反序列化后处理"><a class="header" href="#反序列化后处理">反序列化后处理</a></h3>
