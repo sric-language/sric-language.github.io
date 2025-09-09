@@ -158,41 +158,41 @@
                         <h2 id="closureslambdas"><a class="header" href="#closureslambdas">Closures/Lambdas</a></h2>
 <p>Anonymous functions are defined using the <code>fun</code> keyword:</p>
 <pre><code>fun foo(f: fun(a:Int):Int) {
-    f(1);
+    f(1)
 }
 
 foo(fun(a:Int):Int{
-    printf("%d\n", a);
-    return a + 1;
+    printf("%d\n", a)
+    return a + 1
 });
 </code></pre>
 <p>Return type inference is not yet supported for closures - the return type must be explicitly specified.</p>
 <h2 id="variable-capture"><a class="header" href="#variable-capture">Variable Capture</a></h2>
 <p>By default, external variables are captured by value:</p>
-<pre><code>var i = 0;
+<pre><code>var i = 0
 var f = fun(a:Int):Int{
-    return a + i;
+    return a + i
 };
 </code></pre>
 <h2 id="static-closures"><a class="header" href="#static-closures">Static Closures</a></h2>
 <p>Static closures are state-less closures marked with <code>static</code>. They cannot capture variables:</p>
-<pre><code>var f : fun(a:Int) static : Int;
+<pre><code>var f : fun(a:Int) static : Int
 </code></pre>
 <h2 id="reference-capture"><a class="header" href="#reference-capture">Reference Capture</a></h2>
 <p>C++-style reference capture is not supported. For reference capture, you need to explicitly take the address:</p>
-<pre><code>var i = 0;
-var ri = &amp;i;
+<pre><code>var i = 0
+var ri = &amp;i
 var f = fun(a:Int):Int{
-    return a + *ri;
+    return a + *ri
 };
 </code></pre>
 <h2 id="move-capture"><a class="header" href="#move-capture">Move Capture</a></h2>
 <p>C++-style move capture is not supported. Use <code>AutoMove</code> to wrap objects and avoid explicit move instructions:</p>
-<pre><code>var arr: DArray;
-var autoMove = AutoMove { .set(arr); };
+<pre><code>var arr: DArray
+var autoMove = AutoMove { .set(arr) }
 
 var f = fun() {
-    var s = autoMove.get().size();
+    var s = autoMove.get().size()
 }
 </code></pre>
 

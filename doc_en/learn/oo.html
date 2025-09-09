@@ -158,16 +158,16 @@
                         <h2 id="struct"><a class="header" href="#struct">Struct</a></h2>
 <p>Classes don't have parameterized constructors - callers must initialize them manually:</p>
 <pre><code>struct Point {
-    var x: Int = 0;
-    var y: Int = uninit;
-    var z: Int;
+    var x: Int = 0
+    var y: Int = uninit
+    var z: Int
 }
-var p = Point { .y = 1; };
+var p = Point { .y = 1 }
 </code></pre>
 <p>Initialization uses with blocks (different from C's named initialization). These blocks can contain any statements and work in non-initialization contexts:</p>
-<pre><code>var point = Point { .y = 1; };
+<pre><code>var point = Point { .y = 1 }
 point {
-    .x = 2; if (a) { .y = 3; }
+    .x = 2; if (a) { .y = 3 }
 }
 </code></pre>
 <h2 id="methods"><a class="header" href="#methods">Methods</a></h2>
@@ -188,7 +188,7 @@ point {
     static fun foo() {
     }
 }
-Point::foo();
+Point::foo()
 </code></pre>
 <h2 id="inheritance"><a class="header" href="#inheritance">Inheritance</a></h2>
 <ul>
@@ -203,7 +203,7 @@ Point::foo();
     virtual fun foo() {}
 }
 trait I {
-    abstract fun foo2();
+    abstract fun foo2()
 }
 struct A : B , I {
     override fun foo2() {}
@@ -220,9 +220,9 @@ struct A : B , I {
 </code></pre>
 <p>Destructors are rarely needed due to automatic memory management via ownership. Constructors exist mainly to handle complex initialization logic:</p>
 <pre><code>struct A {
-    var p : own* Int = ...;
+    var p : own* Int = ...
     fun new() {
-        p = new Int;
+        p = new Int
     }
 }
 </code></pre>

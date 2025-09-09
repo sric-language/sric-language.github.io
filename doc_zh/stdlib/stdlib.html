@@ -166,46 +166,46 @@
 <h3 id="使用c语言库"><a class="header" href="#使用c语言库">使用C语言库</a></h3>
 <p>cstd模块只导出了一部分常用的C函数，期待您的补充。</p>
 <p>如果使用到没有导出的C语言库，可自行导出。例如:</p>
-<pre><code>externc fun printf(format: raw* const Int8, args: ...);
+<pre><code>externc fun printf(format: raw* const Int8, args: ...)
 
 fun main() {
-    printf("Hello World\n");
+    printf("Hello World\n")
 }
 </code></pre>
 <p>使用externc声明即可。宏按照const变量来声明。
 更多请参见<a href="cpp.html">C++交互</a>。</p>
 <h3 id="string"><a class="header" href="#string">String</a></h3>
 <p>在Sric中字符串是raw* const Int8类型的，可以自动转为String类型。</p>
-<pre><code>var str: String = "abc";
+<pre><code>var str: String = "abc"
 </code></pre>
 <p>有些情况下可能需要手动转String:</p>
-<pre><code>var str = asStr("abc");
+<pre><code>var str = asStr("abc")
 </code></pre>
 <h3 id="darray"><a class="header" href="#darray">DArray</a></h3>
 <p>DArray类似于C++的std::vector。用于存储需要动态增长大小的数据。</p>
-<pre><code>var a : DArray$&lt;Int&gt;;
-a.add(1);
-a.add(2);
+<pre><code>var a : DArray$&lt;Int&gt;
+a.add(1)
+a.add(2)
 
-verify(a[0] == 1);
+verify(a[0] == 1)
 </code></pre>
 <h3 id="hashmap"><a class="header" href="#hashmap">HashMap</a></h3>
 <p>HashMap用来存储key-value数据。</p>
-<pre><code>var map = HashMap$&lt;Int, String&gt;{};
-map.set(1, "1");
-map.set(2, "2");
+<pre><code>var map = HashMap$&lt;Int, String&gt;{}
+map.set(1, "1")
+map.set(2, "2")
 
-verify(map[2] == "2");
+verify(map[2] == "2")
 </code></pre>
 <h3 id="读写文件"><a class="header" href="#读写文件">读写文件</a></h3>
 <p>可用FileStream来读写文件。</p>
 <p>写入文件：</p>
-<pre><code>var stream = FileStream::open("tmp.txt", "wb");
-stream.writeStr("Hello\nWorld");
+<pre><code>var stream = FileStream::open("tmp.txt", "wb")
+stream.writeStr("Hello\nWorld")
 </code></pre>
 <p>读取文件:</p>
-<pre><code>var stream = FileStream::open("tmp.txt", "rb");
-var line = stream.readAllStr();
+<pre><code>var stream = FileStream::open("tmp.txt", "rb")
+var line = stream.readAllStr()
 </code></pre>
 <p>第二个参数的含义，参见C语言的fopen函数。</p>
 

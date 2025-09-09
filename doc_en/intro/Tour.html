@@ -156,36 +156,36 @@
                 <div id="content" class="content">
                     <main>
                         <h3 id="data-type"><a class="header" href="#data-type">Data Type</a></h3>
-<pre><code>var p: Int             //value type
-var p: own* Int;       //ownership pointer
-var p: * Int;          //non-owning pointer
-var p: &amp; Int;          //reference
-var p: raw* Int;       //unsafe raw pointer
-var p: uniq* Int;      //unique pointer
+<pre><code>var p: Int            //value type
+var p: own* Int       //ownership pointer
+var p: * Int          //non-owning pointer
+var p: &amp; Int          //reference
+var p: raw* Int       //unsafe raw pointer
+var p: uniq* Int      //unique pointer
 </code></pre>
 <h3 id="explicit-copy-or-move"><a class="header" href="#explicit-copy-or-move">Explicit Copy or Move</a></h3>
 <p>Move or share ownership pointer</p>
-<pre><code>var p: own* Int = ...;
-var p1 = p; //compiler error;
-var p2 = move p;
-var p3 = share(p2);
+<pre><code>var p: own* Int = ...
+var p1 = p //compiler error
+var p2 = move p
+var p3 = share(p2)
 </code></pre>
 <p>Move or copy a struct with ownership pointer:</p>
 <pre><code>struct A {
-    var i: own* Int;
+    var i: own* Int
     fun copy(): A { ... }
 }
-var a: A;
-var x = a; //compile error
-var b = move a;
-var c = a.copy();
+var a: A
+var x = a //compile error
+var b = move a
+var c = a.copy()
 </code></pre>
 <h3 id="unsafe"><a class="header" href="#unsafe">Unsafe</a></h3>
 <p>Dereference a raw pointer in an <code>unsafe</code> block/function:</p>
-<pre><code>var p: raw* Int;
+<pre><code>var p: raw* Int
 ...
 unsafe {
-    var i = *p;
+    var i = *p
 }
 </code></pre>
 <p>Unsafe functions must be called in an <code>unsafe</code> block/function:</p>
@@ -193,18 +193,18 @@ unsafe {
 
 fun main() {
     unsafe {
-        foo();
+        foo()
     }
 }
 </code></pre>
 <h3 id="inheritance"><a class="header" href="#inheritance">Inheritance</a></h3>
 <p>Single inheritance, similar to Java:</p>
 <pre><code>trait I {
-    virtual fun foo();
+    virtual fun foo()
 }
 
 virtual struct B {
-    var a: Int;
+    var a: Int
     fun bar() { ... }
 }
 
@@ -218,28 +218,28 @@ struct A : B, I {
 <h3 id="with-block"><a class="header" href="#with-block">With-Block</a></h3>
 <p>A with-block is not like C++'s named initialization; it can contain any statements:</p>
 <pre><code>struct A {
-    var i: Int;
+    var i: Int
     fun init() { ... }
 }
 
-var a  = A { .init(); .i = 0; };
-var a: own* A = new A { .i = 0; };
+var a  = A { .init(); .i = 0 }
+var a: own* A = new A { .i = 0 }
 </code></pre>
 <h3 id="pointer-usage"><a class="header" href="#pointer-usage">Pointer Usage</a></h3>
 <p>Always access by <code>.</code></p>
-<pre><code>var a: A;
-var b: own* A;
-a.foo();
-b.foo();
+<pre><code>var a: A
+var b: own* A
+a.foo()
+b.foo()
 </code></pre>
 <h3 id="type-cast-and-check"><a class="header" href="#type-cast-and-check">Type Cast and Check</a></h3>
-<pre><code>var a = p as own* A;
-var b = p is own* A;
+<pre><code>var a = p as own* A
+var b = p is own* A
 </code></pre>
 <h3 id="array"><a class="header" href="#array">Array</a></h3>
 <p>Statically sized arrays:</p>
-<pre><code>var a  = []Int { 1,2,3 };
-var a: [15]Int;
+<pre><code>var a  = []Int { 1,2,3 }
+var a: [15]Int
 </code></pre>
 <h3 id="generic-type"><a class="header" href="#generic-type">Generic Type</a></h3>
 <p>Generic params start with <code>$&lt;</code></p>
@@ -250,21 +250,21 @@ var a: [15]Int;
 }
 
 T fun foo$&lt;T&gt;(a: T) {
-    return a;
+    return a
 }
 
-var b: Bar$&lt;Int&gt;;
+var b: Bar$&lt;Int&gt;
 </code></pre>
 <h3 id="null-safe"><a class="header" href="#null-safe">Null safe</a></h3>
 <p>Pointer is non-nullable by default.</p>
-<pre><code>var a: own*? B;
-var b: own* B = a;
+<pre><code>var a: own*? B
+var b: own* B = a
 </code></pre>
 <h3 id="immutable"><a class="header" href="#immutable">Immutable</a></h3>
 <p>Similar to C++:</p>
-<pre><code>var p : raw* const Int;
-var p : const raw* Int;
-var p : const raw* const Int;
+<pre><code>var p : raw* const Int
+var p : const raw* Int
+var p : const raw* const Int
 </code></pre>
 <h3 id="protection"><a class="header" href="#protection">Protection</a></h3>
 <pre><code>public
@@ -278,7 +278,7 @@ readonly
     operator fun mult(a: A): A { ... }
 }
 
-var c = a * b;
+var c = a * b
 </code></pre>
 <p>Overloadable operators:</p>
 <pre><code>methods    symbol
@@ -304,40 +304,40 @@ depends = sric 1.0
 srcDirs = ./
 </code></pre>
 <p>import external module in code:</p>
-<pre><code>import std::*;
-import std::Vec;
+<pre><code>import std::*
+import std::Vec
 </code></pre>
 <h3 id="closure"><a class="header" href="#closure">Closure</a></h3>
 <pre><code>fun foo(f: fun(a:Int) ) {
-    f(1);
+    f(1)
 }
 
-foo(fun(a:Int){ ... });
+foo(fun(a:Int){ ... })
 </code></pre>
 <h3 id="type-alias"><a class="header" href="#type-alias">Type Alias</a></h3>
 <p>typealias:</p>
-<pre><code>typealias VecInt = std::Vec$&lt;Int&gt;;
+<pre><code>typealias VecInt = std::Vec$&lt;Int&gt;
 </code></pre>
 <h3 id="enum"><a class="header" href="#enum">Enum</a></h3>
 <pre><code>enum Color {
     red = 1, green, blue
 }
 
-var c = Color::red;
+var c = Color::red
 </code></pre>
 <h3 id="default-params-and-named-args"><a class="header" href="#default-params-and-named-args">Default Params and Named Args</a></h3>
 <pre><code>fun foo(a: Int, b: Int = 0) {
 }
 
 fun main() {
-    foo(a : 10);
+    foo(a : 10)
 }
 </code></pre>
 <h3 id="coroutine"><a class="header" href="#coroutine">Coroutine</a></h3>
 <pre><code>async fun test2() : Int {
-    var i = 0;
-    i = await testCallback();
-    return i + 1;
+    var i = 0
+    i = await testCallback()
+    return i + 1
 }
 </code></pre>
 

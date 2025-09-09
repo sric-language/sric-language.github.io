@@ -162,31 +162,31 @@
 <li>Three pointer types: owning, non-owning, and raw</li>
 <li>Asterisk placement differs from C/C++ (before type)</li>
 </ul>
-<pre><code class="language-sric">var p: Int             // Value type
-var p: own* Int;       // Owning pointer
-var p: * Int;          // Non-owning pointer
-var p: &amp; Int;          // Reference
-var p: raw* Int;       // Raw pointer
-var p: uniq* Int;      // Unique pointer
+<pre><code class="language-sric">var p: Int            // Value type
+var p: own* Int       // Owning pointer
+var p: * Int          // Non-owning pointer
+var p: &amp; Int          // Reference
+var p: raw* Int       // Raw pointer
+var p: uniq* Int      // Unique pointer
 </code></pre>
 <p>Sric also provides C++-style smart pointers (SharedPtr, WeakPtr) via standard library.</p>
 <h3 id="memory-allocation"><a class="header" href="#memory-allocation">Memory Allocation</a></h3>
 <p>Get pointers via address-of operator or <code>new</code>:</p>
-<pre><code class="language-sric">var i: own* Int = new Int;  // Parentheses omitted (no constructors)
+<pre><code class="language-sric">var i: own* Int = new Int  // Parentheses omitted (no constructors)
 </code></pre>
 <h4 id="owning-pointers"><a class="header" href="#owning-pointers">Owning Pointers</a></h4>
 <ul>
 <li>Own their objects (auto-released at scope exit)</li>
 <li>Require explicit move/copy during transfer:</li>
 </ul>
-<pre><code class="language-sric">var p1: own* Int = ...;
-var p2 = move p1;          // Transfer ownership
-var p3 = share(p1);        // Shared ownership
+<pre><code class="language-sric">var p1: own* Int = ...
+var p2 = move p1          // Transfer ownership
+var p3 = share(p1)        // Shared ownership
 </code></pre>
 <h4 id="unique-pointers"><a class="header" href="#unique-pointers">Unique Pointers</a></h4>
 <p><code>uniq*</code> is zero-overhead. Similar to <code>own*</code>, but without a share() method.</p>
-<pre><code class="language-sric">var p1: uniq* Int = makeUniq$&lt;T&gt;();
-var p2 = move p1;
+<pre><code class="language-sric">var p1: uniq* Int = makeUniq$&lt;T&gt;()
+var p2 = move p1
 </code></pre>
 <h4 id="non-owning-pointers"><a class="header" href="#non-owning-pointers">Non-owning Pointers</a></h4>
 <ul>
@@ -194,30 +194,30 @@ var p2 = move p1;
 <li>Runtime validity checks</li>
 <li>Implicit conversion from <code>own*</code>/<code>uniq*</code>:</li>
 </ul>
-<pre><code class="language-sric">var p1: own* Int = ...;
-var p4: * Int = p1;       // Non-owning
-var p5: raw* Int = p1;    // Raw
+<pre><code class="language-sric">var p1: own* Int = ...
+var p4: * Int = p1       // Non-owning
+var p5: raw* Int = p1    // Raw
 </code></pre>
 <h4 id="raw-pointers"><a class="header" href="#raw-pointers">Raw Pointers</a></h4>
 <ul>
 <li>C/C++-style pointers (require <code>unsafe</code>):</li>
 </ul>
-<pre><code class="language-sric">var p: raw* Int = ...;
+<pre><code class="language-sric">var p: raw* Int = ...
 unsafe {
-    var i = *p;
+    var i = *p
 }
 </code></pre>
 <h2 id="address-of-operator"><a class="header" href="#address-of-operator">Address-of Operator</a></h2>
 <p>Get pointers from values (non-owning by default):</p>
-<pre><code class="language-sric">var i: Int = 0;
-var p: *Int = &amp;i;
+<pre><code class="language-sric">var i: Int = 0
+var p: *Int = &amp;i
 </code></pre>
 <h2 id="pointer-arithmetic"><a class="header" href="#pointer-arithmetic">Pointer Arithmetic</a></h2>
 <p>Only allowed for raw pointers in <code>unsafe</code> contexts:</p>
-<pre><code class="language-sric">var p : raw* Int = ...;
+<pre><code class="language-sric">var p : raw* Int = ...
 unsafe {
-    ++p;
-    p = p + 2;
+    ++p
+    p = p + 2
 }
 </code></pre>
 <h2 id="references"><a class="header" href="#references">References</a></h2>
@@ -226,21 +226,21 @@ unsafe {
 </code></pre>
 <h2 id="arrays"><a class="header" href="#arrays">Arrays</a></h2>
 <p>Fixed-size arrays (for dynamic arrays see <code>DArray</code>):</p>
-<pre><code class="language-sric">var a: [5]Int;                // Explicit size
-var a = []Int { 1,3,4 };      // Size inference
-constexpr var size = 15;
-var a: [size]Int;             // Constexpr size
+<pre><code class="language-sric">var a: [5]Int                // Explicit size
+var a = []Int { 1,3,4 }      // Size inference
+constexpr var size = 15
+var a: [size]Int             // Constexpr size
 </code></pre>
 <h2 id="null-safety"><a class="header" href="#null-safety">Null Safety</a></h2>
 <p>Pointers are non-nullable by default (use <code>?</code> for nullable):</p>
-<pre><code class="language-sric">var a: own*? B = null;     // Valid
-var a: own* B = null;      // Compile error
+<pre><code class="language-sric">var a: own*? B = null     // Valid
+var a: own* B = null      // Compile error
 </code></pre>
 <h2 id="immutability"><a class="header" href="#immutability">Immutability</a></h2>
 <p><code>const</code> can modify either pointer or pointee:</p>
-<pre><code class="language-sric">var p : raw* const Int;     // Immutable value
-var p : const raw* Int;     // Immutable pointer
-var p : const raw* const Int;  // Both
+<pre><code class="language-sric">var p : raw* const Int     // Immutable value
+var p : const raw* Int     // Immutable pointer
+var p : const raw* const Int  // Both
 </code></pre>
 
                     </main>

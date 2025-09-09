@@ -166,16 +166,16 @@
 <h3 id="字符串"><a class="header" href="#字符串">字符串</a></h3>
 <p>字符串可以多行</p>
 <pre><code>var s = "ab
-         cd";
+         cd"
 </code></pre>
 <p>三引号字符串，密码的双引号不需要转义。</p>
 <pre><code>var s = """ab"
-           cd""";
+           cd"""
 </code></pre>
 <p>字符串字面量的类型是raw*const Int8, 可以自动转为sric::String</p>
 <h3 id="字符"><a class="header" href="#字符">字符</a></h3>
 <p>字符是指单个字母，类型是Int8</p>
-<pre><code>var c : Int8 = 'A';
+<pre><code>var c : Int8 = 'A'
 </code></pre>
 <h3 id="注释"><a class="header" href="#注释">注释</a></h3>
 <p>单行注释</p>
@@ -202,16 +202,16 @@
 <li>变量类型写变量后。</li>
 <li>每个语句只能定义一个变量。</li>
 </ul>
-<pre><code>var i: Int = 0;
+<pre><code>var i: Int = 0
 </code></pre>
 <p>只有函数内的局部变量才支持类型推断</p>
-<pre><code>var i = 0;
+<pre><code>var i = 0
 </code></pre>
 <p>变量自动初始化为默认值，如果想保持随机值，则使用uninit关键字。</p>
-<pre><code>var i = uninit;
+<pre><code>var i = uninit
 </code></pre>
 <p>全局变量必须是不可变的，除非加unsafe修饰</p>
-<pre><code>var i: const Int = 0;
+<pre><code>var i: const Int = 0
 </code></pre>
 <h3 id="函数定义"><a class="header" href="#函数定义">函数定义</a></h3>
 <ul>
@@ -219,12 +219,12 @@
 <li>返回值是Void时，可省略返回值</li>
 <li>函数的名称必须是唯一值的，不支持通过参数重载</li>
 </ul>
-<pre><code>fun foo(a: Int): Int { return 0; }
+<pre><code>fun foo(a: Int): Int { return 0 }
 fun foo2() {}
 </code></pre>
 <p>默认参数和命名参数</p>
 <pre><code>fun foo(a: Int, b: Int = 0) {}
-foo(a: 1);
+foo(a: 1)
 </code></pre>
 <p>命名参数让你能显式写出参数名称，增加可读性。</p>
 <h3 id="前向声明"><a class="header" href="#前向声明">前向声明</a></h3>
@@ -239,7 +239,7 @@ readonly
 </code></pre>
 <p>例如</p>
 <pre><code>private fun foo() {}
-readonly var i: Int = 0;
+readonly var i: Int = 0
 </code></pre>
 <ul>
 <li>全局变量和函数的可见性保护区域是当前文件，如果声明为private则外部文件不可见。</li>

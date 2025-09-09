@@ -158,16 +158,16 @@
                         <h2 id="结构"><a class="header" href="#结构">结构</a></h2>
 <p>类没有有参构造函数，需要调用者自己初始化。</p>
 <pre><code>struct Point {
-    var x: Int = 0;
-    var y: Int = uninit;
-    var z: Int;
+    var x: Int = 0
+    var y: Int = uninit
+    var z: Int
 }
-var p = Point { .y = 1; };
+var p = Point { .y = 1 }
 </code></pre>
 <p>初始化的语法叫做with块，不同于C的命名初始化。with块可以包含任何语句，并且可以用在非初始化场景。例如</p>
-<pre><code>var point = Point { .y = 1; };
+<pre><code>var point = Point { .y = 1 }
 point {
-    .x = 2; if (a) { .y = 3; }
+    .x = 2; if (a) { .y = 3 }
 }
 </code></pre>
 <h2 id="方法"><a class="header" href="#方法">方法</a></h2>
@@ -189,7 +189,7 @@ point {
     }
 }
 
-Point::foo();
+Point::foo()
 </code></pre>
 <h2 id="继承"><a class="header" href="#继承">继承</a></h2>
 <ul>
@@ -224,7 +224,7 @@ struct A : B , I {
 <pre><code>struct A {
     var p : own* Int = ...;
     fun new() {
-        p = new Int;
+        p = new Int
     }
 }
 </code></pre>

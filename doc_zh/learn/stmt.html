@@ -157,23 +157,23 @@
                     <main>
                         <h2 id="语句"><a class="header" href="#语句">语句</a></h2>
 <ul>
-<li>所有语句使用分号结尾。</li>
+<li>语句结尾的分号是可以省略的。</li>
 <li>不支持do while语句和goto语句，其他和C++一致。</li>
 <li>switch语句不支持自动贯穿，如果想贯穿需要用fallthrough关键字</li>
 </ul>
 <pre><code>switch (i) {
     case 1:
-        fallthrough;
+        fallthrough
     case 2:
-        printf("%d\n", i);
+        printf("%d\n", i)
 }
 </code></pre>
 <h3 id="unsafe"><a class="header" href="#unsafe">Unsafe</a></h3>
 <p>在unsafe块中解引用裸指针</p>
-<pre><code>var p: *Int;
+<pre><code>var p: *Int
 ...
 unsafe {
-    var i = *p;
+    var i = *p
 }
 </code></pre>
 <p>Unsafe 函数必须在unsafe块中调用</p>
@@ -181,7 +181,7 @@ unsafe {
 
 fun main() {
     unsafe {
-        foo();
+        foo()
     }
 }
 </code></pre>
@@ -199,24 +199,24 @@ if ((i &amp; Mask) != 0) {}
 <h3 id="with块"><a class="header" href="#with块">With块</a></h3>
 <p>with块不是C++的命名初始化， 它可以包含任何语句.</p>
 <pre><code>struct A {
-    var i: Int;
+    var i: Int
     fun init() { ... }
 }
 
-var a  = A { .init(); .i = 0; };
-var a: own* A = new A { .i = 0; };
+var a  = A { .init(); .i = 0 }
+var a: own* A = new A { .i = 0 }
 </code></pre>
 <h3 id="指针访问"><a class="header" href="#指针访问">指针访问</a></h3>
 <p>指针也通过<code>.</code>来访问，不用<code>-&gt;</code></p>
-<pre><code>var a: A;
-var b: own* A;
-a.foo();
-b.foo();
+<pre><code>var a: A
+var b: own* A
+a.foo()
+b.foo()
 </code></pre>
 <h3 id="类型转换和判断"><a class="header" href="#类型转换和判断">类型转换和判断:</a></h3>
 <p>as表达式用来做动态类型转换和数字类型转换。</p>
-<pre><code>var a = p as own* A;
-var b = p is own* A;
+<pre><code>var a = p as own* A
+var b = p is own* A
 </code></pre>
 <p>其他类型转换使用unsafeCast函数来完成。</p>
 <h2 id="异常处理"><a class="header" href="#异常处理">异常处理</a></h2>

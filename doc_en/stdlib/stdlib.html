@@ -166,43 +166,43 @@
 <h3 id="using-c-libraries"><a class="header" href="#using-c-libraries">Using C Libraries</a></h3>
 <p>The <code>sric</code> module only exports common C functions.</p>
 <p>To use unexported C functions:</p>
-<pre><code class="language-sric">externc fun printf(format: raw* const Int8, args: ...);
+<pre><code class="language-sric">externc fun printf(format: raw* const Int8, args: ...)
 
 fun main() {
-    printf("Hello World\n");
+    printf("Hello World\n")
 }
 </code></pre>
 <p>Declare macros as const variables. See C++ Interop for details.</p>
 <h3 id="string"><a class="header" href="#string">String</a></h3>
 <p>Strings are raw* const Int8 but auto-convert to String:</p>
-<pre><code class="language-sric">var str: String = "abc";
+<pre><code class="language-sric">var str: String = "abc"
 </code></pre>
 <p>Explicit conversion when needed:</p>
-<pre><code class="language-sric">var str = asStr("abc");
+<pre><code class="language-sric">var str = asStr("abc")
 </code></pre>
 <h3 id="darray"><a class="header" href="#darray">DArray</a></h3>
 <p>Dynamic array (like C++ std::vector):</p>
-<pre><code class="language-sric">var a : DArray$&lt;Int&gt;;
-a.add(1);
-a.add(2);
-verify(a[0] == 1);
+<pre><code class="language-sric">var a : DArray$&lt;Int&gt;
+a.add(1)
+a.add(2)
+verify(a[0] == 1)
 </code></pre>
 <h2 id="hashmap"><a class="header" href="#hashmap">HashMap</a></h2>
 <p>Key-value storage:</p>
-<pre><code class="language-sric">var map = HashMap$&lt;Int, String&gt;{};
-map.set(1, "1");
-map.set(2, "2");
-verify(map[2] == "2");
+<pre><code class="language-sric">var map = HashMap$&lt;Int, String&gt;{}
+map.set(1, "1")
+map.set(2, "2")
+verify(map[2] == "2")
 </code></pre>
 <h2 id="file-io"><a class="header" href="#file-io">File I/O</a></h2>
 <p>Using FileStream:</p>
 <p>Write:</p>
-<pre><code class="language-sric">var stream = FileStream::open("tmp.txt", "wb");
-stream.writeStr("Hello\nWorld");
+<pre><code class="language-sric">var stream = FileStream::open("tmp.txt", "wb")
+stream.writeStr("Hello\nWorld")
 </code></pre>
 <p>Read:</p>
-<pre><code class="language-sric">var stream = FileStream::open("tmp.txt", "rb");
-var line = stream.readAllStr();
+<pre><code class="language-sric">var stream = FileStream::open("tmp.txt", "rb")
+var line = stream.readAllStr()
 </code></pre>
 <p>Mode strings match C's fopen().</p>
 

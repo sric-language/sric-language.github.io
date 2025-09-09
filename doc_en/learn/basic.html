@@ -166,16 +166,16 @@
 <h3 id="strings"><a class="header" href="#strings">Strings</a></h3>
 <p>Strings can span multiple lines:</p>
 <pre><code>var s = "ab
-            cd";
+            cd"
 </code></pre>
 <p>Triple-quoted strings don't require escaping double quotes:</p>
 <pre><code>var s = """ab"
-            cd""";
+            cd"""
 </code></pre>
 <p>String literals are of type raw*const Int8 and can be automatically converted to sric::String.</p>
 <h3 id="characters"><a class="header" href="#characters">Characters</a></h3>
 <p>A character represents a single letter and is of type Int8:</p>
-<pre><code>var c : Int8 = 'A';
+<pre><code>var c : Int8 = 'A'
 </code></pre>
 <h3 id="comments"><a class="header" href="#comments">Comments</a></h3>
 <p>Single-line comment:</p>
@@ -201,16 +201,16 @@ introduction
 <li>Type annotations come after the variable name.</li>
 <li>Only one variable can be declared per statement.</li>
 </ul>
-<pre><code>var i: Int = 0;
+<pre><code>var i: Int = 0
 </code></pre>
 <p>Type inference is only supported for local variables within functions:</p>
-<pre><code>var i = 0;
+<pre><code>var i = 0
 </code></pre>
 <p>Variables are automatically initialized to default values. Use <code>uninit</code> keyword to keep random values:</p>
-<pre><code>var i = uninit;
+<pre><code>var i = uninit
 </code></pre>
 <p>Global variables must be immutable unless marked with <code>unsafe</code>:</p>
-<pre><code>var i: const Int = 0;
+<pre><code>var i: const Int = 0
 </code></pre>
 <h3 id="function-definition"><a class="header" href="#function-definition">Function Definition</a></h3>
 <ul>
@@ -218,12 +218,12 @@ introduction
 <li>Return type can be omitted when it's Void</li>
 <li>Function names must be unique (no parameter-based overloading)</li>
 </ul>
-<pre><code>fun foo(a: Int): Int { return 0; }
+<pre><code>fun foo(a: Int): Int { return 0 }
 fun foo2() {}
 </code></pre>
 <p>Default parameters and named parameters:</p>
 <pre><code>fun foo(a: Int, b: Int = 0) {}
-foo(a: 1);
+foo(a: 1)
 </code></pre>
 <p>Named parameters improve readability by explicitly showing parameter names.</p>
 <h3 id="forward-declaration"><a class="header" href="#forward-declaration">Forward Declaration</a></h3>
@@ -237,7 +237,7 @@ readonly
 </code></pre>
 <p>Examples:</p>
 <pre><code>private fun foo() {}
-readonly var i: Int = 0;
+readonly var i: Int = 0
 </code></pre>
 <ul>
 <li>Visibility scope for global variables and functions is the current file. <code>private</code> makes them invisible to other files.</li>

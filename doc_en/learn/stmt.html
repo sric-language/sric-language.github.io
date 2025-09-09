@@ -157,23 +157,23 @@
                     <main>
                         <h2 id="statements"><a class="header" href="#statements">Statements</a></h2>
 <ul>
-<li>All statements end with semicolons</li>
+<li>The semicolon at the end of a statement can be omitted.</li>
 <li>No <code>do while</code> or <code>goto</code> (otherwise same as C++)</li>
 <li><code>switch</code> doesn't fall through by default (use <code>fallthrough</code> explicitly)</li>
 </ul>
 <pre><code class="language-sric">switch (i) {
     case 1:
-        fallthrough;
+        fallthrough
     case 2:
-        printf("%d\n", i);
+        printf("%d\n", i)
 }
 </code></pre>
 <h3 id="unsafe"><a class="header" href="#unsafe">Unsafe</a></h3>
 <p>Dereference raw pointers in unsafe blocks:</p>
-<pre><code class="language-sric">var p: *Int;
+<pre><code class="language-sric">var p: *Int
 ...
 unsafe {
-    var i = *p;
+    var i = *p
 }
 </code></pre>
 <p>Unsafe functions require unsafe blocks:</p>
@@ -181,7 +181,7 @@ unsafe {
 
 fun main() {
     unsafe {
-        foo();
+        foo()
     }
 }
 </code></pre>
@@ -195,24 +195,24 @@ if ((i &amp; Mask) != 0) {}
 <h3 id="with-blocks"><a class="header" href="#with-blocks">With Blocks</a></h3>
 <p>With blocks (unlike C++ designated initializers) can contain any statements:</p>
 <pre><code class="language-sric">struct A {
-    var i: Int;
+    var i: Int
     fun init() { ... }
 }
 
-var a = A { .init(); .i = 0; };
-var a: own* A = new A { .i = 0; };
+var a = A { .init(); .i = 0 }
+var a: own* A = new A { .i = 0 }
 </code></pre>
 <h2 id="pointer-access"><a class="header" href="#pointer-access">Pointer Access</a></h2>
 <p>Use . for both direct and pointer access (no -&gt;):</p>
-<pre><code class="language-sric">var a: A;
-var b: own* A;
-a.foo();
-b.foo();
+<pre><code class="language-sric">var a: A
+var b: own* A
+a.foo()
+b.foo()
 </code></pre>
 <h2 id="type-conversionchecking"><a class="header" href="#type-conversionchecking">Type Conversion/Checking</a></h2>
 <p>as for dynamic/numeric conversion, is for type checking:</p>
-<pre><code class="language-sric">var a = p as own* A;
-var b = p is own* A;
+<pre><code class="language-sric">var a = p as own* A
+var b = p is own* A
 </code></pre>
 <p>Other conversions use unsafeCast.</p>
 <h3 id="error-handling"><a class="header" href="#error-handling">Error Handling</a></h3>

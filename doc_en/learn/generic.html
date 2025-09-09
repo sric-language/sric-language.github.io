@@ -163,8 +163,8 @@
 </code></pre>
 <p>Type parameters can have example types for compile-time type checking:</p>
 <pre><code>abstract struct Linkable$&lt;T&gt; {
-    var next: own*? T;
-    var previous: *? T;
+    var next: own*? T
+    var previous: *? T
 }
 
 struct LinkedList$&lt;T: Linkable$&lt;T&gt;&gt; {
@@ -172,7 +172,7 @@ struct LinkedList$&lt;T: Linkable$&lt;T&gt;&gt; {
 </code></pre>
 <h3 id="template-instantiation"><a class="header" href="#template-instantiation">Template Instantiation</a></h3>
 <p>When instantiating generic templates, any type satisfying the example type constraints can be used:</p>
-<pre><code>var tree = Tree$&lt;Int&gt; {};
+<pre><code>var tree = Tree$&lt;Int&gt; {}
 </code></pre>
 
                     </main>

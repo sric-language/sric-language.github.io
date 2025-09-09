@@ -159,20 +159,20 @@
 <p>Sric provides C++-style smart pointers including SharedPtr, and WeakPtr.</p>
 <h2 id="sharedptr"><a class="header" href="#sharedptr">SharedPtr</a></h2>
 <p>Reference-counted with some overhead. Can be created from existing own*:</p>
-<pre><code class="language-sric">var p = new Int;
-var sp: SharedPtr$&lt;Int&gt; = toShared(p);
+<pre><code class="language-sric">var p = new Int
+var sp: SharedPtr$&lt;Int&gt; = toShared(p)
 </code></pre>
 <p>Convertible with own*:</p>
-<pre><code class="language-sric">var p = sharedPtr.getOwn();
-sharedPtr.set(p);
+<pre><code class="language-sric">var p = sharedPtr.getOwn()
+sharedPtr.set(p)
 </code></pre>
 <h2 id="weakptr"><a class="header" href="#weakptr">WeakPtr</a></h2>
 <p>Breaks circular references that could cause memory leaks with own*/SharedPtr:</p>
-<pre><code class="language-sric">var p = new Int;
-var wp: WeakPtr$&lt;Int&gt; = toWeak(p);
+<pre><code class="language-sric">var p = new Int
+var wp: WeakPtr$&lt;Int&gt; = toWeak(p)
 </code></pre>
 <p>Use via lock() which returns nullable own*:</p>
-<pre><code class="language-sric">var sp : own*? Int = wp.lock();
+<pre><code class="language-sric">var sp : own*? Int = wp.lock()
 </code></pre>
 <p>Returns null if referenced object was freed.</p>
 

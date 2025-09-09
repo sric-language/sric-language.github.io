@@ -164,10 +164,10 @@
 <li>Symbol mapping for other cases</li>
 </ul>
 <h3 id="c-styleno-namespace"><a class="header" href="#c-styleno-namespace">C-style/No Namespace</a></h3>
-<pre><code class="language-sric">externc fun printf(format: raw* const Int8, args: ...);
+<pre><code class="language-sric">externc fun printf(format: raw* const Int8, args: ...)
 
 fun main() {
-    printf("Hello World\n");
+    printf("Hello World\n")
 }
 </code></pre>
 <h3 id="matching-namespaces"><a class="header" href="#matching-namespaces">Matching Namespaces</a></h3>
@@ -182,7 +182,7 @@ C++:</p>
 <p>Sric:</p>
 <pre><code class="language-sric">//xx module
 extern struct P {
-    fun foo();
+    fun foo()
 }
 </code></pre>
 <p>Module name must match C++ namespace.</p>
@@ -211,17 +211,17 @@ extern fun hello();
 //@#include &lt;vector&gt;
 //@extern symbol: std::vector
 extern struct vector$&lt;T&gt; {
-    fun size(): Int;
+    fun size(): Int
 }
 
 fun testExtern() {
-    var v = makePtr$&lt;vector$&lt;Int&gt;&gt;(3);
-    verify(v.size() == 3);
+    var v = makePtr$&lt;vector$&lt;Int&gt;&gt;(3)
+    verify(v.size() == 3)
 }
 
 fun testExtern2() {
-    var v2 = makeValue$&lt;vector$&lt;Int&gt;&gt;(3);
-    verify(v2.size() == 3);
+    var v2 = makeValue$&lt;vector$&lt;Int&gt;&gt;(3)
+    verify(v2.size() == 3)
 }
 </code></pre>
 <h3 id="generating-sric-interfaces-from-c-headers"><a class="header" href="#generating-sric-interfaces-from-c-headers">Generating Sric Interfaces from C++ Headers</a></h3>

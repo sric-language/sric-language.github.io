@@ -156,36 +156,36 @@
                 <div id="content" class="content">
                     <main>
                         <h3 id="数据类型"><a class="header" href="#数据类型">数据类型</a></h3>
-<pre><code>var p: Int             //值类型
-var p: own* Int;       //所有权指针
-var p: * Int;          //非所有权指针
-var p: &amp; Int;          //引用
-var p: raw* Int;       //裸指针
-var p: uniq* Int;      //唯一所有权指针
+<pre><code>var p: Int            //值类型
+var p: own* Int       //所有权指针
+var p: * Int          //非所有权指针
+var p: &amp; Int          //引用
+var p: raw* Int       //裸指针
+var p: uniq* Int      //唯一所有权指针
 </code></pre>
 <h3 id="明确的拷贝或者移动"><a class="header" href="#明确的拷贝或者移动">明确的拷贝或者移动</a></h3>
 <p>移动或者共享所有权指针</p>
-<pre><code>var p: own* Int = ...;
-var p1 = p; //compiler error;
-var p2 = move p;
-var p3 = share(p2);
+<pre><code>var p: own* Int = ...
+var p1 = p; //compiler error
+var p2 = move p
+var p3 = share(p2)
 </code></pre>
 <p>移动或者拷贝有所有权指针的结构:</p>
 <pre><code>struct A {
-    var i: own* Int;
+    var i: own* Int
     fun copy(): A { ... }
 }
-var a: A;
-var x = a; //compile error
-var b = move a;
-var c = a.copy();
+var a: A
+var x = a //compile error
+var b = move a
+var c = a.copy()
 </code></pre>
 <h3 id="unsafe"><a class="header" href="#unsafe">Unsafe</a></h3>
 <p>在unsafe块中解引用裸指针</p>
-<pre><code>var p: raw* Int;
+<pre><code>var p: raw* Int
 ...
 unsafe {
-    var i = *p;
+    var i = *p
 }
 </code></pre>
 <p>Unsafe 函数必须在unsafe块中调用</p>
@@ -193,18 +193,18 @@ unsafe {
 
 fun main() {
     unsafe {
-        foo();
+        foo()
     }
 }
 </code></pre>
 <h3 id="继承"><a class="header" href="#继承">继承</a></h3>
 <p>和Java一样的单继承</p>
 <pre><code>trait I {
-    virtual fun foo();
+    virtual fun foo()
 }
 
 virtual struct B {
-    var a: Int;
+    var a: Int
     fun bar() { ... }
 }
 
@@ -218,28 +218,28 @@ struct A : B, I {
 <h3 id="with块"><a class="header" href="#with块">With块</a></h3>
 <p>with块不是C++的命名初始化， 它可以包含任何语句.</p>
 <pre><code>struct A {
-    var i: Int;
+    var i: Int
     fun init() { ... }
 }
 
-var a  = A { .init(); .i = 0; };
-var a: own* A = new A { .i = 0; };
+var a  = A { .init(); .i = 0 }
+var a: own* A = new A { .i = 0 }
 </code></pre>
 <h3 id="指针用法"><a class="header" href="#指针用法">指针用法</a></h3>
 <p>总是通过<code>.</code>来访问</p>
-<pre><code>var a: A;
-var b: own* A;
-a.foo();
-b.foo();
+<pre><code>var a: A
+var b: own* A
+a.foo()
+b.foo()
 </code></pre>
 <h3 id="类型转换和判断"><a class="header" href="#类型转换和判断">类型转换和判断</a></h3>
-<pre><code>var a = p as own* A;
-var b = p is own* A;
+<pre><code>var a = p as own* A
+var b = p is own* A
 </code></pre>
 <h3 id="数组"><a class="header" href="#数组">数组</a></h3>
 <p>静态大小的数组</p>
-<pre><code>var a  = []Int { 1,2,3 };
-var a: [15]Int;
+<pre><code>var a  = []Int { 1,2,3 }
+var a: [15]Int
 </code></pre>
 <h3 id="泛型类型"><a class="header" href="#泛型类型">泛型类型</a></h3>
 <p>泛型类型通过<code>$&lt;</code>开头</p>
@@ -250,22 +250,22 @@ var a: [15]Int;
 }
 
 T fun foo$&lt;T&gt;(a: T) {
-    return a;
+    return a
 }
 
-var b: Bar$&lt;Int&gt;;
+var b: Bar$&lt;Int&gt;
 </code></pre>
 <h3 id="null-安全"><a class="header" href="#null-安全">Null 安全</a></h3>
 <p>指针默认是不可以为null的</p>
-<pre><code>var a: own*? B;
-var b: own* B = a;
+<pre><code>var a: own*? B
+var b: own* B = a
 </code></pre>
 <p>可空类型转为不可空类型会在运行时进行检测，防止空值传播。</p>
 <h3 id="不可变性"><a class="header" href="#不可变性">不可变性</a></h3>
 <p>和C++类似</p>
-<pre><code>var p : raw* const Int;
-var p : const raw* Int;
-var p : const raw* const Int;
+<pre><code>var p : raw* const Int
+var p : const raw* Int
+var p : const raw* const Int
 </code></pre>
 <h3 id="可见性"><a class="header" href="#可见性">可见性</a></h3>
 <pre><code>public
@@ -279,7 +279,7 @@ readonly
     operator fun mult(a: A): A { ... }
 }
 
-var c = a * b;
+var c = a * b
 </code></pre>
 <p>可重载的操作符:</p>
 <pre><code>methods    symbol
@@ -305,40 +305,40 @@ depends = sric 1.0
 srcDirs = ./
 </code></pre>
 <p>在代码里面导入外部模块:</p>
-<pre><code>import std::*;
-import std::Vec;
+<pre><code>import std::*
+import std::Vec
 </code></pre>
 <h3 id="闭包"><a class="header" href="#闭包">闭包</a></h3>
 <pre><code>fun foo(f: fun(a:Int) ) {
-    f(1);
+    f(1)
 }
 
-foo(fun(a:Int){ ... });
+foo(fun(a:Int){ ... })
 </code></pre>
 <h3 id="类型别名"><a class="header" href="#类型别名">类型别名</a></h3>
 <p>别名:</p>
-<pre><code>typealias VecInt = std::Vec$&lt;Int&gt;;
+<pre><code>typealias VecInt = std::Vec$&lt;Int&gt;
 </code></pre>
 <h3 id="枚举"><a class="header" href="#枚举">枚举</a></h3>
 <pre><code>enum Color {
     red = 1, green, blue
 }
 
-var c = Color::red;
+var c = Color::red
 </code></pre>
 <h3 id="默认参数和命名参数"><a class="header" href="#默认参数和命名参数">默认参数和命名参数</a></h3>
 <pre><code>fun foo(a: Int, b: Int = 0) {
 }
 
 fun main() {
-    foo(a : 10);
+    foo(a : 10)
 }
 </code></pre>
 <h3 id="协程"><a class="header" href="#协程">协程</a></h3>
 <pre><code>async fun test2() : Int {
-    var i = 0;
-    i = await testCallback();
-    return i + 1;
+    var i = 0
+    i = await testCallback()
+    return i + 1
 }
 </code></pre>
 

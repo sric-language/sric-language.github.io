@@ -157,7 +157,7 @@
                     <main>
                         <h2 id="类型别名"><a class="header" href="#类型别名">类型别名</a></h2>
 <p>类型别名相当于C的typedef</p>
-<pre><code>typealias size_t = Int32;
+<pre><code>typealias size_t = Int32
 </code></pre>
 <h2 id="枚举"><a class="header" href="#枚举">枚举</a></h2>
 <p>枚举和C++相同，但总是占命名空间。</p>
@@ -167,7 +167,7 @@
 
 fun foo(c: Color) {}
 
-foo(Color::Red);
+foo(Color::Red)
 </code></pre>
 <p>可以设置大小:</p>
 <pre><code>enum Color : UInt8 {
@@ -179,7 +179,7 @@ foo(Color::Red);
 <p>unsafe里的this的类型是裸指针，而不是安全指针。如果对象是独立用new关键字分配的，可以通过rawToRef转为安全指针。</p>
 <pre><code>unsafe struct A {
     fun foo() {
-        var self = rawToRef(this);
+        var self = rawToRef(this)
     }
 }
 </code></pre>
