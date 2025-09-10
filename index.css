@@ -1,30 +1,31 @@
 
 .header {
   background: url(res/home.png);
-  height: 800px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 
 
 .banner {
-  width: 1500px;
   margin: 0 auto;
+  padding: 100px;
+  display: flex;
+  justify-content:center;
 }
+
 .text-block {
-  float: left;
-  margin-top: 162px;
+  margin-top: 122px;
 }
 .code-block {
-  float: right;
-  margin-top: 84px;
+  margin-top: 1px;
 }
 
 .banner-bg {
-  width:100%;
   height:800px;
   vertical-align: bottom;
 }
 .code-bg {
-  width: 900px;
+  width: 800px;
 }
 .code {
   width: 600px;
@@ -32,8 +33,8 @@
   color: #fff;
   font-family: Consolas,Monaco,Menlo,"Andale Mono","lucida console","Courier New",monospace;
   font-size: 20px;
-  line-height: 1.9;
-  margin-top: -420px;
+  line-height: 1.8;
+  margin-top: -380px;
 }
 
 .slogon1 {
@@ -55,6 +56,7 @@
   display: block;
   width: 70px;
   margin-top: 57px;
+  margin-bottom: 20px;
 }
 
 
@@ -64,7 +66,7 @@
 
 .features{
   background:#fff;
-  width: 1500px;
+  width: 100%;
   margin: 0 auto;
   padding: 100px 0;
 }
@@ -81,15 +83,21 @@
   color: #89898c;
   text-align: center;
   margin: 34px auto 0 auto;
-  width: 1500px;
+  width: 100%;
 }
 
 .features-content {
   margin-top: 100px;
+  display: flex;
+  justify-content:center;
+}
+
+.features-image {
+  width: 800px;
+  height: 600px;
 }
 
 .features-text {
-  float: right;
   width: 590px;
 }
 
@@ -121,9 +129,10 @@
 }
 
 .aplication-content {
-  width: 1500px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
+  justify-content:center;
   margin-top: 90px;
 }
 
@@ -163,15 +172,14 @@
 
 .wase {
   background:#fff;
-  width: 1500px;
   margin: 0 auto;
-  padding: 100px 0;
-  height: 700px;
+  padding: 100px 50px;
+  display: flex;
+  justify-content:center;
 }
 
 .wase-text {
   width: 660px;
-  float: left;
 }
 
 .wase-text h3 {
@@ -189,7 +197,9 @@
 
 .wase-image {
   margin-top: -40px;
-  float: right;
+  width: 600px;
+  height: 600px;
+  padding: 30px;
 }
 
 .demo-button {
@@ -215,7 +225,7 @@
 }
 
 .join-text {
-  width: 1500px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -230,9 +240,17 @@
   font-size: 18px;
   color: rgb(255, 255, 255);
   line-height: 2.5;
+  text-align: center;
 }
 
 
 
 
 
+
+@media (max-width: 1200px) {
+    .banner {
+        flex-direction: column;
+    }
+
+}
