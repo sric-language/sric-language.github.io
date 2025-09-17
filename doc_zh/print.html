@@ -381,8 +381,8 @@ fun main() {
 <tr><td>unsigned int</td><td>UInt32</td></tr>
 <tr><td>int64_t</td><td>Int64</td></tr>
 <tr><td>uint64_t</td><td>UInt64</td></tr>
-<tr><td>float</td><td>Float32</td></tr>
-<tr><td>double</td><td>Float/Float64</td></tr>
+<tr><td>float</td><td>Float/Float32</td></tr>
+<tr><td>double</td><td>Float64</td></tr>
 <tr><td>void</td><td>Void</td></tr>
 <tr><td>char</td><td>Int8</td></tr>
 </tbody></table>
@@ -580,7 +580,6 @@ fun main(): Int {
     printf("Please input your guess\n")
     while (true) {
         //get input
-        var guess = 0
         scanf("%d", (&amp;guess as raw*Int))
 
         if (guess &gt; expected) {
@@ -604,7 +603,7 @@ fun main(): Int {
 <li>Bool</li>
 <li>Void</li>
 </ul>
-<p>Int默认32位，Float默认64位。</p>
+<p>Int默认32位，Float默认32位。</p>
 <h3 id="字符串"><a class="header" href="#字符串">字符串</a></h3>
 <p>字符串可以多行</p>
 <pre><code>var s = "ab
