@@ -187,7 +187,7 @@ var p3 = share(p1)
 <p>使用share函数，从一个所有权指针分裂出新的所有权指针，多个指针指向同一个内存地址。</p>
 <h4 id="唯一所有权指针"><a class="header" href="#唯一所有权指针">唯一所有权指针</a></h4>
 <p><code>uniq*</code>是零开销的。和<code>own*</code>类似，但没有share()方法。</p>
-<pre><code>var p1: uniq* Int = makeUniq$&lt;T&gt;()
+<pre><code>var p1: uniq* Int = makeUniq$&lt;Int&gt;()
 var p2 = move p1
 </code></pre>
 <h4 id="非所有权指针"><a class="header" href="#非所有权指针">非所有权指针</a></h4>

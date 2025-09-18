@@ -720,7 +720,7 @@ var p3 = share(p1)        // Shared ownership
 </code></pre>
 <h4 id="unique-pointers"><a class="header" href="#unique-pointers">Unique Pointers</a></h4>
 <p><code>uniq*</code> is zero-overhead. Similar to <code>own*</code>, but without a share() method.</p>
-<pre><code class="language-sric">var p1: uniq* Int = makeUniq$&lt;T&gt;()
+<pre><code class="language-sric">var p1: uniq* Int = makeUniq$&lt;Int&gt;()
 var p2 = move p1
 </code></pre>
 <h4 id="non-owning-pointers"><a class="header" href="#non-owning-pointers">Non-owning Pointers</a></h4>
@@ -1048,6 +1048,7 @@ import sric::DArray
 <li><code>sric</code>: Built-in standard library</li>
 <li><code>jsonc</code>: JSON parsing/compression</li>
 <li><code>serial</code>: Serialization using dynamic reflection</li>
+<li><code>sricNet</code>: Network library for native and webassembly</li>
 </ul>
 <p><a href="stdlib//apidoc.html">API Documentation</a></p>
 <h3 id="using-c-libraries"><a class="header" href="#using-c-libraries">Using C Libraries</a></h3>
@@ -1127,6 +1128,34 @@ var wp: WeakPtr$&lt;Int&gt; = toWeak(p)
 reflect struct Point {
     var x: Int
     var y: Int
+}
+</code></pre>
+<h4 id="usage"><a class="header" href="#usage">Usage</a></h4>
+<pre><code>import sric::*
+import serial::*
+import waseGraphics
+
+unsafe fun main(): Int {
+    //force load reflect metadata
+    var c : waseGraphics::Color
+    c.init(1, 1, 1, 1);
+
+    var rmodule = findModule("waseGraphics")
+    printf("rmodule %p\n", rmodule as raw*? Void)
+
+    //make instance
+    var rtype = findRType("waseGraphics::Color")
+    var obj = newInstance(*rtype)
+
+    //access field
+    var rgba = (unsafeCast$&lt;raw*Int8&gt;(obj) + rtype.fields[0].offset) as raw*UInt32
+    *rgba = 0xff8845ff
+
+    //call method
+    var rmethod = findInstanceMethod(rtype, "toString")
+    var str = callInstanceToString(rmethod.pointer, obj)
+    printf("%s\n", str.c_str())
+    return 0
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="coroutines"><a class="header" href="#coroutines">Coroutines</a></h2>
@@ -1355,7 +1384,7 @@ reflect struct Insets {
 <pre><code>sric module.scm -fmake -c++17
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="command-line-tool"><a class="header" href="#command-line-tool">Command Line Tool</a></h1>
-<h2 id="usage"><a class="header" href="#usage">Usage</a></h2>
+<h2 id="usage-1"><a class="header" href="#usage-1">Usage</a></h2>
 <p>The sric command supports these arguments:</p>
 <ul>
 <li><code>-debug</code> Compile in Debug mode (default is release mode)</li>

@@ -185,7 +185,7 @@ var p3 = share(p1)        // Shared ownership
 </code></pre>
 <h4 id="unique-pointers"><a class="header" href="#unique-pointers">Unique Pointers</a></h4>
 <p><code>uniq*</code> is zero-overhead. Similar to <code>own*</code>, but without a share() method.</p>
-<pre><code class="language-sric">var p1: uniq* Int = makeUniq$&lt;T&gt;()
+<pre><code class="language-sric">var p1: uniq* Int = makeUniq$&lt;Int&gt;()
 var p2 = move p1
 </code></pre>
 <h4 id="non-owning-pointers"><a class="header" href="#non-owning-pointers">Non-owning Pointers</a></h4>

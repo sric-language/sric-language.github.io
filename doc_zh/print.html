@@ -720,7 +720,7 @@ var p3 = share(p1)
 <p>使用share函数，从一个所有权指针分裂出新的所有权指针，多个指针指向同一个内存地址。</p>
 <h4 id="唯一所有权指针"><a class="header" href="#唯一所有权指针">唯一所有权指针</a></h4>
 <p><code>uniq*</code>是零开销的。和<code>own*</code>类似，但没有share()方法。</p>
-<pre><code>var p1: uniq* Int = makeUniq$&lt;T&gt;()
+<pre><code>var p1: uniq* Int = makeUniq$&lt;Int&gt;()
 var p2 = move p1
 </code></pre>
 <h4 id="非所有权指针"><a class="header" href="#非所有权指针">非所有权指针</a></h4>
@@ -1064,6 +1064,7 @@ import sric::DArray
 <li>sric: 自带标准库</li>
 <li>jsonc: JSON解析和压缩库</li>
 <li>serial： 序列化库，基于动态反射功能。</li>
+<li>sricNet: 网络库，支持native和webassembly</li>
 </ul>
 <p><a href="stdlib//apidoc.html">标准库文档</a></p>
 <h3 id="使用c语言库"><a class="header" href="#使用c语言库">使用C语言库</a></h3>
@@ -1146,6 +1147,34 @@ var wp: WeakPtr$&lt;Int&gt; = toWeak(p)
 reflect struct Point {
     var x: Int
     var y: Int
+}
+</code></pre>
+<h4 id="用法"><a class="header" href="#用法">用法</a></h4>
+<pre><code>import sric::*
+import serial::*
+import waseGraphics
+
+unsafe fun main(): Int {
+    //force load reflect metadata
+    var c : waseGraphics::Color
+    c.init(1, 1, 1, 1);
+
+    var rmodule = findModule("waseGraphics")
+    printf("rmodule %p\n", rmodule as raw*? Void)
+
+    //make instance
+    var rtype = findRType("waseGraphics::Color")
+    var obj = newInstance(*rtype)
+
+    //access field
+    var rgba = (unsafeCast$&lt;raw*Int8&gt;(obj) + rtype.fields[0].offset) as raw*UInt32
+    *rgba = 0xff8845ff
+
+    //call method
+    var rmethod = findInstanceMethod(rtype, "toString")
+    var str = callInstanceToString(rmethod.pointer, obj)
+    printf("%s\n", str.c_str())
+    return 0
 }
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="协程-1"><a class="header" href="#协程-1">协程</a></h2>
@@ -1373,7 +1402,7 @@ reflect struct Insets {
 <pre><code>sric module.scm -fmake -c++17
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="命令行工具"><a class="header" href="#命令行工具">命令行工具</a></h1>
-<h2 id="用法"><a class="header" href="#用法">用法</a></h2>
+<h2 id="用法-1"><a class="header" href="#用法-1">用法</a></h2>
 <p>sric命令有以下参数：</p>
 <ul>
 <li>-debug 在Debug模式编译（默认release模式）</li>
