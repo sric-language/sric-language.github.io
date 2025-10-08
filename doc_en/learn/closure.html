@@ -164,7 +164,7 @@
 foo(fun(a:Int):Int{
     printf("%d\n", a)
     return a + 1
-});
+})
 </code></pre>
 <p>Return type inference is not yet supported for closures - the return type must be explicitly specified.</p>
 <h2 id="variable-capture"><a class="header" href="#variable-capture">Variable Capture</a></h2>
@@ -172,7 +172,14 @@ foo(fun(a:Int):Int{
 <pre><code>var i = 0
 var f = fun(a:Int):Int{
     return a + i
-};
+}
+</code></pre>
+<h2 id="mutable"><a class="header" href="#mutable">Mutable</a></h2>
+<p>Variables captured by default are immutable.</p>
+<pre><code>var i = 0
+var f = fun(a:Int) mut {
+    i = 1
+}
 </code></pre>
 <h2 id="static-closures"><a class="header" href="#static-closures">Static Closures</a></h2>
 <p>Static closures are state-less closures marked with <code>static</code>. They cannot capture variables:</p>

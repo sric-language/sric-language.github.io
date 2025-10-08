@@ -837,8 +837,6 @@ b.foo()
 var b = p is own* A
 </code></pre>
 <p>Other conversions use unsafeCast.</p>
-<h3 id="error-handling"><a class="header" href="#error-handling">Error Handling</a></h3>
-<p>Since Sric does not support exception handling, Optional can serve as an alternative for error return.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="struct"><a class="header" href="#struct">Struct</a></h2>
 <p>Classes don't have parameterized constructors - callers must initialize them manually:</p>
 <pre><code>struct Point {
@@ -966,7 +964,7 @@ struct LinkedList$&lt;T: Linkable$&lt;T&gt;&gt; {
 foo(fun(a:Int):Int{
     printf("%d\n", a)
     return a + 1
-});
+})
 </code></pre>
 <p>Return type inference is not yet supported for closures - the return type must be explicitly specified.</p>
 <h2 id="variable-capture"><a class="header" href="#variable-capture">Variable Capture</a></h2>
@@ -974,7 +972,14 @@ foo(fun(a:Int):Int{
 <pre><code>var i = 0
 var f = fun(a:Int):Int{
     return a + i
-};
+}
+</code></pre>
+<h2 id="mutable"><a class="header" href="#mutable">Mutable</a></h2>
+<p>Variables captured by default are immutable.</p>
+<pre><code>var i = 0
+var f = fun(a:Int) mut {
+    i = 1
+}
 </code></pre>
 <h2 id="static-closures"><a class="header" href="#static-closures">Static Closures</a></h2>
 <p>Static closures are state-less closures marked with <code>static</code>. They cannot capture variables:</p>

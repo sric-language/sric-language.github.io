@@ -164,7 +164,7 @@
 foo(fun(a:Int):Int{
     printf("%d\n", a)
     return a + 1
-});
+})
 </code></pre>
 <p>暂不支持闭包的返回类型推断，需要显式指定返回类型。</p>
 <h2 id="捕获变量"><a class="header" href="#捕获变量">捕获变量</a></h2>
@@ -172,7 +172,14 @@ foo(fun(a:Int):Int{
 <pre><code>var i = 0
 var f = fun(a:Int):Int{
     return a + i
-};
+}
+</code></pre>
+<h2 id="可变闭包"><a class="header" href="#可变闭包">可变闭包</a></h2>
+<p>默认捕获的变量是不可变的</p>
+<pre><code>var i = 0
+var f = fun(a:Int) mut {
+    i = 1
+}
 </code></pre>
 <h2 id="静态闭包"><a class="header" href="#静态闭包">静态闭包</a></h2>
 <p>静态闭包指无状态的闭包，用static修饰。不可捕获变量。</p>

@@ -850,8 +850,6 @@ b.foo()
 var b = p is own* A
 </code></pre>
 <p>其他类型转换使用unsafeCast函数来完成。</p>
-<h2 id="异常处理"><a class="header" href="#异常处理">异常处理</a></h2>
-<p>Sric不支持异常处理，可用Optional来返回错误。</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="结构"><a class="header" href="#结构">结构</a></h2>
 <p>类没有有参构造函数，需要调用者自己初始化。</p>
 <pre><code>struct Point {
@@ -981,7 +979,7 @@ struct LinkedList$&lt;T: Linkable$&lt;T&gt;&gt; {
 foo(fun(a:Int):Int{
     printf("%d\n", a)
     return a + 1
-});
+})
 </code></pre>
 <p>暂不支持闭包的返回类型推断，需要显式指定返回类型。</p>
 <h2 id="捕获变量"><a class="header" href="#捕获变量">捕获变量</a></h2>
@@ -989,7 +987,14 @@ foo(fun(a:Int):Int{
 <pre><code>var i = 0
 var f = fun(a:Int):Int{
     return a + i
-};
+}
+</code></pre>
+<h2 id="可变闭包"><a class="header" href="#可变闭包">可变闭包</a></h2>
+<p>默认捕获的变量是不可变的</p>
+<pre><code>var i = 0
+var f = fun(a:Int) mut {
+    i = 1
+}
 </code></pre>
 <h2 id="静态闭包"><a class="header" href="#静态闭包">静态闭包</a></h2>
 <p>静态闭包指无状态的闭包，用static修饰。不可捕获变量。</p>
