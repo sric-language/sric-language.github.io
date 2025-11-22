@@ -40,7 +40,7 @@
     <div class="field" id="url"><p class="fieldinfo"><span class="kind">var</span><span class="name">url</span><span class="flags"></span><span class="type"> : sric::String</span></p><div class="doc">
     * request URL
     </div></div>
-    <div class="field" id="onReceive"><p class="fieldinfo"><span class="kind">var</span><span class="name">onReceive</span><span class="flags"></span><span class="type"> : fun(res : &sricNet::HttpResponse)</span></p><div class="doc">
+    <div class="field" id="onReceive"><p class="fieldinfo"><span class="kind">var</span><span class="name">onReceive</span><span class="flags"></span><span class="type"> : fun(res : &sricNet::HttpResponse) mut </span></p><div class="doc">
     * lambda callback in main thread
     </div></div>
     <div class="field" id="id"><p class="fieldinfo"><span class="kind">var</span><span class="name">id</span><span class="flags"></span><span class="type"> : UInt64</span></p><div class="doc">
@@ -65,9 +65,9 @@
 </div><div class="typedef" id="WebSocket"><p class="typeinfo"><span class="kind">struct</span><span class="name">WebSocket</span><span class="flags">extern </span></p>
 
     <div class="typefield"><div class="field" id="url"><p class="fieldinfo"><span class="kind">var</span><span class="name">url</span><span class="flags"></span><span class="type"> : sric::String</span></p></div>
-    <div class="field" id="onReceived"><p class="fieldinfo"><span class="kind">var</span><span class="name">onReceived</span><span class="flags"></span><span class="type"> : fun(data : raw* const Int8, size : Int32)</span></p></div>
-    <div class="field" id="onConnected"><p class="fieldinfo"><span class="kind">var</span><span class="name">onConnected</span><span class="flags"></span><span class="type"> : fun()</span></p></div>
-    <div class="field" id="onDisconnected"><p class="fieldinfo"><span class="kind">var</span><span class="name">onDisconnected</span><span class="flags"></span><span class="type"> : fun()</span></p></div>
+    <div class="field" id="onReceived"><p class="fieldinfo"><span class="kind">var</span><span class="name">onReceived</span><span class="flags"></span><span class="type"> : fun(data : raw* const Int8, size : Int32) mut </span></p></div>
+    <div class="field" id="onConnected"><p class="fieldinfo"><span class="kind">var</span><span class="name">onConnected</span><span class="flags"></span><span class="type"> : fun() mut </span></p></div>
+    <div class="field" id="onDisconnected"><p class="fieldinfo"><span class="kind">var</span><span class="name">onDisconnected</span><span class="flags"></span><span class="type"> : fun() mut </span></p></div>
     </div>
     <div class="typefunc"><div class="func" id="close"><p class="funcinfo"><span class="kind">fun</span><span class="name">close</span><span class="flags"></span><span class="prams">()</span><span class="flags"></span><span class="returnType"> : Void</span></p></div>
     <div class="func" id="open"><p class="funcinfo"><span class="kind">fun</span><span class="name">open</span><span class="flags"></span><span class="prams">(<span class="param"><span class="name">url : </span><span class="type">raw* const Int8</span></span>)</span><span class="flags"></span><span class="returnType"> : Void</span></p></div>

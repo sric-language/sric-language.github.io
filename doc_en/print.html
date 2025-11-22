@@ -936,6 +936,31 @@ foo(Color::Red)
     }
 }
 </code></pre>
+<h2 id="dconst-method"><a class="header" href="#dconst-method">dconst Method</a></h2>
+<p>To reduce code duplication and complex features like function overloading, Sric provides the dconst method.</p>
+<pre><code>struct A {
+    var i: String
+    fun foo() dconst : * String {
+        ...
+        return &amp;i
+    }
+}
+</code></pre>
+<p>The dconst method automatically generates both const and non-const versions internally in the compiler. This is equivalent to the following C++ code:</p>
+<pre><code>class A {
+    string i;
+public:
+    string* foo() {
+        ...
+        return &amp;i;
+    }
+
+    const string* foo() const {
+        ...
+        return &amp;i;
+    }
+};
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="generics"><a class="header" href="#generics">Generics</a></h2>
 <h3 id="generic-definition"><a class="header" href="#generic-definition">Generic Definition</a></h3>
 <p>Unlike C++, generics use <code>$&lt;</code> prefix to disambiguate between type parameters and the less-than operator.</p>

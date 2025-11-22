@@ -951,6 +951,31 @@ foo(Color::Red)
     }
 }
 </code></pre>
+<h2 id="dconst方法"><a class="header" href="#dconst方法">dconst方法</a></h2>
+<p>为了减少代码重复，以及函数重载这种复杂特性，Sric提供了dconst方法。</p>
+<pre><code>struct A {
+    var i: String
+    fun foo() dconst : * String {
+        ...
+        return &amp;i
+    }
+}
+</code></pre>
+<p>dconst方法在编译器内部会自动生成cosnt和非const两个版本的。等价于下面的C++代码:</p>
+<pre><code>class A {
+    string i;
+public:
+    string* foo() {
+        ...
+        return &amp;i;
+    }
+
+    const string* foo() const {
+        ...
+        return &amp;i;
+    }
+};
+</code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="模板"><a class="header" href="#模板">模板</a></h2>
 <h3 id="模板定义"><a class="header" href="#模板定义">模板定义</a></h3>
 <p>模板和C++不同的是使用<code>$&lt;</code>开头，这是为了消除泛型参数和小于运算符的歧义。</p>
