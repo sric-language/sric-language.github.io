@@ -479,17 +479,17 @@ struct Point {
 <ul>
 <li><a href="https://www.oracle.com/java/technologies/downloads/">JDK 17+</a></li>
 <li>支持C++20的C++ 编译器: gcc 11+、 clang 17+、 Xcode 16+、 Visual Studio 2022+</li>
-<li><a href="https://github.com/fanx-dev/fanx/releases">Fanx</a></li>
 <li><a href="https://cmake.org/download/">CMake</a></li>
 <li><a href="https://git-scm.com/downloads">git</a></li>
 <li><a href="https://code.visualstudio.com/">VSCode</a></li>
 </ul>
-<p>安装以上软件，并配置环境变量，确保java、jar、fan、cmake等命令在git bash中可用。</p>
+<p>安装以上软件，并配置环境变量，确保java、jar、cmake等命令在git bash中可用。</p>
 <h3 id="2构建fmake"><a class="header" href="#2构建fmake">2.构建fmake</a></h3>
 <pre><code>git clone https://github.com/chunquedong/fmake.git
 cd fmake
-fanb pod.props
+sh build.sh
 </code></pre>
+<p>并将fmake/bin目录加入到环境变量PATH中</p>
 <p>在Windows系统上使用微软C++编译器工具集:</p>
 <pre><code>cd fmake
 source vsvars.sh
@@ -564,11 +564,11 @@ cd -
 <pre><code>sric hello.scm
 </code></pre>
 <p>然后再单独手动运行fmake编译:</p>
-<pre><code>fan fmake output/hello.fmake -debug
+<pre><code>fmake output/hello.fmake -debug
 </code></pre>
 <h2 id="调试"><a class="header" href="#调试">调试</a></h2>
 <p>可通过生成IDE项目来调试生成的C++代码。</p>
-<pre><code>fan fmake output/hello.fmake -debug -G
+<pre><code>fmake output/hello.fmake -debug -G
 </code></pre>
 <p>生成的项目文件在上层目录的build文件夹下。</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="猜数字游戏"><a class="header" href="#猜数字游戏">猜数字游戏</a></h2>

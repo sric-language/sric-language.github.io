@@ -160,17 +160,17 @@
 <ul>
 <li><a href="https://www.oracle.com/java/technologies/downloads/">JDK 17+</a></li>
 <li>C++ compiler (supporting C++20): gcc 11+, clang 17+, Xcode 16+, Visual Studio 2022+</li>
-<li><a href="https://github.com/fanx-dev/fanx/releases">Fanx</a></li>
 <li><a href="https://cmake.org/download/">CMake</a></li>
 <li><a href="https://git-scm.com/downloads">git</a></li>
 <li><a href="https://code.visualstudio.com/">VSCode</a></li>
 </ul>
-<p>Install the above software and configure the environment variables to ensure that commands such as java, jar, fan, and cmake are available in git bash.</p>
+<p>Install the above software and configure the environment variables to ensure that commands such as java, jar, and cmake are available in git bash.</p>
 <h3 id="2build-fmake"><a class="header" href="#2build-fmake">2.Build fmake</a></h3>
 <pre><code>git clone https://github.com/chunquedong/fmake.git
 cd fmake
-fanb pod.props
+sh build.sh
 </code></pre>
+<p>Add fmake/bin to your PATH</p>
 <p>Use the Microsoft C++ compiler toolchain on Windows:</p>
 <pre><code>cd fmake
 source vsvars.sh
